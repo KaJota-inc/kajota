@@ -12,6 +12,17 @@
     "lint:fix": "eslint --fix **/*.{ts,tsx}",
     "format": "prettier --write src/**/*.{ts,tsx}"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "**/*.{ts,tsx}": [
+      "yarn lint:fix",
+      "yarn format"
+    ]
+  },
   "jest": {
     "preset": "jest-expo"
   },
