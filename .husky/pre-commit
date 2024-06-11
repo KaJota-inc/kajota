@@ -1,5 +1,10 @@
-#!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
 
-# npm test
-npx lint-staged
+echo  :::::::::::::::::::::::::::::: &&
+echo  👷‍♀️ 🔨🛠🔨🛠🔨🛠🔨🛠 🛠🔨🛠🔨🛠 🛠👷‍♀️  &&
+echo  :::::Searching for Bugs::::::: &&
+echo  :::::::::::::::::::::::::::::: &&
+npx lint-staged &&
+npm run lint:fix &&
+npm run format

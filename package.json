@@ -10,7 +10,9 @@
     "test": "jest --watchAll ",
     "lint": "eslint **/*.{ts,tsx}",
     "lint:fix": "eslint --fix **/*.{ts,tsx}",
-    "format": "prettier --write src/**/*.{ts,tsx}"
+    "format": "prettier --write src/**/*.{ts,tsx}",
+    "prepare": "husky install",
+    "postinstall": "husky install && patch-package"
   },
   "husky": {
     "hooks": {
