@@ -6,17 +6,20 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
+    "scheme": "jotaapp",
     "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
+      "image": "./src/shared/assets/images/png/jota_splash_screen.png",
+      "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
+
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.jotaapp.kajota"
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./src/shared/assets/images/png/jota_splash_screen.png",
         "backgroundColor": "#ffffff"
       }
     },

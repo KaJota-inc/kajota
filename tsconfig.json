@@ -1,15 +1,27 @@
 {
-	"extends": "expo/tsconfig.base",
+	// "extends": "expo/tsconfig.base",
+	"extends": "@tsconfig/react-native/tsconfig.json",
 	"compilerOptions": {
-		"jsx": "react",
 		"strict": true,
-		"skipLibCheck": true /* Skip type checking all .d.ts files. */,
-		"baseUrl": "./" /* Base directory to resolve non-absolute module names. */,
+		"esModuleInterop": true,
+		"jsx": "react",
+		"noImplicitAny": true,
+		"useUnknownInCatchVariables": false,
+		"removeComments": true,
+		"declaration": true,
+		"skipLibCheck": true,
+		"resolveJsonModule": true,
+		"baseUrl": ".",
 		"paths": {
-			/* A series of entries which re-map imports to lookup locations relative to the 'baseUrl'. */
-			"*": ["src/*"],
-			"tests": ["tests/*"],
-			"@`components`/*": ["src/components/*"]
-		}
+			"@components/*": ["src/components/*"],
+			"@pages/*": ["src/pages/*"],
+			"@constants/*": ["src/constants/*"],
+			"@hooks/*": ["src/hooks/*"],
+			"@navigation/*": ["src/navigation/*"],
+			"@shared/*": ["src/shared/*"],
+			"@store/*": ["src/store/*"],
+			"@services/*": ["src/services/*"]
+		},
+		"types": ["node"]
 	}
 }
