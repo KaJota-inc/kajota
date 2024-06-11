@@ -3,10 +3,12 @@ import {StyleSheet} from "react-native";
 import React from "react";
 import {Text, View} from "@components/Themed";
 import {COLORS, SIZES} from "@constants/Colors";
-import { StatusBar } from "react-native";
+import {StatusBar} from "react-native";
+import {AuthProps, AuthRoutes} from "@shared/const/routerAuth";
 
+type NavigationProps = AuthProps<AuthRoutes.WS>;
 
-const WS = () => {
+const WS: React.FC<NavigationProps> = () => {
     return (
         <View style={styles.main}>
             <StatusBar barStyle="light-content"/>
