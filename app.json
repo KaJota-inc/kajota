@@ -24,7 +24,7 @@
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./src/shared/assets/images/png/jota_logo.png"
     }
   }
 }
