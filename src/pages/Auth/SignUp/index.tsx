@@ -3,7 +3,7 @@ import {StyleSheet} from "react-native";
 import React from "react";
 import {Text, View} from "@components/Themed";
 
-const Highlights = () => {
+const SignUp = () => {
     return (
         <View>
             <Text>Highlights</Text>
@@ -11,6 +11,6 @@ const Highlights = () => {
     );
 };
 
-export default Highlights;
+export default SignUp;
 
 const styles = StyleSheet.create({});

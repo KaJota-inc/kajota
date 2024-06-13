@@ -7,6 +7,7 @@ export const COLORS = {
   light: {
     background: "#fff",
     colorOne: "#F15A32",
+    colorOneLight: "#F8C8BB",
     text: "#000",
     tint: tintColorLight,
     tabIconDefault: "#ccc",
@@ -45,5 +46,10 @@ export const SIZES = {
 };
 
 export const IMAGES = {
-  // devotionalSample1: require("../shared/assets/images/png/devotional-sample-picture-1.png"),
+  FrameWS1: require("../shared/assets/images/png/FrameWS1.png"),
+  FrameWS1sub: require("../shared/assets/images/png/FrameWS1sub.png"),
+  FrameWS2: require("../shared/assets/images/png/FrameWS2.png"),
+  FrameWS2sub: require("../shared/assets/images/png/FrameWS2sub.png"),
+  FrameWS3: require("../shared/assets/images/png/FrameWS3.png"),
+  FrameWS3sub: require("../shared/assets/images/png/FrameWS3sub.png"),
 };
