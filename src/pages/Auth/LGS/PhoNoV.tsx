@@ -107,9 +107,7 @@ const PhoNoV = () => {
                     placeholderTextColor={COLORS.light.active}
                     textContentType="telephoneNumber"
                     style={{...styles.inputContent}}
-                    outlineStyle={{
-                        borderRadius: 30,
-                    }}
+                    outlineStyle={styles.inputOutline}
                     keyboardType="phone-pad"
                     autoCapitalize="none"
                     autoCorrect={false}
@@ -162,7 +160,7 @@ const PhoNoV = () => {
                                     {/*    }}*/}
                                     {/*/>*/}
                                     <View style={styles.r6c}/>
-                                    <Text style={styles.r6d} >{`+${callingCode}`}</Text>
+                                    <Text style={styles.r6d}>{`+${callingCode}`}</Text>
                                 </TouchableOpacity>
 
 
@@ -243,9 +241,12 @@ const styles = StyleSheet.create({
         backgroundColor: COLORS.light.backgroundGray,
         marginBottom: 8,
         paddingLeft: "15%",
-        paddingRight:"2%",
+        paddingRight: "2%",
         // borderRadius:30,
         // borderWidth:2
+    },
+    inputOutline: {
+        borderRadius: 30,
     },
     error: {
         color: COLORS.light.warning,
@@ -283,8 +284,8 @@ const styles = StyleSheet.create({
         // marginHorizontal: "2%",
         width: "600%",
         // borderWidth: 1,
-        alignItems:"flex-end",
-        marginLeft:"10%"
+        alignItems: "flex-end",
+        marginLeft: "10%"
     },
     r6a: {
         flexDirection: "row",
@@ -317,7 +318,7 @@ const styles = StyleSheet.create({
         fontSize: SIZES.sizeSeven,
         fontWeight: "400",
         backgroundColor: "transparent",
-        marginLeft:"4%"
+        marginLeft: "4%"
 
     },
 });

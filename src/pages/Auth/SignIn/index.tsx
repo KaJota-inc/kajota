@@ -204,11 +204,7 @@ const SignIn: React.FC<NavigationProps> = ({navigation}) => {
                                 textContentType="password"
                                 secureTextEntry={hidePassword}
                                 style={{...styles.inputContent}}
-
-                                outlineStyle={{
-                                    borderRadius: 30,
-                                    // borderWidth:2
-                                }}
+                                outlineStyle={styles.inputOutline}
                                 keyboardType="default"
                                 autoCapitalize="none"
                                 autoCorrect={false}
@@ -460,6 +456,9 @@ const styles = StyleSheet.create({
         padding: 2,
         // borderRadius:30,
         // borderWidth:2
+    },
+    inputOutline: {
+        borderRadius: 30,
     },
     error: {
         color: COLORS.light.warning,

@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
     },
     wrapper: {
         borderWidth:1,
-        height:"70%",
+        // height:"70%",
     },
     text: {
         color: COLORS.light.background,
