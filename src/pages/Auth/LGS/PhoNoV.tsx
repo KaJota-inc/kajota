@@ -13,7 +13,7 @@ import {Country, CountryCode} from "react-native-country-picker-modal/lib/types"
 
 const PhoNoV = () => {
 
-    const [phoneNo, setPhoneNo] = useState<string>("0");
+    const [phoneNo, setPhoneNo] = useState<string>("");
     const [error, setError] = useState<boolean>(false);
     const [errorCount, setErrorCount] = useState<number>(0);
 
