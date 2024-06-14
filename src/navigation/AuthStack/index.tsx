@@ -7,7 +7,7 @@ import {
     SignIn,
     SignUp,
 } from "../../pages/Auth";
-import {WS} from "@pages/Auth";
+import {LGS, WS} from "@pages/Auth";
 
 const Auth = createStackNavigator<AuthParamList>();
 
@@ -37,6 +37,12 @@ const AuthStack = (): React.ReactElement => {
             <Auth.Screen
                 component={SignUp}
                 name={AuthRoutes.SignUp}
+                options={{headerShown: false}}
+            />
+
+            <Auth.Screen
+                component={LGS}
+                name={AuthRoutes.LGS}
                 options={{headerShown: false}}
             />
         </Auth.Navigator>

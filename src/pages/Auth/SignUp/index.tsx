@@ -56,6 +56,7 @@ const SignUp: React.FC<NavigationProps> = ({navigation}) => {
                                     </View>
                                 }
                                 onPressFunction={() => {
+                                    navigation.navigate(AuthRoutes.LGS)
                                 }}
                                 err={false}
                                 btnStyle={styles.r8t2}
