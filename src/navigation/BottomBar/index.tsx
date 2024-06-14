@@ -7,8 +7,18 @@ import {View, Text} from "@components/Themed";
 import {Octicons} from "@expo/vector-icons";
 
 
-import {FifaLogoSVG} from "@shared/components/SVGS";
-import {DOB} from "@pages/Home";
+import {
+    FifaLogoSVG,
+    TabAccountLogoSVG,
+    TabExploreLogoSVG, TabHomeLogoSVG,
+    TabItemsLogoSVG,
+    TabSellLogoSVG
+} from "@shared/components/SVGS";
+import {DOB, Home} from "@pages/Home";
+import {ExploreMain} from "@pages/Explore";
+import {SellsMain} from "@pages/Sells";
+import {ItemsMain} from "@pages/Items";
+import {AccountsMain} from "@pages/Accounts";
 
 const Tab = createBottomTabNavigator();
 
@@ -18,11 +28,59 @@ const TAB_OPTIONS: TabOptions = {
         icon: ({color}: { color: string }) => {
             return (
                 <>
-                    <FifaLogoSVG/>
+                    <TabHomeLogoSVG/>
                 </>
             );
         },
-        component: DOB as React.FC,
+        component: Home as React.FC,
+    },
+
+    Explore: {
+        label: "Explore",
+        icon: ({color}: { color: string }) => {
+            return (
+                <>
+                    <TabExploreLogoSVG/>
+                </>
+            );
+        },
+        component: ExploreMain as React.FC,
+    },
+
+    Sell: {
+        label: "Sell",
+        icon: ({color}: { color: string }) => {
+            return (
+                <>
+                    <TabSellLogoSVG/>
+                </>
+            );
+        },
+        component: SellsMain as React.FC,
+    },
+
+    Items: {
+        label: "Items",
+        icon: ({color}: { color: string }) => {
+            return (
+                <>
+                    <TabItemsLogoSVG />
+                </>
+            );
+        },
+        component: ItemsMain as React.FC,
+    },
+
+    Account: {
+        label: "Account",
+        icon: ({color}: { color: string }) => {
+            return (
+                <>
+                    <TabAccountLogoSVG/>
+                </>
+            );
+        },
+        component: AccountsMain as React.FC,
     },
 
 
@@ -44,7 +102,7 @@ const BottomTabNavigator = (): React.ReactElement => {
                     >
                         <CompToRender
                             color={
-                                focused ? COLORS.light.colorOne : COLORS.light.tabIconSelected
+                                focused ? COLORS.light.colorOne : COLORS.light.text
                             }
                         />
                     </View>
@@ -53,7 +111,7 @@ const BottomTabNavigator = (): React.ReactElement => {
                         style={{
                             color: focused
                                 ? COLORS.light.colorOne
-                                : COLORS.light.tabIconSelected,
+                                : COLORS.light.text,
                             fontSize: SIZES.sizeFiveB,
                             fontWeight: "400",
                         }}

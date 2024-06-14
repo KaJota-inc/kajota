@@ -12,10 +12,10 @@ const Home = createStackNavigator<HomeParamList>();
 const HomeStack = (): React.ReactElement => {
     return (
         <Home.Navigator
-            initialRouteName={HomeRoutes.DOB}
+            initialRouteName={HomeRoutes.HOME}
             screenOptions={{headerShown: false}}
         >
-            <Home.Screen component={BottomBar} name={HomeRoutes.DOB}/>
+            <Home.Screen component={BottomBar} name={HomeRoutes.HOME}/>
             <Home.Screen component={DOB} name={HomeRoutes.DOB}/>
         </Home.Navigator>
     );

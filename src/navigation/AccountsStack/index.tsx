@@ -4,7 +4,7 @@ import {createStackNavigator} from "@react-navigation/stack";
 
 
 import {AccountsParamList, AccountsRoutes} from "@shared/const/routerAccounts";
-import {DOB} from "@pages/Accounts";
+import {AccountsMain} from "@pages/Accounts";
 
 
 const Sell = createStackNavigator<AccountsParamList>();
@@ -12,10 +12,10 @@ const Sell = createStackNavigator<AccountsParamList>();
 const Accountstack = (): React.ReactElement => {
     return (
         <Sell.Navigator
-            initialRouteName={AccountsRoutes.DOB}
+            initialRouteName={AccountsRoutes.AccountsMain}
             screenOptions={{headerShown: false}}
         >
-            <Sell.Screen component={DOB} name={AccountsRoutes.DOB}/>
+            <Sell.Screen component={AccountsMain} name={AccountsRoutes.AccountsMain}/>
         </Sell.Navigator>
     );
 };

@@ -1,8 +1,8 @@
-import DOB from "../../pages/Items/DOB";
+import ItemsMain from "./ItemsMain";
 
 
 
 export {
-    DOB,
+    ItemsMain,
 
 };

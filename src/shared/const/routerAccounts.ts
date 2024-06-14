@@ -2,11 +2,11 @@ import { StackNavigationProp, StackScreenProps } from "@react-navigation/stack";
 
 
 export enum AccountsRoutes {
-    DOB = "DOB",
+    AccountsMain = "AccountsMain",
 }
 
 export type AccountsParamList = {
-    [AccountsRoutes.DOB]: undefined;
+    [AccountsRoutes.AccountsMain]: undefined;
 };
 
 export type AccountsProps<RouteName extends AccountsRoutes> =

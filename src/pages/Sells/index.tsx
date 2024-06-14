@@ -1,8 +1,8 @@
-import DOB from "../../pages/Sells/DOB";
+import SellsMain from "./SellsMain";
 
 
 
 export {
-    DOB,
+    SellsMain,
 
 };

@@ -8,6 +8,9 @@ import {AppleLogoSVG, EmailLogoSVG, GoogleLogoSVG} from "@shared/components/SVGS
 import {TextInput} from "react-native-paper";
 import ValidateData from "@shared/lib/validateData";
 import {validateObject} from "@shared/helper";
+import {CommonActions} from "@react-navigation/native";
+import {RootRoutes} from "@shared/const/routerRoot";
+import {HomeRoutes} from "@shared/const/routerHome";
 
 type NavigationProps = AuthProps<AuthRoutes.SignIn>;
 
@@ -19,6 +22,18 @@ const SignIn: React.FC<NavigationProps> = ({navigation}) => {
     const [error, setError] = useState<boolean>(false);
     const [hidePassword, setHidePassword] = useState<boolean>(true);
     const [errorCount, setErrorCount] = useState<number>(0);
+
+    const resetAction = CommonActions.reset({
+        index: 1,
+        routes: [
+            {
+                name: RootRoutes.Home,
+                params: {
+                    screen: HomeRoutes.HOME,
+                },
+            },
+        ],
+    });
 
     const SCHEME = {
         user: (user: string) => user?.length >= 4,
@@ -42,6 +57,26 @@ const SignIn: React.FC<NavigationProps> = ({navigation}) => {
 
     const filledFields = () => {
         return !!password && !!email
+    }
+
+    const handleContinue = async () => {
+        debug.log("here")
+        validation = validateObject(
+            {
+                user: email,
+                password: password,
+            },
+            // @ts-ignore
+            SCHEME,
+        );
+        debug.log("validation", validation)
+
+        // if (!validation.isValid) {
+        //     // setError(true)
+        //     return;
+        // }
+
+        navigation?.dispatch(resetAction);
     }
 
     useEffect(() => {
@@ -110,11 +145,11 @@ const SignIn: React.FC<NavigationProps> = ({navigation}) => {
                             />
                         </View>
 
-                            <View style={styles.r6}>
-                                <View style={styles.r6a}/>
-                                <Text style={styles.r6b}>OR</Text>
-                                <View style={styles.r6c}/>
-                            </View>
+                        <View style={styles.r6}>
+                            <View style={styles.r6a}/>
+                            <Text style={styles.r6b}>OR</Text>
+                            <View style={styles.r6c}/>
+                        </View>
 
                         <View style={styles.r3}>
                             {/*<Text style={styles.r3t1}>Username/Email</Text>*/}
@@ -127,7 +162,7 @@ const SignIn: React.FC<NavigationProps> = ({navigation}) => {
                                 textContentType="emailAddress"
                                 style={{...styles.inputContent}}
                                 outlineStyle={{
-                                    borderRadius:30,
+                                    borderRadius: 30,
                                     // borderWidth:2
                                 }}
                                 keyboardType="default"
@@ -171,7 +206,7 @@ const SignIn: React.FC<NavigationProps> = ({navigation}) => {
                                 style={{...styles.inputContent}}
 
                                 outlineStyle={{
-                                    borderRadius:30,
+                                    borderRadius: 30,
                                     // borderWidth:2
                                 }}
                                 keyboardType="default"
@@ -224,7 +259,7 @@ const SignIn: React.FC<NavigationProps> = ({navigation}) => {
                             <MainButton
                                 title={"Sign In"}
                                 onPressFunction={() => {
-                                    // onGetStarted();
+                                    handleContinue()
                                 }}
                                 err={false}
                                 btnStyle={styles.r9t}
@@ -314,7 +349,7 @@ const styles = StyleSheet.create({
         width: "100%",
         marginTop: 5,
         marginBottom: 15,
-        borderRadius:30,
+        borderRadius: 30,
 
     },
     r3t1: {
@@ -442,7 +477,7 @@ const styles = StyleSheet.create({
     },
     fpt: {
         color: COLORS.light.text,
-        fontSize:SIZES.sizeSeven
+        fontSize: SIZES.sizeSeven
     },
     r9: {
         marginBottom: 10,
@@ -450,7 +485,7 @@ const styles = StyleSheet.create({
         // backgroundColor: COLORS.light.colorOne,
         paddingVertical: 5,
         width: "100%",
-        alignItems:"center"
+        alignItems: "center"
     },
     r9t: {
         // width: "80%",

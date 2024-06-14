@@ -3,14 +3,14 @@ import {StyleSheet} from "react-native";
 import React from "react";
 import {Text, View} from "@components/Themed";
 
-const Highlights = () => {
+const SellsMain = () => {
     return (
         <View>
-            <Text>Highlights</Text>
+            <Text>SellsMain</Text>
         </View>
     );
 };
 
-export default Highlights;
+export default SellsMain;
 
 const styles = StyleSheet.create({});

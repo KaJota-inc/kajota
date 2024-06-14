@@ -1,11 +1,11 @@
 import { StackNavigationProp, StackScreenProps } from "@react-navigation/stack";
 
 export enum ItemsRoutes {
-    DOB = "DOB",
+    ItemsMain = "ItemsMain",
 }
 
 export type ItemsParamList = {
-    [ItemsRoutes.DOB]: undefined;
+    [ItemsRoutes.ItemsMain]: undefined;
 };
 
 export type ItemsProps<RouteName extends ItemsRoutes> = StackScreenProps<

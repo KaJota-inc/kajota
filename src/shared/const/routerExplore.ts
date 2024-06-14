@@ -1,11 +1,11 @@
 import { StackNavigationProp, StackScreenProps } from "@react-navigation/stack";
 
 export enum ExploreRoutes {
-    DOB = "DOB",
+    ExploreMain = "ExploreMain",
 }
 
 export type ExploreParamList = {
-    [ExploreRoutes.DOB]: undefined;
+    [ExploreRoutes.ExploreMain]: undefined;
 };
 
 export type ExploreProps<RouteName extends ExploreRoutes> = StackScreenProps<

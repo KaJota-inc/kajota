@@ -1,11 +1,11 @@
 import {StackNavigationProp, StackScreenProps} from "@react-navigation/stack";
 
 export enum SellsRoutes {
-    DOB = "DOB",
+    SellsMain = "SellsMain",
 }
 
 export type SellsParamList = {
-    [SellsRoutes.DOB]: undefined;
+    [SellsRoutes.SellsMain]: undefined;
 };
 
 export type SellsProps<RouteName extends SellsRoutes> = StackScreenProps<

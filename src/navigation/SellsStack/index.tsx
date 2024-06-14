@@ -4,7 +4,7 @@ import {createStackNavigator} from "@react-navigation/stack";
 
 
 import {SellsParamList, SellsRoutes} from "@shared/const/routerSells";
-import {DOB} from "@pages/Sells";
+import {SellsMain} from "@pages/Sells";
 
 
 const Sell = createStackNavigator<SellsParamList>();
@@ -12,10 +12,10 @@ const Sell = createStackNavigator<SellsParamList>();
 const SellStack = (): React.ReactElement => {
     return (
         <Sell.Navigator
-            initialRouteName={SellsRoutes.DOB}
+            initialRouteName={SellsRoutes.SellsMain}
             screenOptions={{headerShown: false}}
         >
-            <Sell.Screen component={DOB} name={SellsRoutes.DOB}/>
+            <Sell.Screen component={SellsMain} name={SellsRoutes.SellsMain}/>
         </Sell.Navigator>
     );
 };

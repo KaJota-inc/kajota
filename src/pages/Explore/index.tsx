@@ -1,8 +1,8 @@
-import DOB from "../../pages/Explore/DOB";
+import ExploreMain from "./ExploreMain";
 
 
 
 export {
-    DOB,
+    ExploreMain,
 
 };

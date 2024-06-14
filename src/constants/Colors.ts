@@ -5,14 +5,16 @@ const tintColorDark = "#fff";
 
 export const COLORS = {
   light: {
+
     background: "#fff",
+
     backgroundGray:"#F3F2F1",
     colorOne: "#F15A32",
     colorOneLight: "#F8C8BB",
     text: "#000",
     textGray:"#BFBFBF",
     textAsh:"#F3F2F1",
-
+    tabColor: "#6B7280",
     warning:"#e3be5a",
     inactive: "#E1E8ED",
     active:"#737373",
