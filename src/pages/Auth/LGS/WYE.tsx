@@ -60,7 +60,7 @@ const WYE = ({handleStep, flow, option, currentIdx}: IFLowProps) => {
         //     // setError(true)
         //     return;
         // }
-
+        handleStep(flow[currentIdx + 1])
 
     }
 

@@ -26,7 +26,7 @@ const Digit6Code = ({handleStep,flow, option, currentIdx }:IFLowProps) => {
 
     useEffect(() => {
         setErrorText("")
-        if (code?.length == 6) {
+        if (code?.length === 7) {
             verifyCode()
         }
     }, [code]);

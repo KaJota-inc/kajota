@@ -64,6 +64,8 @@ const ConfirmPassword = ({handleStep, flow, option, currentIdx}: IFLowProps) => 
         //     return;
         // }
 
+        handleStep(flow[currentIdx + 1])
+
 
     }
 

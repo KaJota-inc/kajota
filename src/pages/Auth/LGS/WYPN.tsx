@@ -74,7 +74,7 @@ const WYPN = ({handleStep, flow, option, currentIdx}: IFLowProps) => {
         //     return;
         // }
 
-        // navigation?.dispatch(resetAction);
+        handleStep(flow[currentIdx + 1])
     }
 
 
