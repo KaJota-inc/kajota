@@ -7,8 +7,15 @@ import {AuthProps, AuthRoutes} from "@shared/const/routerAuth";
 import {COLORS, SIZES} from "@constants/Colors";
 import {AppleLogoSVG, EmailLogoSVG, GoogleLogoSVG} from "@shared/components/SVGS";
 import Layout from "@constants/Layout";
+import {RootRoutes, RootScreenProps} from "@shared/const/routerRoot";
+import {CompositeScreenProps} from "@react-navigation/native";
 
-type NavigationProps = AuthProps<AuthRoutes.SignUp>;
+// type NavigationProps = AuthProps<AuthRoutes.SignUp>;
+
+type NavigationProps = CompositeScreenProps<
+    AuthProps<AuthRoutes.SignUp>,
+    RootScreenProps<RootRoutes.Auth>
+>;
 
 
 const SignUp: React.FC<NavigationProps> = ({navigation}) => {
@@ -41,6 +48,12 @@ const SignUp: React.FC<NavigationProps> = ({navigation}) => {
                                 </View>
                             }
                             onPressFunction={() => {
+                                navigation.navigate(RootRoutes.Auth, {
+                                    screen: AuthRoutes.LGS,
+                                    params: {
+                                        option : "apple",
+                                    },
+                                });
                             }}
                             err={false}
                             btnStyle={styles.r8t1}
@@ -58,7 +71,12 @@ const SignUp: React.FC<NavigationProps> = ({navigation}) => {
                                 </View>
                             }
                             onPressFunction={() => {
-                                navigation.navigate(AuthRoutes.LGS)
+                                navigation.navigate(RootRoutes.Auth, {
+                                    screen: AuthRoutes.LGS,
+                                    params: {
+                                       option : "google",
+                                    },
+                                });
                             }}
                             err={false}
                             btnStyle={styles.r8t2}
@@ -76,6 +94,12 @@ const SignUp: React.FC<NavigationProps> = ({navigation}) => {
                                 </View>
                             }
                             onPressFunction={() => {
+                                navigation.navigate(RootRoutes.Auth, {
+                                    screen: AuthRoutes.LGS,
+                                    params: {
+                                        option : "email",
+                                    },
+                                });
                             }}
                             err={false}
                             btnStyle={styles.r8t2}
@@ -181,6 +205,7 @@ const styles = StyleSheet.create({
         backgroundColor: COLORS.light.text,
         paddingVertical: 10,
         marginVertical: 10,
+        height:60
         // width: 250,
     },
     r8t2: {
@@ -189,6 +214,8 @@ const styles = StyleSheet.create({
         marginVertical: 10,
         borderColor: COLORS.light.text,
         borderWidth: 1,
+        height:60
+
     },
     r8t3: {
         justifyContent: "center",
@@ -197,7 +224,9 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         backgroundColor: "transparent",
         paddingVertical: "2%",
-        width: Layout.window.width * 0.8
+        width: Layout.window.width * 0.8,
+
+
         // flex: 1
         // width: 250
     },

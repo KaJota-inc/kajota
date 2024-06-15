@@ -12,8 +12,7 @@ import {Feather} from "@expo/vector-icons";
 import {Country, CountryCode} from "react-native-country-picker-modal/lib/types";
 import {IFLowProps} from "@pages/Auth/LGS/index";
 
-
-const PhoNoV = ({handleStep, flow, option, currentIdx}: IFLowProps) => {
+const WYPN = ({handleStep, flow, option, currentIdx}: IFLowProps) => {
 
     const [phoneNo, setPhoneNo] = useState<string>("");
     const [error, setError] = useState<boolean>(false);
@@ -23,6 +22,10 @@ const PhoNoV = ({handleStep, flow, option, currentIdx}: IFLowProps) => {
     const [callingCode, setCallingCode] = useState<string>('1');
     const [flag, setFlag] = useState<string>('🇺🇸');
 
+    const [progressPercent, setProgressPercent] = useState<number>(40); //5-97.5
+    const handleSetProgressPercent = (val: number) => {
+        setProgressPercent(val);
+    };
 
     const onSelect = (country: Country) => {
         debug.log("country", country)
@@ -71,7 +74,7 @@ const PhoNoV = ({handleStep, flow, option, currentIdx}: IFLowProps) => {
         //     return;
         // }
 
-        handleStep(flow[currentIdx + 1])
+        // navigation?.dispatch(resetAction);
     }
 
 
@@ -91,16 +94,21 @@ const PhoNoV = ({handleStep, flow, option, currentIdx}: IFLowProps) => {
 
     return (
         <>
-
             <View style={styles.r1}>
-                <Text style={styles.r1t2}>{option === "apple" ? "Verification" : "Phone number Verification"}</Text>
-            </View>
-            <View style={styles.r3}>
-                <Text style={styles.r3t1}>Enter your phone number for verification</Text>
+                <Text style={styles.r1t2}>We’re almost there!</Text>
             </View>
 
+            <View style={styles.progressMain}>
+                <View style={styles.progressInner}>
+                    <View
+                        style={[styles.progressActual, {width: `${progressPercent}%`}]}
+                    ></View>
+                </View>
+                <Text style={styles.mr2t1}>{`${progressPercent}%`}</Text>
+            </View>
 
             <View style={styles.r3}>
+                <Text style={styles.r7t1}>What’s your phone number?</Text>
                 <TextInput
                     mode="outlined"
                     textColor={COLORS.light.text}
@@ -177,7 +185,7 @@ const PhoNoV = ({handleStep, flow, option, currentIdx}: IFLowProps) => {
 
             <View style={styles.r9}>
                 <MainButton
-                    title={"Continue"}
+                    title={"Next"}
                     onPressFunction={() => {
                         handleContinue()
                     }}
@@ -185,13 +193,12 @@ const PhoNoV = ({handleStep, flow, option, currentIdx}: IFLowProps) => {
                     btnStyle={styles.r9t}
 
                 />
-
             </View>
         </>
     );
 };
 
-export default PhoNoV;
+export default WYPN;
 
 const styles = StyleSheet.create({
     r1: {
@@ -221,8 +228,8 @@ const styles = StyleSheet.create({
     r1t2: {
         // marginLeft: "8%",
         color: COLORS.light.text,
-        fontSize: SIZES.sizeNine,
-        fontWeight: "700",
+        fontSize: SIZES.sizeEightB,
+        fontWeight: "400",
         // textAlign: "center",
     },
     r3: {
@@ -263,10 +270,10 @@ const styles = StyleSheet.create({
         // backgroundColor: COLORS.light.colorOne,
         paddingVertical: 5,
         width: "100%",
-        alignItems: "center"
+        alignItems: "flex-end"
     },
     r9t: {
-        // width: "80%",
+        width: "30%",
         backgroundColor: COLORS.light.colorOne,
     },
     countryPicker: {
@@ -321,6 +328,36 @@ const styles = StyleSheet.create({
         fontWeight: "400",
         backgroundColor: "transparent",
         marginLeft: "4%"
-
+    },
+    progressMain: {
+        marginVertical: "2%",
+        // marginBottom: 75,
+        //   borderWidth: 1,
+        alignItems: "center",
+        width: "100%",
+        justifyContent: "space-between",
+        flexDirection: "row"
+    },
+    progressInner: {
+        backgroundColor: COLORS.light.progressBg,
+        borderRadius: 5,
+        width: "88%",
+        height: 6,
+        // borderWidth: 1,
+    },
+    progressActual: {
+        backgroundColor: COLORS.light.progress,
+        height: 6,
+        borderRadius: 5,
+    },
+    mr2t1: {
+        color: COLORS.light.text,
+    },
+    r7t1: {
+        color: COLORS.light.text,
+        fontSize: SIZES.sizeNine,
+        fontWeight: "600",
+        marginTop: 40,
+        marginBottom: 20,
     },
 });

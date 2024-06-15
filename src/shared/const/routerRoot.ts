@@ -21,10 +21,11 @@ export enum RootRoutes {
 export type RootParamList = {
     [RootRoutes.Auth]?: {
         screen: AuthRoutes;
+        params: any | undefined;
     };
     [RootRoutes.Home]?: {
         screen: HomeRoutes;
-        params: any;
+        params: any | undefined;
     };
     [RootRoutes.Accounts]?: {
         screen: AccountsRoutes;

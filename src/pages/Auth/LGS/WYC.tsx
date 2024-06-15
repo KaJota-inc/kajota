@@ -12,28 +12,36 @@ import {Feather} from "@expo/vector-icons";
 import {Country, CountryCode} from "react-native-country-picker-modal/lib/types";
 import {IFLowProps} from "@pages/Auth/LGS/index";
 
+const WYC = ({handleStep, flow, option, currentIdx}: IFLowProps) => {
 
-const PhoNoV = ({handleStep, flow, option, currentIdx}: IFLowProps) => {
 
-    const [phoneNo, setPhoneNo] = useState<string>("");
     const [error, setError] = useState<boolean>(false);
     const [errorCount, setErrorCount] = useState<number>(0);
 
+    const [country, setCountry] = useState<string>('United States');
     const [countryCode, setCountryCode] = useState<CountryCode>('US');
     const [callingCode, setCallingCode] = useState<string>('1');
     const [flag, setFlag] = useState<string>('🇺🇸');
 
+    const [visible, setVisible] = useState<boolean>(false);
 
-    const onSelect = (country: Country) => {
-        debug.log("country", country)
-        setCountryCode(country.cca2);
-        setCallingCode(country.callingCode[0]);
-        setFlag(country.flag);
+    const [progressPercent, setProgressPercent] = useState<number>(20); //5-97.5
+    const handleVisible = () => {
+        setVisible(!visible);
+    };
+
+    const onSelect = (cntry: Country) => {
+        debug.log("cntry", cntry)
+        setCountryCode(cntry.cca2);
+        setCallingCode(cntry.callingCode[0]);
+        setFlag(cntry.flag);
+        setCountry(cntry.name as string)
     };
 
 
     const SCHEME = {
-        phonenumber: (phone: string) => ValidateData.number(phone),
+        country: (val: string) => val?.length >= 3,
+        // country: (val: string) => ValidateData.number(country),
     };
 
     type TypeValidation = {
@@ -43,7 +51,7 @@ const PhoNoV = ({handleStep, flow, option, currentIdx}: IFLowProps) => {
 
     let validation: TypeValidation = validateObject(
         {
-            phonenumber: phoneNo,
+            country: country,
         },
         // @ts-ignore
         SCHEME,
@@ -51,7 +59,7 @@ const PhoNoV = ({handleStep, flow, option, currentIdx}: IFLowProps) => {
 
 
     const filledFields = () => {
-        return !!phoneNo
+        return !!country
     }
 
 
@@ -59,7 +67,7 @@ const PhoNoV = ({handleStep, flow, option, currentIdx}: IFLowProps) => {
         debug.log("here")
         validation = validateObject(
             {
-                phonenumber: phoneNo,
+                country: country,
             },
             // @ts-ignore
             SCHEME,
@@ -71,7 +79,7 @@ const PhoNoV = ({handleStep, flow, option, currentIdx}: IFLowProps) => {
         //     return;
         // }
 
-        handleStep(flow[currentIdx + 1])
+        // navigation?.dispatch(resetAction);
     }
 
 
@@ -79,7 +87,7 @@ const PhoNoV = ({handleStep, flow, option, currentIdx}: IFLowProps) => {
         setErrorCount(errorCount + 1)
         validation = validateObject(
             {
-                phonenumber: phoneNo,
+                country: country,
             },
             // @ts-ignore
             SCHEME,
@@ -87,25 +95,34 @@ const PhoNoV = ({handleStep, flow, option, currentIdx}: IFLowProps) => {
         if (!validation.isValid && errorCount >= 1 && filledFields()) {
             setError(true)
         }
-    }, [phoneNo]);
+    }, [country]);
 
     return (
         <>
-
             <View style={styles.r1}>
-                <Text style={styles.r1t2}>{option === "apple" ? "Verification" : "Phone number Verification"}</Text>
-            </View>
-            <View style={styles.r3}>
-                <Text style={styles.r3t1}>Enter your phone number for verification</Text>
+                <Text style={styles.r1t2}>Let’s get started!</Text>
             </View>
 
+            <View style={styles.progressMain}>
+                <View style={styles.progressInner}>
+                    <View
+                        style={[styles.progressActual, {width: `${progressPercent}%`}]}
+                    ></View>
+                </View>
+                <Text style={styles.mr2t1}>{`${progressPercent}%`}</Text>
+            </View>
 
             <View style={styles.r3}>
+                <Text style={styles.r7t1}>What’s your Country?</Text>
+
                 <TextInput
                     mode="outlined"
                     textColor={COLORS.light.text}
                     // label={"Full Name"}
-                    placeholder={""}
+                    // disabled={true}
+                    editable={false}
+                    onPressIn={handleVisible}
+                    placeholder={"Country"}
                     placeholderTextColor={COLORS.light.active}
                     textContentType="telephoneNumber"
                     style={{...styles.inputContent}}
@@ -114,29 +131,29 @@ const PhoNoV = ({handleStep, flow, option, currentIdx}: IFLowProps) => {
                     autoCapitalize="none"
                     autoCorrect={false}
                     selectionColor={
-                        validation?.data?.phonenumber.isValid && error
+                        validation?.data?.country.isValid && error
                             ? COLORS.light.colorOne
                             : COLORS.light.warning
                     }
                     outlineColor={
-                        !validation?.data?.phonenumber.isValid && error
+                        !validation?.data?.country.isValid && error
                             ? COLORS.light.warning
                             : COLORS.light.inactive
                     }
                     activeOutlineColor={
-                        validation?.data?.phonenumber.isValid && error ?
+                        validation?.data?.country.isValid && error ?
                             COLORS.light.colorOne
                             : COLORS.light.warning
                     }
-                    value={phoneNo}
+                    value={country}
                     onChangeText={(val) => {
-                        setPhoneNo(val);
+                        setCountry(val);
                     }}
                     left={
                         <TextInput.Icon
                             style={styles.r6}
                             icon={() =>
-                                <TouchableOpacity style={styles.r6a}>
+                                // <TouchableOpacity style={styles.r6a}>
                                     <CountryPicker
                                         countryCode={countryCode}
                                         withFilter
@@ -145,39 +162,50 @@ const PhoNoV = ({handleStep, flow, option, currentIdx}: IFLowProps) => {
                                         withEmoji
                                         onSelect={onSelect}
                                         containerButtonStyle={styles.countryPicker}
+                                        visible={visible}
+                                        onClose={()=>setVisible(false)}
+                                        onOpen={()=>setVisible(true)}
                                     />
-                                    {/*<Feather*/}
-                                    {/*    name="chevron-down"*/}
-                                    {/*    size={18}*/}
-                                    {/*    color={COLORS.light.text}*/}
-                                    {/*    style={styles.r6b}*/}
-                                    {/*/>*/}
-                                    {/*<Avatar.Icon*/}
-                                    {/*    size={28}*/}
-                                    {/*    icon="chevron-down"*/}
-                                    {/*    color={COLORS.light.text}*/}
-                                    {/*    style={{*/}
-                                    {/*        backgroundColor: "transparent",*/}
-                                    {/*        borderWidth: 1*/}
-                                    {/*    }}*/}
-                                    {/*/>*/}
-                                    <View style={styles.r6c}/>
-                                    <Text style={styles.r6d}>{`+${callingCode}`}</Text>
-                                </TouchableOpacity>
 
-
+                                // </TouchableOpacity>
                             }
                         />
                     }
+                    right={<TextInput.Icon
+                        style={styles.r6}
+                        icon={() =>
+                            <TouchableOpacity
+                                style={styles.r6a}
+                                onPress={handleVisible}
+                            >
+                                <Feather
+                                    name={visible? "chevron-up" : "chevron-down"}
+                                    size={28}
+                                    color={COLORS.light.text}
+                                    style={styles.r6b}
+                                />
+                                {/*<Avatar.Icon*/}
+                                {/*    size={28}*/}
+                                {/*    icon="chevron-down"*/}
+                                {/*    color={COLORS.light.text}*/}
+                                {/*    style={{*/}
+                                {/*        backgroundColor: "transparent",*/}
+                                {/*        borderWidth: 1*/}
+                                {/*    }}*/}
+                                {/*/>*/}
+
+                            </TouchableOpacity>
+                        }
+                    />}
                 />
                 {
-                    (!validation?.data?.phonenumber.isValid && error) &&
-                    <Text style={styles.error}>{"Invalid Phone number"}</Text>}
+                    (!validation?.data?.country.isValid && error) &&
+                    <Text style={styles.error}>{"Invalid Country"}</Text>}
             </View>
 
             <View style={styles.r9}>
                 <MainButton
-                    title={"Continue"}
+                    title={"Next"}
                     onPressFunction={() => {
                         handleContinue()
                     }}
@@ -185,13 +213,12 @@ const PhoNoV = ({handleStep, flow, option, currentIdx}: IFLowProps) => {
                     btnStyle={styles.r9t}
 
                 />
-
             </View>
         </>
     );
 };
 
-export default PhoNoV;
+export default WYC;
 
 const styles = StyleSheet.create({
     r1: {
@@ -221,8 +248,8 @@ const styles = StyleSheet.create({
     r1t2: {
         // marginLeft: "8%",
         color: COLORS.light.text,
-        fontSize: SIZES.sizeNine,
-        fontWeight: "700",
+        fontSize: SIZES.sizeEightB,
+        fontWeight: "400",
         // textAlign: "center",
     },
     r3: {
@@ -242,7 +269,7 @@ const styles = StyleSheet.create({
         width: "100%",
         backgroundColor: COLORS.light.backgroundGray,
         marginBottom: 8,
-        paddingLeft: "15%",
+        paddingLeft: "5%",
         paddingRight: "2%",
         // borderRadius:30,
         // borderWidth:2
@@ -263,10 +290,10 @@ const styles = StyleSheet.create({
         // backgroundColor: COLORS.light.colorOne,
         paddingVertical: 5,
         width: "100%",
-        alignItems: "center"
+        alignItems: "flex-end"
     },
     r9t: {
-        // width: "80%",
+        width: "30%",
         backgroundColor: COLORS.light.colorOne,
     },
     countryPicker: {
@@ -274,7 +301,7 @@ const styles = StyleSheet.create({
         backgroundColor: "transparent",
         // width: "160%",
         // borderWidth: 1,
-        alignItems: "flex-end"
+        // alignItems: "flex-end"
 
     },
     phoneNumberInput: {
@@ -284,10 +311,10 @@ const styles = StyleSheet.create({
         // color: COLORS.light.textGray,
         // fontSize: SIZES.sizeSeven,
         // marginHorizontal: "2%",
-        width: "600%",
+        // width: "600%",
         // borderWidth: 1,
-        alignItems: "flex-end",
-        marginLeft: "10%"
+        // alignItems: "flex-end",
+        // marginLeft: "10%"
     },
     r6a: {
         flexDirection: "row",
@@ -303,7 +330,7 @@ const styles = StyleSheet.create({
         // width: "30%",
 
         backgroundColor: "transparent",
-        marginLeft: 10
+        // marginLeft: 10
     },
     r6c: {
         borderRightWidth: 2,
@@ -321,6 +348,36 @@ const styles = StyleSheet.create({
         fontWeight: "400",
         backgroundColor: "transparent",
         marginLeft: "4%"
-
+    },
+    progressMain: {
+        marginVertical: "2%",
+        // marginBottom: 75,
+        //   borderWidth: 1,
+        alignItems: "center",
+        width: "100%",
+        justifyContent: "space-between",
+        flexDirection: "row"
+    },
+    progressInner: {
+        backgroundColor: COLORS.light.progressBg,
+        borderRadius: 5,
+        width: "88%",
+        height: 6,
+        // borderWidth: 1,
+    },
+    progressActual: {
+        backgroundColor: COLORS.light.progress,
+        height: 6,
+        borderRadius: 5,
+    },
+    mr2t1: {
+        color: COLORS.light.text,
+    },
+    r7t1: {
+        color: COLORS.light.text,
+        fontSize: SIZES.sizeNine,
+        fontWeight: "600",
+        marginTop: 40,
+        marginBottom: 20,
     },
 });

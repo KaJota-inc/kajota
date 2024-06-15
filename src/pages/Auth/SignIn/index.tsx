@@ -11,6 +11,7 @@ import {validateObject} from "@shared/helper";
 import {CommonActions} from "@react-navigation/native";
 import {RootRoutes} from "@shared/const/routerRoot";
 import {HomeRoutes} from "@shared/const/routerHome";
+import Layout from "@constants/Layout";
 
 type NavigationProps = AuthProps<AuthRoutes.SignIn>;
 
@@ -36,8 +37,9 @@ const SignIn: React.FC<NavigationProps> = ({navigation}) => {
     });
 
     const SCHEME = {
-        user: (user: string) => user?.length >= 4,
+        // user: (user: string) => user?.length >= 4,
         password: (password: string) => ValidateData.special(password),
+        user: (user: string) => ValidateData.email(user),
     };
 
     type TypeValidation = {
@@ -376,7 +378,8 @@ const styles = StyleSheet.create({
         alignItems: "center",
         flexDirection: "row",
         backgroundColor: "transparent",
-        paddingVertical: "2%"
+        paddingVertical: "2%",
+        width: Layout.window.width * 0.8
     },
     r8t4: {
         color: COLORS.light.background,

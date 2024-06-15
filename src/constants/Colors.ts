@@ -5,9 +5,7 @@ const tintColorDark = "#fff";
 
 export const COLORS = {
   light: {
-
     background: "#fff",
-
     backgroundGray:"#F3F2F1",
     colorOne: "#F15A32",
     colorOneLight: "#F8C8BB",
@@ -18,6 +16,9 @@ export const COLORS = {
     warning:"#e3be5a",
     inactive: "#E1E8ED",
     active:"#737373",
+    progress:"#3BA755",
+    progressBg: "#BFBFBF",
+
     tint: tintColorLight,
     tabIconDefault: "#ccc",
     tabIconSelected: tintColorLight,

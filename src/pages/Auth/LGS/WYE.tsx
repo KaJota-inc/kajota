@@ -2,38 +2,29 @@ import {StyleSheet, TouchableOpacity} from "react-native";
 
 import React, {useEffect, useState} from "react";
 import {Text, View} from "@components/Themed";
-import {TextInput, Avatar} from 'react-native-paper';
-import CountryPicker from 'react-native-country-picker-modal';
 import {COLORS, SIZES} from "@constants/Colors";
 import {MainButton} from "@components/index";
+import {TextInput} from "react-native-paper";
 import ValidateData from "@shared/lib/validateData";
 import {validateObject} from "@shared/helper";
-import {Feather} from "@expo/vector-icons";
-import {Country, CountryCode} from "react-native-country-picker-modal/lib/types";
 import {IFLowProps} from "@pages/Auth/LGS/index";
 
+const WYE = ({handleStep, flow, option, currentIdx}: IFLowProps) => {
 
-const PhoNoV = ({handleStep, flow, option, currentIdx}: IFLowProps) => {
+    const cWidth = 100;
 
-    const [phoneNo, setPhoneNo] = useState<string>("");
+    const [email, setEmail] = useState<string>("");
     const [error, setError] = useState<boolean>(false);
+    const [hidePassword, setHidePassword] = useState<boolean>(true);
     const [errorCount, setErrorCount] = useState<number>(0);
 
-    const [countryCode, setCountryCode] = useState<CountryCode>('US');
-    const [callingCode, setCallingCode] = useState<string>('1');
-    const [flag, setFlag] = useState<string>('🇺🇸');
-
-
-    const onSelect = (country: Country) => {
-        debug.log("country", country)
-        setCountryCode(country.cca2);
-        setCallingCode(country.callingCode[0]);
-        setFlag(country.flag);
+    const [progressPercent, setProgressPercent] = useState<number>(60); //5-97.5
+    const handleSetProgressPercent = (val: number) => {
+        setProgressPercent(val);
     };
 
-
     const SCHEME = {
-        phonenumber: (phone: string) => ValidateData.number(phone),
+        user: (user: string) => ValidateData.email(user),
     };
 
     type TypeValidation = {
@@ -43,7 +34,7 @@ const PhoNoV = ({handleStep, flow, option, currentIdx}: IFLowProps) => {
 
     let validation: TypeValidation = validateObject(
         {
-            phonenumber: phoneNo,
+            user:email
         },
         // @ts-ignore
         SCHEME,
@@ -51,15 +42,14 @@ const PhoNoV = ({handleStep, flow, option, currentIdx}: IFLowProps) => {
 
 
     const filledFields = () => {
-        return !!phoneNo
+        return !!email
     }
-
 
     const handleContinue = async () => {
         debug.log("here")
         validation = validateObject(
             {
-                phonenumber: phoneNo,
+                user:email
             },
             // @ts-ignore
             SCHEME,
@@ -71,15 +61,14 @@ const PhoNoV = ({handleStep, flow, option, currentIdx}: IFLowProps) => {
         //     return;
         // }
 
-        handleStep(flow[currentIdx + 1])
-    }
 
+    }
 
     useEffect(() => {
         setErrorCount(errorCount + 1)
         validation = validateObject(
             {
-                phonenumber: phoneNo,
+                user:email
             },
             // @ts-ignore
             SCHEME,
@@ -87,97 +76,117 @@ const PhoNoV = ({handleStep, flow, option, currentIdx}: IFLowProps) => {
         if (!validation.isValid && errorCount >= 1 && filledFields()) {
             setError(true)
         }
-    }, [phoneNo]);
+    }, [email,]);
 
     return (
         <>
 
             <View style={styles.r1}>
-                <Text style={styles.r1t2}>{option === "apple" ? "Verification" : "Phone number Verification"}</Text>
-            </View>
-            <View style={styles.r3}>
-                <Text style={styles.r3t1}>Enter your phone number for verification</Text>
+                <Text style={styles.r1t2}>We’d like to reach out to you!</Text>
             </View>
 
+            <View style={styles.progressMain}>
+                <View style={styles.progressInner}>
+                    <View
+                        style={[styles.progressActual, {width: `${progressPercent}%`}]}
+                    ></View>
+                </View>
+                <Text style={styles.mr2t1}>{`${progressPercent}%`}</Text>
+            </View>
+            {/*<View style={styles.mr2}>*/}
+            {/* */}
+            {/*</View>*/}
+            {/*<View style={styles.r3}>*/}
+            {/*    <Text style={styles.r3t1}>Hint: Don’t use password from other accounts.</Text>*/}
+            {/*</View>*/}
 
             <View style={styles.r3}>
+                <Text style={styles.r7t1}>What’s your email?</Text>
                 <TextInput
                     mode="outlined"
                     textColor={COLORS.light.text}
                     // label={"Full Name"}
-                    placeholder={""}
+                    placeholder={"Email"}
                     placeholderTextColor={COLORS.light.active}
-                    textContentType="telephoneNumber"
+                    textContentType="emailAddress"
+                    // secureTextEntry={hidePassword}
                     style={{...styles.inputContent}}
                     outlineStyle={styles.inputOutline}
-                    keyboardType="phone-pad"
+                    keyboardType="default"
                     autoCapitalize="none"
                     autoCorrect={false}
                     selectionColor={
-                        validation?.data?.phonenumber.isValid && error
-                            ? COLORS.light.colorOne
+                        validation?.data?.user.isValid && error ?
+                            COLORS.light.colorOne
                             : COLORS.light.warning
                     }
                     outlineColor={
-                        !validation?.data?.phonenumber.isValid && error
+                        !validation?.data?.user.isValid && error
                             ? COLORS.light.warning
                             : COLORS.light.inactive
                     }
                     activeOutlineColor={
-                        validation?.data?.phonenumber.isValid && error ?
+                        validation?.data?.user.isValid && error ?
                             COLORS.light.colorOne
                             : COLORS.light.warning
                     }
-                    value={phoneNo}
+                    value={email}
                     onChangeText={(val) => {
-                        setPhoneNo(val);
+                        setEmail(val);
                     }}
-                    left={
-                        <TextInput.Icon
-                            style={styles.r6}
-                            icon={() =>
-                                <TouchableOpacity style={styles.r6a}>
-                                    <CountryPicker
-                                        countryCode={countryCode}
-                                        withFilter
-                                        withFlag
-                                        withCallingCode
-                                        withEmoji
-                                        onSelect={onSelect}
-                                        containerButtonStyle={styles.countryPicker}
-                                    />
-                                    {/*<Feather*/}
-                                    {/*    name="chevron-down"*/}
-                                    {/*    size={18}*/}
-                                    {/*    color={COLORS.light.text}*/}
-                                    {/*    style={styles.r6b}*/}
-                                    {/*/>*/}
-                                    {/*<Avatar.Icon*/}
-                                    {/*    size={28}*/}
-                                    {/*    icon="chevron-down"*/}
-                                    {/*    color={COLORS.light.text}*/}
-                                    {/*    style={{*/}
-                                    {/*        backgroundColor: "transparent",*/}
-                                    {/*        borderWidth: 1*/}
-                                    {/*    }}*/}
-                                    {/*/>*/}
-                                    <View style={styles.r6c}/>
-                                    <Text style={styles.r6d}>{`+${callingCode}`}</Text>
-                                </TouchableOpacity>
-
-
-                            }
-                        />
-                    }
                 />
                 {
-                    (!validation?.data?.phonenumber.isValid && error) &&
-                    <Text style={styles.error}>{"Invalid Phone number"}</Text>}
+                    (!validation?.data?.user.isValid && error) &&
+                    <Text style={styles.error}>{"Invalid Email"}</Text>}
+
             </View>
+
+            {/*<View style={styles.r3}>*/}
+            {/*    <Text style={styles.r7t1}>Email</Text>*/}
+            {/*    <TextInput*/}
+            {/*        mode="outlined"*/}
+            {/*        textColor={COLORS.light.text}*/}
+            {/*        // label={"Full Name"}*/}
+            {/*        placeholder={"Email"}*/}
+            {/*        placeholderTextColor={COLORS.light.active}*/}
+            {/*        textContentType="emailAddress"*/}
+            {/*        style={{...styles.inputContent}}*/}
+            {/*        outlineStyle={{*/}
+            {/*            borderRadius: 30,*/}
+            {/*            // borderWidth:2*/}
+            {/*        }}*/}
+            {/*        keyboardType="default"*/}
+            {/*        autoCapitalize="none"*/}
+            {/*        autoCorrect={false}*/}
+            {/*        selectionColor={*/}
+            {/*            validation?.data?.user.isValid && error*/}
+            {/*                ? COLORS.light.colorOne*/}
+            {/*                : COLORS.light.warning*/}
+            {/*        }*/}
+            {/*        outlineColor={*/}
+            {/*            !validation?.data?.user.isValid && error*/}
+            {/*                ? COLORS.light.warning*/}
+            {/*                : COLORS.light.inactive*/}
+            {/*        }*/}
+            {/*        activeOutlineColor={*/}
+            {/*            validation?.data?.user.isValid && error ?*/}
+            {/*                COLORS.light.colorOne*/}
+            {/*                : COLORS.light.warning*/}
+            {/*        }*/}
+            {/*        value={email}*/}
+            {/*        onChangeText={(val) => {*/}
+            {/*            setEmail(val);*/}
+            {/*        }}*/}
+            {/*    />*/}
+            {/*    {*/}
+            {/*        (!validation?.data?.user.isValid && error) &&*/}
+            {/*        <Text style={styles.error}>{"Invalid email"}</Text>}*/}
+            {/*</View>*/}
+
 
             <View style={styles.r9}>
                 <MainButton
-                    title={"Continue"}
+                    title={"Next"}
                     onPressFunction={() => {
                         handleContinue()
                     }}
@@ -185,13 +194,13 @@ const PhoNoV = ({handleStep, flow, option, currentIdx}: IFLowProps) => {
                     btnStyle={styles.r9t}
 
                 />
-
             </View>
+
         </>
     );
 };
 
-export default PhoNoV;
+export default WYE;
 
 const styles = StyleSheet.create({
     r1: {
@@ -221,19 +230,19 @@ const styles = StyleSheet.create({
     r1t2: {
         // marginLeft: "8%",
         color: COLORS.light.text,
-        fontSize: SIZES.sizeNine,
-        fontWeight: "700",
+        fontSize: SIZES.sizeEightB,
+        fontWeight: "400",
         // textAlign: "center",
     },
     r3: {
         width: "100%",
-        marginTop: 5,
+        marginTop: 55,
         marginBottom: 15,
     },
     r3t1: {
         marginBottom: 18,
         fontWeight: "300",
-        fontSize: SIZES.sizeSeven,
+        fontSize: SIZES.sizeSixB,
     },
     inputContent: {
         fontSize: SIZES.sizeSeven,
@@ -242,7 +251,7 @@ const styles = StyleSheet.create({
         width: "100%",
         backgroundColor: COLORS.light.backgroundGray,
         marginBottom: 8,
-        paddingLeft: "15%",
+        paddingLeft: "2%",
         paddingRight: "2%",
         // borderRadius:30,
         // borderWidth:2
@@ -263,10 +272,10 @@ const styles = StyleSheet.create({
         // backgroundColor: COLORS.light.colorOne,
         paddingVertical: 5,
         width: "100%",
-        alignItems: "center"
+        alignItems: "flex-end"
     },
     r9t: {
-        // width: "80%",
+        width: "30%",
         backgroundColor: COLORS.light.colorOne,
     },
     countryPicker: {
@@ -321,6 +330,58 @@ const styles = StyleSheet.create({
         fontWeight: "400",
         backgroundColor: "transparent",
         marginLeft: "4%"
-
+    },
+    r7: {
+        width: "100%",
+        backgroundColor: "transparent",
+        flexDirection: "row",
+        marginTop: "7%",
+        alignItems: "center",
+        justifyContent: "center",
+        marginBottom: 20,
+        flexWrap: "wrap"
+    },
+    r7t1: {
+        color: COLORS.light.text,
+        fontSize: SIZES.sizeNineB,
+        fontWeight: "600",
+        marginTop: 40,
+        marginBottom: 20,
+    },
+    r7t2: {
+        color: COLORS.light.colorOne,
+        fontSize: SIZES.sizeSeven,
+        fontWeight: "700",
+        textAlign: "center",
+    },
+    buttonStyle: {
+        // borderWidth: 5,
+        borderColor: COLORS.light.progress,
+        backgroundColor: COLORS.light.progress,
+        // position: "absolute",
+    },
+    progressMain: {
+        marginVertical: "2%",
+        // marginBottom: 75,
+        //   borderWidth: 1,
+        alignItems: "center",
+        width: "100%",
+        justifyContent: "space-between",
+        flexDirection: "row"
+    },
+    progressInner: {
+        backgroundColor: COLORS.light.progressBg,
+        borderRadius: 5,
+        width: "88%",
+        height: 6,
+        // borderWidth: 1,
+    },
+    progressActual: {
+        backgroundColor: COLORS.light.progress,
+        height: 6,
+        borderRadius: 5,
+    },
+    mr2t1: {
+        color: COLORS.light.text,
     },
 });

@@ -54,3 +54,5 @@ export interface MainButtonContainer {
 export interface CountryPickerContainer {
   handleChosenCountry: any;
 }
+
+export type LoginOptionTypes = "google" | "apple" | "email";
