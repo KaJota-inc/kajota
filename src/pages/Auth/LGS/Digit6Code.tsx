@@ -61,7 +61,7 @@ const Digit6Code = ({handleStep,flow, option, currentIdx }:IFLowProps) => {
 
                 />
             </View>
-            <View style={styles.r7}>
+            {option!=="forgot-password" &&<View style={styles.r7}>
                 <Text style={styles.r7t1}>Yet to get an email? </Text>
                 <TouchableOpacity
                     onPress={() => {
@@ -72,7 +72,7 @@ const Digit6Code = ({handleStep,flow, option, currentIdx }:IFLowProps) => {
 
                 </TouchableOpacity>
                 <Text style={styles.r7t1}>in 54s </Text>
-            </View>
+            </View>}
         </>
     );
 };

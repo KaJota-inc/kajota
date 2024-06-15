@@ -8,34 +8,24 @@ import {COLORS, SIZES} from "@constants/Colors";
 import {MainButton} from "@components/index";
 import ValidateData from "@shared/lib/validateData";
 import {validateObject} from "@shared/helper";
-import {Country, CountryCode} from "react-native-country-picker-modal/lib/types";
 import {IFLowProps} from "@pages/Auth/LGS/index";
 
-const WYPN = ({handleStep, flow, option, currentIdx}: IFLowProps) => {
+const ResetPassword = ({handleStep, flow, option, currentIdx}: IFLowProps) => {
 
-    const [phoneNo, setPhoneNo] = useState<string>("");
     const [error, setError] = useState<boolean>(false);
     const [errorCount, setErrorCount] = useState<number>(0);
 
-    const [countryCode, setCountryCode] = useState<CountryCode>('US');
-    const [callingCode, setCallingCode] = useState<string>('1');
-    const [flag, setFlag] = useState<string>('🇺🇸');
+    const [password, setPassword] = useState<string>("");
+    const [confirmPassword, setConfirmPassword] = useState<string>("");
 
-    const [progressPercent, setProgressPercent] = useState<number>(40); //5-97.5
-    const handleSetProgressPercent = (val: number) => {
-        setProgressPercent(val);
-    };
 
-    const onSelect = (country: Country) => {
-        debug.log("country", country)
-        setCountryCode(country.cca2);
-        setCallingCode(country.callingCode[0]);
-        setFlag(country.flag);
-    };
+    const [hidePassword, setHidePassword] = useState<boolean>(true);
+    const [hideConfirmPassword, setHideConfirmPassword] = useState<boolean>(true);
 
 
     const SCHEME = {
-        phonenumber: (phone: string) => ValidateData.number(phone),
+        newP: (newP: string) => ValidateData.special(newP),
+        confirmP: (confirmP: string) => password === confirmPassword
     };
 
     type TypeValidation = {
@@ -45,23 +35,23 @@ const WYPN = ({handleStep, flow, option, currentIdx}: IFLowProps) => {
 
     let validation: TypeValidation = validateObject(
         {
-            phonenumber: phoneNo,
+            newP: password,
+            confirmP: confirmPassword,
         },
         // @ts-ignore
         SCHEME,
     );
 
-
     const filledFields = () => {
-        return !!phoneNo
+        return !!confirmPassword && !!password
     }
-
 
     const handleContinue = async () => {
         debug.log("here")
         validation = validateObject(
             {
-                phonenumber: phoneNo,
+                newP: password,
+                confirmP: confirmPassword,
             },
             // @ts-ignore
             SCHEME,
@@ -72,16 +62,16 @@ const WYPN = ({handleStep, flow, option, currentIdx}: IFLowProps) => {
         //     // setError(true)
         //     return;
         // }
-
         handleStep(flow[currentIdx + 1])
-    }
 
+    }
 
     useEffect(() => {
         setErrorCount(errorCount + 1)
         validation = validateObject(
             {
-                phonenumber: phoneNo,
+                newP: password,
+                confirmP: confirmPassword,
             },
             // @ts-ignore
             SCHEME,
@@ -89,102 +79,117 @@ const WYPN = ({handleStep, flow, option, currentIdx}: IFLowProps) => {
         if (!validation.isValid && errorCount >= 1 && filledFields()) {
             setError(true)
         }
-    }, [phoneNo]);
+    }, [password, confirmPassword]);
 
     return (
         <>
             <View style={styles.r1}>
-                <Text style={styles.r1t2}>We’re almost there!</Text>
-            </View>
-
-            <View style={styles.progressMain}>
-                <View style={styles.progressInner}>
-                    <View
-                        style={[styles.progressActual, {width: `${progressPercent}%`}]}
-                    ></View>
-                </View>
-                <Text style={styles.mr2t1}>{`${progressPercent}%`}</Text>
+                <Text style={styles.r1t2}>Reset Password</Text>
             </View>
 
             <View style={styles.r3}>
-                <Text style={styles.r7t1}>What’s your phone number?</Text>
+                <Text style={styles.r3t1}>Reset your password securely to regain access to your account.</Text>
+            </View>
+
+            <View style={styles.r3}>
+                {/*<Text style={styles.r3t1}>Password</Text>*/}
                 <TextInput
                     mode="outlined"
                     textColor={COLORS.light.text}
                     // label={"Full Name"}
-                    placeholder={""}
+                    placeholder={"Password"}
                     placeholderTextColor={COLORS.light.active}
-                    textContentType="telephoneNumber"
+                    textContentType="password"
+                    secureTextEntry={hidePassword}
                     style={{...styles.inputContent}}
                     outlineStyle={styles.inputOutline}
-                    keyboardType="phone-pad"
+                    keyboardType="default"
                     autoCapitalize="none"
                     autoCorrect={false}
                     selectionColor={
-                        validation?.data?.phonenumber.isValid && error
-                            ? COLORS.light.colorOne
+                        validation?.data?.newP.isValid && error ?
+                            COLORS.light.colorOne
                             : COLORS.light.warning
                     }
                     outlineColor={
-                        !validation?.data?.phonenumber.isValid && error
+                        !validation?.data?.newP.isValid && error
                             ? COLORS.light.warning
                             : COLORS.light.inactive
                     }
                     activeOutlineColor={
-                        validation?.data?.phonenumber.isValid && error ?
+                        validation?.data?.newP.isValid && error ?
                             COLORS.light.colorOne
                             : COLORS.light.warning
                     }
-                    value={phoneNo}
+                    value={password}
                     onChangeText={(val) => {
-                        setPhoneNo(val);
+                        setPassword(val);
                     }}
-                    left={
+                    right={
                         <TextInput.Icon
-                            style={styles.r6}
-                            icon={() =>
-                                <TouchableOpacity style={styles.r6a}>
-                                    <CountryPicker
-                                        countryCode={countryCode}
-                                        withFilter
-                                        withFlag
-                                        withCallingCode
-                                        withEmoji
-                                        onSelect={onSelect}
-                                        containerButtonStyle={styles.countryPicker}
-                                    />
-                                    {/*<Feather*/}
-                                    {/*    name="chevron-down"*/}
-                                    {/*    size={18}*/}
-                                    {/*    color={COLORS.light.text}*/}
-                                    {/*    style={styles.r6b}*/}
-                                    {/*/>*/}
-                                    {/*<Avatar.Icon*/}
-                                    {/*    size={28}*/}
-                                    {/*    icon="chevron-down"*/}
-                                    {/*    color={COLORS.light.text}*/}
-                                    {/*    style={{*/}
-                                    {/*        backgroundColor: "transparent",*/}
-                                    {/*        borderWidth: 1*/}
-                                    {/*    }}*/}
-                                    {/*/>*/}
-                                    <View style={styles.r6c}/>
-                                    <Text style={styles.r6d}>{`+${callingCode}`}</Text>
-                                </TouchableOpacity>
-
-
-                            }
+                            icon={hidePassword ? "eye-off" : "eye"}
+                            color={COLORS.light.active}
+                            onPress={() => setHidePassword(!hidePassword)}
                         />
                     }
                 />
                 {
-                    (!validation?.data?.phonenumber.isValid && error) &&
-                    <Text style={styles.error}>{"Invalid Phone number"}</Text>}
+                    (!validation?.data?.newP.isValid && error) &&
+                    <Text style={styles.error}>{"Invalid Password"}</Text>}
+
+            </View>
+
+            <View style={styles.r3}>
+                {/*<Text style={styles.r3t1}>Password</Text>*/}
+                <TextInput
+                    mode="outlined"
+                    textColor={COLORS.light.text}
+                    // label={"Full Name"}
+                    placeholder={"Confirm password"}
+                    placeholderTextColor={COLORS.light.active}
+                    textContentType="password"
+                    secureTextEntry={hideConfirmPassword}
+                    style={{...styles.inputContent}}
+                    outlineStyle={styles.inputOutline}
+                    keyboardType="default"
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    selectionColor={
+                        validation?.data?.confirmP.isValid && error ?
+                            COLORS.light.colorOne
+                            : COLORS.light.warning
+                    }
+                    outlineColor={
+                        !validation?.data?.confirmP.isValid && error
+                            ? COLORS.light.warning
+                            : COLORS.light.inactive
+                    }
+                    activeOutlineColor={
+                        validation?.data?.confirmP.isValid && error ?
+                            COLORS.light.colorOne
+                            : COLORS.light.warning
+                    }
+                    value={confirmPassword}
+                    onChangeText={(val) => {
+                        setConfirmPassword(val);
+                    }}
+                    right={
+                        <TextInput.Icon
+                            icon={hideConfirmPassword ? "eye-off" : "eye"}
+                            color={COLORS.light.active}
+                            onPress={() => setHideConfirmPassword(!hideConfirmPassword)}
+                        />
+                    }
+                />
+                {
+                    (!validation?.data?.confirmP.isValid && error) &&
+                    <Text style={styles.error}>{"Password does not match"}</Text>}
+
             </View>
 
             <View style={styles.r9}>
                 <MainButton
-                    title={"Next"}
+                    title={"Reset Password"}
                     onPressFunction={() => {
                         handleContinue()
                     }}
@@ -197,7 +202,7 @@ const WYPN = ({handleStep, flow, option, currentIdx}: IFLowProps) => {
     );
 };
 
-export default WYPN;
+export default ResetPassword;
 
 const styles = StyleSheet.create({
     r1: {
@@ -227,8 +232,8 @@ const styles = StyleSheet.create({
     r1t2: {
         // marginLeft: "8%",
         color: COLORS.light.text,
-        fontSize: SIZES.sizeEightB,
-        fontWeight: "400",
+        fontSize: SIZES.sizeNine,
+        fontWeight: "700",
         // textAlign: "center",
     },
     r3: {
@@ -239,7 +244,7 @@ const styles = StyleSheet.create({
     r3t1: {
         marginBottom: 18,
         fontWeight: "300",
-        fontSize: SIZES.sizeSeven,
+        fontSize: SIZES.sizeSixB,
     },
     inputContent: {
         fontSize: SIZES.sizeSeven,
@@ -248,7 +253,7 @@ const styles = StyleSheet.create({
         width: "100%",
         backgroundColor: COLORS.light.backgroundGray,
         marginBottom: 8,
-        paddingLeft: "15%",
+        // paddingLeft: "15%",
         paddingRight: "2%",
         // borderRadius:30,
         // borderWidth:2
@@ -269,10 +274,10 @@ const styles = StyleSheet.create({
         // backgroundColor: COLORS.light.colorOne,
         paddingVertical: 5,
         width: "100%",
-        alignItems: "flex-end"
+        alignItems: "center"
     },
     r9t: {
-        width: "30%",
+        // width: "30%",
         backgroundColor: COLORS.light.colorOne,
     },
     countryPicker: {

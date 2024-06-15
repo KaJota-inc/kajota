@@ -8,12 +8,18 @@ import {AppleLogoSVG, EmailLogoSVG, GoogleLogoSVG} from "@shared/components/SVGS
 import {TextInput} from "react-native-paper";
 import ValidateData from "@shared/lib/validateData";
 import {validateObject} from "@shared/helper";
-import {CommonActions} from "@react-navigation/native";
-import {RootRoutes} from "@shared/const/routerRoot";
+import {CommonActions, CompositeScreenProps} from "@react-navigation/native";
+import {RootRoutes, RootScreenProps} from "@shared/const/routerRoot";
 import {HomeRoutes} from "@shared/const/routerHome";
 import Layout from "@constants/Layout";
 
-type NavigationProps = AuthProps<AuthRoutes.SignIn>;
+// type NavigationProps = AuthProps<AuthRoutes.SignIn>;
+
+
+type NavigationProps = CompositeScreenProps<
+    AuthProps<AuthRoutes.SignIn>,
+    RootScreenProps<RootRoutes.Auth>
+>;
 
 
 const SignIn: React.FC<NavigationProps> = ({navigation}) => {
@@ -246,7 +252,12 @@ const SignIn: React.FC<NavigationProps> = ({navigation}) => {
                         <TouchableOpacity
                             style={styles.fp}
                             onPress={() => {
-                                // navigation?.navigate(AuthRoutes.ForgotPassword);
+                                navigation.navigate(RootRoutes.Auth, {
+                                    screen: AuthRoutes.LGS,
+                                    params: {
+                                        option : "forgot-password",
+                                    },
+                                });
                             }}
                         >
                             <Text style={styles.fpt}>Forgot Password?</Text>

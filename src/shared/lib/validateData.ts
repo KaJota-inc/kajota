@@ -39,7 +39,7 @@ export default class ValidateData {
   static uppercase = (password = '') => /[A-Z]/.test(password);
   static lowercase = (password = '') => /[a-z]/.test(password);
   static number = (password = '') => /[0-9]/.test(password);
-  static special = (password = '') => /([@#!$?])/.test(password);
+  static special = (password = '') => /([@#!$?]{5,20}$)/.test(password);
   static allValidationPassword = (password = '') =>
     /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#!$?])[-\w@#!$?]{5,20}$/.test(password);
 

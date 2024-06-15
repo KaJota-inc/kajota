@@ -11,9 +11,9 @@ import {validateObject} from "@shared/helper";
 import {Country, CountryCode} from "react-native-country-picker-modal/lib/types";
 import {IFLowProps} from "@pages/Auth/LGS/index";
 
-const WYPN = ({handleStep, flow, option, currentIdx}: IFLowProps) => {
+const ForgotPassword = ({handleStep, flow, option, currentIdx}: IFLowProps) => {
 
-    const [phoneNo, setPhoneNo] = useState<string>("");
+    const [email, setEmail] = useState<string>("");
     const [error, setError] = useState<boolean>(false);
     const [errorCount, setErrorCount] = useState<number>(0);
 
@@ -33,9 +33,8 @@ const WYPN = ({handleStep, flow, option, currentIdx}: IFLowProps) => {
         setFlag(country.flag);
     };
 
-
     const SCHEME = {
-        phonenumber: (phone: string) => ValidateData.number(phone),
+        user: (user: string) => ValidateData.email(user),
     };
 
     type TypeValidation = {
@@ -45,7 +44,7 @@ const WYPN = ({handleStep, flow, option, currentIdx}: IFLowProps) => {
 
     let validation: TypeValidation = validateObject(
         {
-            phonenumber: phoneNo,
+            user:email
         },
         // @ts-ignore
         SCHEME,
@@ -53,15 +52,14 @@ const WYPN = ({handleStep, flow, option, currentIdx}: IFLowProps) => {
 
 
     const filledFields = () => {
-        return !!phoneNo
+        return !!email
     }
-
 
     const handleContinue = async () => {
         debug.log("here")
         validation = validateObject(
             {
-                phonenumber: phoneNo,
+                user:email
             },
             // @ts-ignore
             SCHEME,
@@ -72,16 +70,15 @@ const WYPN = ({handleStep, flow, option, currentIdx}: IFLowProps) => {
         //     // setError(true)
         //     return;
         // }
-
         handleStep(flow[currentIdx + 1])
-    }
 
+    }
 
     useEffect(() => {
         setErrorCount(errorCount + 1)
         validation = validateObject(
             {
-                phonenumber: phoneNo,
+                user:email
             },
             // @ts-ignore
             SCHEME,
@@ -89,102 +86,65 @@ const WYPN = ({handleStep, flow, option, currentIdx}: IFLowProps) => {
         if (!validation.isValid && errorCount >= 1 && filledFields()) {
             setError(true)
         }
-    }, [phoneNo]);
+    }, [email,]);
 
     return (
         <>
             <View style={styles.r1}>
-                <Text style={styles.r1t2}>We’re almost there!</Text>
-            </View>
-
-            <View style={styles.progressMain}>
-                <View style={styles.progressInner}>
-                    <View
-                        style={[styles.progressActual, {width: `${progressPercent}%`}]}
-                    ></View>
-                </View>
-                <Text style={styles.mr2t1}>{`${progressPercent}%`}</Text>
+                <Text style={styles.r1t2}>Forgot Password?</Text>
             </View>
 
             <View style={styles.r3}>
-                <Text style={styles.r7t1}>What’s your phone number?</Text>
+                <Text style={styles.r3t1}>Enter your email to reset your password securely.</Text>
+            </View>
+
+
+
+            <View style={styles.r3}>
+                {/*<Text style={styles.r7t1}>What’s your email?</Text>*/}
                 <TextInput
                     mode="outlined"
                     textColor={COLORS.light.text}
                     // label={"Full Name"}
-                    placeholder={""}
+                    placeholder={"Email"}
                     placeholderTextColor={COLORS.light.active}
-                    textContentType="telephoneNumber"
+                    textContentType="emailAddress"
+                    // secureTextEntry={hidePassword}
                     style={{...styles.inputContent}}
                     outlineStyle={styles.inputOutline}
-                    keyboardType="phone-pad"
+                    keyboardType="default"
                     autoCapitalize="none"
                     autoCorrect={false}
                     selectionColor={
-                        validation?.data?.phonenumber.isValid && error
-                            ? COLORS.light.colorOne
+                        validation?.data?.user.isValid && error ?
+                            COLORS.light.colorOne
                             : COLORS.light.warning
                     }
                     outlineColor={
-                        !validation?.data?.phonenumber.isValid && error
+                        !validation?.data?.user.isValid && error
                             ? COLORS.light.warning
                             : COLORS.light.inactive
                     }
                     activeOutlineColor={
-                        validation?.data?.phonenumber.isValid && error ?
+                        validation?.data?.user.isValid && error ?
                             COLORS.light.colorOne
                             : COLORS.light.warning
                     }
-                    value={phoneNo}
+                    value={email}
                     onChangeText={(val) => {
-                        setPhoneNo(val);
+                        setEmail(val);
                     }}
-                    left={
-                        <TextInput.Icon
-                            style={styles.r6}
-                            icon={() =>
-                                <TouchableOpacity style={styles.r6a}>
-                                    <CountryPicker
-                                        countryCode={countryCode}
-                                        withFilter
-                                        withFlag
-                                        withCallingCode
-                                        withEmoji
-                                        onSelect={onSelect}
-                                        containerButtonStyle={styles.countryPicker}
-                                    />
-                                    {/*<Feather*/}
-                                    {/*    name="chevron-down"*/}
-                                    {/*    size={18}*/}
-                                    {/*    color={COLORS.light.text}*/}
-                                    {/*    style={styles.r6b}*/}
-                                    {/*/>*/}
-                                    {/*<Avatar.Icon*/}
-                                    {/*    size={28}*/}
-                                    {/*    icon="chevron-down"*/}
-                                    {/*    color={COLORS.light.text}*/}
-                                    {/*    style={{*/}
-                                    {/*        backgroundColor: "transparent",*/}
-                                    {/*        borderWidth: 1*/}
-                                    {/*    }}*/}
-                                    {/*/>*/}
-                                    <View style={styles.r6c}/>
-                                    <Text style={styles.r6d}>{`+${callingCode}`}</Text>
-                                </TouchableOpacity>
-
-
-                            }
-                        />
-                    }
                 />
                 {
-                    (!validation?.data?.phonenumber.isValid && error) &&
-                    <Text style={styles.error}>{"Invalid Phone number"}</Text>}
+                    (!validation?.data?.user.isValid && error) &&
+                    <Text style={styles.error}>{"Invalid Email"}</Text>}
+
             </View>
+
 
             <View style={styles.r9}>
                 <MainButton
-                    title={"Next"}
+                    title={"Continue"}
                     onPressFunction={() => {
                         handleContinue()
                     }}
@@ -197,7 +157,7 @@ const WYPN = ({handleStep, flow, option, currentIdx}: IFLowProps) => {
     );
 };
 
-export default WYPN;
+export default ForgotPassword;
 
 const styles = StyleSheet.create({
     r1: {
@@ -227,8 +187,8 @@ const styles = StyleSheet.create({
     r1t2: {
         // marginLeft: "8%",
         color: COLORS.light.text,
-        fontSize: SIZES.sizeEightB,
-        fontWeight: "400",
+        fontSize: SIZES.sizeNine,
+        fontWeight: "700",
         // textAlign: "center",
     },
     r3: {
@@ -239,7 +199,7 @@ const styles = StyleSheet.create({
     r3t1: {
         marginBottom: 18,
         fontWeight: "300",
-        fontSize: SIZES.sizeSeven,
+        fontSize: SIZES.sizeSixB,
     },
     inputContent: {
         fontSize: SIZES.sizeSeven,
@@ -248,7 +208,7 @@ const styles = StyleSheet.create({
         width: "100%",
         backgroundColor: COLORS.light.backgroundGray,
         marginBottom: 8,
-        paddingLeft: "15%",
+        // paddingLeft: "15%",
         paddingRight: "2%",
         // borderRadius:30,
         // borderWidth:2
@@ -269,10 +229,10 @@ const styles = StyleSheet.create({
         // backgroundColor: COLORS.light.colorOne,
         paddingVertical: 5,
         width: "100%",
-        alignItems: "flex-end"
+        alignItems: "center"
     },
     r9t: {
-        width: "30%",
+        // width: "30%",
         backgroundColor: COLORS.light.colorOne,
     },
     countryPicker: {

@@ -15,6 +15,8 @@ import WYN from "@pages/Auth/LGS/WYN";
 import WYC from "@pages/Auth/LGS/WYC";
 import WYPN from "@pages/Auth/LGS/WYPN";
 import {LoginOptionTypes} from "@shared/types/generaltypes";
+import ForgotPassword from "@pages/Auth/LGS/ForgotPassword";
+import ResetPassword from "@pages/Auth/LGS/ResetPassword";
 
 
 export interface IFLowProps {
@@ -34,6 +36,7 @@ const LGS: React.FC<NavigationProps> = ({navigation, route}) => {
     const googleFlow: number[] = [0, 1, 2]
     const appleFlow: number[] = [0, 1, 2]
     const emailFlow: number[] = [7, 8, 1, 5, 6, 3, 4]
+    const forgotPasswordFlow: number[] = [9, 1, 10]
 
 
     const [step, setStep] = useState<number>(0);
@@ -53,7 +56,7 @@ const LGS: React.FC<NavigationProps> = ({navigation, route}) => {
 
     }
 
-    const handleMainFlow = () =>{
+    const handleMainFlow = () => {
         switch (option) {
             case "google":
                 setMainFlow(googleFlow)
@@ -64,11 +67,13 @@ const LGS: React.FC<NavigationProps> = ({navigation, route}) => {
             case "apple":
                 setMainFlow(appleFlow)
                 break;
+            case "forgot-password":
+                setMainFlow(forgotPasswordFlow)
+                break;
             default:
                 setMainFlow(emailFlow)
                 break;
         }
-
 
 
     }
@@ -81,7 +86,7 @@ const LGS: React.FC<NavigationProps> = ({navigation, route}) => {
 
     useEffect(() => {
 
-        if(mainFlow.length){
+        if (mainFlow.length) {
             setStep(mainFlow[0])
         }
 
@@ -196,6 +201,26 @@ const LGS: React.FC<NavigationProps> = ({navigation, route}) => {
                             option={option}
                         />}
                         {step === 8 && <WYPN
+                            currentIdx={currentIdx}
+                            flow={mainFlow}
+                            handleStep={(val: number) => {
+                                handleSetStep(val)
+                                setCurrentIdx(currentIdx + 1)
+                            }}
+                            option={option}
+                        />}
+
+                        {step === 9 && <ForgotPassword
+                            currentIdx={currentIdx}
+                            flow={mainFlow}
+                            handleStep={(val: number) => {
+                                handleSetStep(val)
+                                setCurrentIdx(currentIdx + 1)
+                            }}
+                            option={option}
+                        />}
+
+                        {step === 10 && <ResetPassword
                             currentIdx={currentIdx}
                             flow={mainFlow}
                             handleStep={(val: number) => {
