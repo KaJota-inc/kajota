@@ -14,10 +14,10 @@ import {COLORS} from "@constants/Colors";
 
 export const TabExploreLogoSVG =
     ({
-         height = 25,
-         width = 25,
+         height = 35,
+         width = 35,
          color = COLORS.light.background,
-         stroke = COLORS.light.tabColor
+         stroke = COLORS.light.active
      }) => {
         return (
             <>
@@ -32,10 +32,10 @@ export const TabExploreLogoSVG =
     };
 export const TabSellLogoSVG =
     ({
-         height = 25,
-         width = 25,
+         height = 35,
+         width = 35,
          color = COLORS.light.background,
-         stroke = COLORS.light.tabColor
+         stroke = COLORS.light.active
      }) => {
         return (
             <>
@@ -50,10 +50,10 @@ export const TabSellLogoSVG =
     };
 export const TabAccountLogoSVG =
     ({
-         height = 25,
-         width = 25,
+         height = 35,
+         width = 35,
          color = COLORS.light.background,
-         stroke = COLORS.light.tabColor
+         stroke = COLORS.light.active
      }) => {
         return (
             <>
@@ -68,10 +68,10 @@ export const TabAccountLogoSVG =
     };
 export const TabItemsLogoSVG =
     ({
-         height = 25,
-         width = 25,
+         height = 35,
+         width = 35,
          color = COLORS.light.background,
-         stroke = COLORS.light.tabColor
+         stroke = COLORS.light.active
      }) => {
         return (
             <>
@@ -86,10 +86,10 @@ export const TabItemsLogoSVG =
     };
 export const TabHomeLogoSVG =
     ({
-         height = 25,
-         width = 25,
+         height = 35,
+         width = 35,
          color = COLORS.light.background,
-         stroke = COLORS.light.tabColor
+         stroke = COLORS.light.active
      }) => {
         return (
             <>

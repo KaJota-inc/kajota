@@ -25,10 +25,10 @@ const Tab = createBottomTabNavigator();
 const TAB_OPTIONS: TabOptions = {
     Home: {
         label: "Home",
-        icon: ({color}: { color: string }) => {
+        icon: ({color, stroke}: { color: string, stroke: string }) => {
             return (
                 <>
-                    <TabHomeLogoSVG/>
+                    <TabHomeLogoSVG color={color} stroke={stroke}/>
                 </>
             );
         },
@@ -37,10 +37,10 @@ const TAB_OPTIONS: TabOptions = {
 
     Explore: {
         label: "Explore",
-        icon: ({color}: { color: string }) => {
+        icon: ({color, stroke}: { color: string, stroke: string }) => {
             return (
                 <>
-                    <TabExploreLogoSVG/>
+                    <TabExploreLogoSVG color={color} stroke={stroke}/>
                 </>
             );
         },
@@ -49,10 +49,13 @@ const TAB_OPTIONS: TabOptions = {
 
     Sell: {
         label: "Sell",
-        icon: ({color}: { color: string }) => {
+        icon: ({color, stroke}: { color: string, stroke: string }) => {
             return (
                 <>
-                    <TabSellLogoSVG/>
+                    <TabSellLogoSVG
+                        color={COLORS.light.colorOne}
+                        stroke={COLORS.light.background}
+                    />
                 </>
             );
         },
@@ -61,10 +64,10 @@ const TAB_OPTIONS: TabOptions = {
 
     Items: {
         label: "Items",
-        icon: ({color}: { color: string }) => {
+        icon: ({color, stroke}: { color: string, stroke: string }) => {
             return (
                 <>
-                    <TabItemsLogoSVG />
+                    <TabItemsLogoSVG color={color} stroke={stroke}/>
                 </>
             );
         },
@@ -73,10 +76,10 @@ const TAB_OPTIONS: TabOptions = {
 
     Account: {
         label: "Account",
-        icon: ({color}: { color: string }) => {
+        icon: ({color, stroke}: { color: string, stroke: string }) => {
             return (
                 <>
-                    <TabAccountLogoSVG/>
+                    <TabAccountLogoSVG color={color} stroke={stroke}/>
                 </>
             );
         },
@@ -96,13 +99,16 @@ const BottomTabNavigator = (): React.ReactElement => {
                         style={[
                             styles.containerIcon,
                             // focused &&
-                            //   TAB_OPTIONS[name].label === "Account" &&
-                            //   styles.focusIcon,
+                            TAB_OPTIONS[name].label === "Sell" &&
+                            styles.focusIcon,
                         ]}
                     >
                         <CompToRender
                             color={
-                                focused ? COLORS.light.colorOne : COLORS.light.text
+                                focused ? COLORS.light.text : COLORS.light.background
+                            }
+                            stroke={
+                                focused ? COLORS.light.background : COLORS.light.text
                             }
                         />
                     </View>
@@ -110,21 +116,25 @@ const BottomTabNavigator = (): React.ReactElement => {
                     <Text
                         style={{
                             color: focused
-                                ? COLORS.light.colorOne
-                                : COLORS.light.text,
+                                ? COLORS.light.text
+                                : COLORS.light.active,
                             fontSize: SIZES.sizeFiveB,
                             fontWeight: "400",
                         }}
                     >
-                        {focused ? (
-                            <Octicons
-                                name="dot-fill"
-                                size={20}
-                                color={COLORS.light.colorOne}
-                            />
-                        ) : (
-                            TAB_OPTIONS[name].label
-                        )}
+                        {
+                            focused &&
+                            TAB_OPTIONS[name].label === "Sell"
+                                ? (
+                                    <Octicons
+                                        name="dot-fill"
+                                        size={20}
+                                        color={COLORS.light.colorOne}
+                                    />
+                                ) : (
+                                    TAB_OPTIONS[name].label
+                                )}
+                        {/*{TAB_OPTIONS[name].label}*/}
                     </Text>
                 </View>
             );
@@ -153,11 +163,11 @@ const BottomTabNavigator = (): React.ReactElement => {
 
 const styles = StyleSheet.create({
     tabBarStyle: {
-        height: Platform.OS === "android" ? 70 : 100,
+        height: Platform.OS === "android" ? 80 : 110,
         backgroundColor: COLORS.light.background,
         borderTopWidth: 1,
         paddingHorizontal: 20,
-        paddingVertical: 20,
+        paddingVertical: 25,
     },
     containerItem: {
         alignItems: "center",
@@ -165,14 +175,16 @@ const styles = StyleSheet.create({
         marginBottom: Platform.OS === "android" ? 20 : 25,
     },
     containerIcon: {
-        height: 30,
-        width: 30,
+        // height: 40,
+        // width: 40,
         justifyContent: "center",
         alignItems: "center",
-        borderRadius: 16,
+        borderRadius: 10,
+        padding: 5
     },
     focusIcon: {
         backgroundColor: COLORS.light.colorOne,
+
     },
 });
 
