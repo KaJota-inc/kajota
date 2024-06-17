@@ -8,13 +8,12 @@ import {Octicons} from "@expo/vector-icons";
 
 
 import {
-    FifaLogoSVG,
     TabAccountLogoSVG,
     TabExploreLogoSVG, TabHomeLogoSVG,
     TabItemsLogoSVG,
     TabSellLogoSVG
 } from "@shared/components/SVGS";
-import {DOB, Home} from "@pages/Home";
+import {Home} from "@pages/Home";
 import {ExploreMain} from "@pages/Explore";
 import {SellsMain} from "@pages/Sells";
 import {ItemsMain} from "@pages/Items";
@@ -179,7 +178,7 @@ const styles = StyleSheet.create({
         // width: 40,
         justifyContent: "center",
         alignItems: "center",
-        borderRadius: 10,
+        borderRadius: 11,
         padding: 5
     },
     focusIcon: {
