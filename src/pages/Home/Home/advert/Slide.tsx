@@ -40,7 +40,8 @@ export const Slide = ({onSkip, onGetStarted, title, subtitle, btnText, backgroun
             </View>
             <View style={styles.r2}>
                 <Image
-                    source={image} style={styles.r2t}
+                    source={image}
+                    style={styles.r2t}
                     resizeMode="cover"
                 />
             </View>

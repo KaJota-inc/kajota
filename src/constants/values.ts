@@ -1,3 +1,5 @@
+import {ProductType} from "@shared/types/generaltypes";
+import {IMAGES} from "@constants/Colors";
 
 export const timeOptions = {
     hour: "numeric" as const,
@@ -10,3 +12,67 @@ export const dateOptions = {
     month: "long" as const,
     day: "numeric" as const,
 };
+
+export const CATEGORIES = [
+    "All",
+    "Electronics",
+    "Computers",
+    "Games",
+    "Vehicles",
+    "Property",
+];
+
+export const PRODUCTS: ProductType[] = [
+    {
+        key: 1,
+        category: "Men's Fashion",
+        uri: IMAGES.SneakerSale,
+        title: "Adidas Shoes",
+        price: 15.00,
+        item: 100,
+        rating: 3.6,
+        ccy: "\u00A3",
+        store: "Zee Store",
+        badgeText: "New",
+        favorite: true
+    },
+    {
+        key: 2,
+        category: "Men's Fashion",
+        uri: IMAGES.SneakerSale,
+        title: "Adidas Shoes",
+        price: 15.00,
+        item: 100,
+        rating: 4.6,
+        ccy: "\u00A3",
+        store: "Zee Store",
+        badgeText: "New",
+        favorite: false
+    },
+    {
+        key: 3,
+        category: "Men's Fashion",
+        uri: IMAGES.SneakerSale,
+        title: "Adidas Shoes",
+        price: 15.00,
+        item: 100,
+        rating: 4.6,
+        ccy: "\u00A3",
+        store: "Zee Store",
+        badgeText: "New",
+        favorite: true
+    },
+    {
+        key: 4,
+        category: "Men's Fashion",
+        uri: IMAGES.SneakerSale,
+        title: "Adidas Shoes",
+        price: 15.00,
+        item: 100,
+        rating: 4.6,
+        ccy: "\u00A3",
+        store: "Zee Store",
+        badgeText: "New",
+        favorite: false
+    },
+];

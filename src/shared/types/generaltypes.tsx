@@ -1,13 +1,8 @@
-/**
- * Learn more about using TypeScript with React Navigation:
- * https://reactnavigation.org/docs/typescript/
- */
-
 import {BottomTabScreenProps} from "@react-navigation/bottom-tabs";
 import {CompositeScreenProps} from "@react-navigation/native";
 import {NativeStackScreenProps} from "@react-navigation/native-stack";
 import {RootParamList} from "@shared/const/routerRoot";
-import {StyleProp, TextStyle, ViewStyle} from "react-native";
+import {ImageSourcePropType, StyleProp, TextStyle, ViewStyle} from "react-native";
 import {ReactNode} from "react";
 
 declare global {
@@ -57,3 +52,18 @@ export interface CountryPickerContainer {
 }
 
 export type LoginOptionTypes = "google" | "apple" | "email" | "forgot-password";
+
+export interface ProductType {
+    key: number;
+    category: string;
+    title: string;
+    uri: ImageSourcePropType;
+    ccy?: string;
+    price: string | number;
+    item: number;
+    rating: number;
+    store: string;
+    badgeText: string;
+    favorite: boolean
+
+}

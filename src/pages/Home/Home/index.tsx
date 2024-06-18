@@ -1,6 +1,6 @@
 import {Image, ScrollView, StatusBar, StyleSheet, TouchableOpacity} from "react-native";
 
-import React from "react";
+import React, {useState} from "react";
 import {Text, View} from "@components/Themed";
 import {CompositeScreenProps} from "@react-navigation/native";
 import {HomeProps, HomeRoutes} from "@shared/const/routerHome";
@@ -9,6 +9,8 @@ import {COLORS, IMAGES, SIZES} from "@constants/Colors";
 import CartIcon from "@shared/components/CartIcon";
 import {AntDesign, Feather, SimpleLineIcons} from "@expo/vector-icons";
 import Advert from "@pages/Home/Home/advert/Advert";
+import {CATEGORIES} from "@constants/values";
+import {GridProductDisplay} from "@shared/components/GridProductDisplay";
 
 type NavigationProps = CompositeScreenProps<
     HomeProps<HomeRoutes.HOME>,
@@ -16,6 +18,8 @@ type NavigationProps = CompositeScreenProps<
 >;
 
 const Home: React.FC<NavigationProps> = () => {
+    const [catIndex, setCatIndex] = useState(0);
+
     return (
         <View style={styles.main}>
             <StatusBar barStyle="dark-content"/>
@@ -53,8 +57,13 @@ const Home: React.FC<NavigationProps> = () => {
                             </TouchableOpacity>
                         </View>
                         <TouchableOpacity style={styles.r2b}>
-                            <Feather
-                                name="sliders"
+                            {/*<Feather*/}
+                            {/*    name="sliders"*/}
+                            {/*    size={24}*/}
+                            {/*    color={COLORS.light.active}*/}
+                            {/*/>*/}
+                            <SimpleLineIcons
+                                name="equalizer"
                                 size={24}
                                 color={COLORS.light.active}
                             />
@@ -68,30 +77,55 @@ const Home: React.FC<NavigationProps> = () => {
                         <View style={styles.r3}>
                             <Advert/>
                         </View>
-                        <View>
-                            <Text>Categories</Text>
-                            <View>
-                                <Text>All</Text>
-                                <Text>Electronics</Text>
-                                <Text>Computer</Text>
-                            </View>
+
+                        <View style={styles.r4}>
+                            <Text style={styles.r4t}>Categories</Text>
+                            <ScrollView
+                                horizontal={true}
+                                showsHorizontalScrollIndicator={false}
+                                showsVerticalScrollIndicator={false}
+                                style={styles.categoriesStyle}
+                                contentContainerStyle={styles.categoriesContentStyle}
+                            >
+                                {CATEGORIES.map((d, index) => {
+                                    return (
+                                        <TouchableOpacity
+                                            key={`#${index}`}
+                                            style={
+                                                catIndex !== index ? styles.category : styles.categoryActive
+                                            }
+                                            onPress={() => {
+                                                setCatIndex(index);
+                                            }}
+                                        >
+                                            <Text
+                                                style={[
+                                                    styles.categoryText,
+                                                    {
+                                                        color: `${catIndex != index ? "grey" : COLORS.light.text}`,
+                                                    },
+                                                ]}
+                                            >
+                                                {d}
+                                            </Text>
+                                        </TouchableOpacity>
+                                    );
+                                })}
+                            </ScrollView>
                         </View>
 
+                        <View style={styles.r5}>
+                            <Text style={styles.r5a}>Popular</Text>
+                            <Text
+                                style={styles.r5b}
+                                onPress={() => {
+                                }}
+                            >
+                                View All
+                            </Text>
+                        </View>
                         <View>
-                            <Text>Popular</Text>
-                            <Text>View All</Text>
-                            <View>
-                                <View>
-                                    <Text>All</Text>
-                                    <Text>Electronics</Text>
-                                    <Text>Computer</Text>
-                                </View>
-                                <View>
-                                    <Text>All</Text>
-                                    <Text>Electronics</Text>
-                                    <Text>Computer</Text>
-                                </View>
-                            </View>
+                            <GridProductDisplay/>
                         </View>
 
                     </ScrollView>
@@ -125,7 +159,7 @@ const styles = StyleSheet.create({
         width: "100%",
         marginTop: 10,
         backgroundColor: "transparent",
-        marginBottom: 20,
+        marginBottom: 100,
     },
     scrollContent: {
         // borderWidth: 1,
@@ -133,8 +167,9 @@ const styles = StyleSheet.create({
         // height: "500%",
         alignItems: "center",
         backgroundColor: "transparent",
-        marginBottom: 20,
-        paddingVertical: 5,
+        paddingTop: 5,
+        paddingBottom: 50
+
     },
     r1: {
         flexDirection: "row",
@@ -152,6 +187,9 @@ const styles = StyleSheet.create({
     },
     r1b: {
         backgroundColor: "transparent",
+        // paddingLeft: 15,
+        // borderWidth: 1,
+
     },
     r1img: {
         height: 50,
@@ -199,26 +237,98 @@ const styles = StyleSheet.create({
         padding: 5
     },
     r2a1t: {
-        marginLeft:"10%",
-        fontSize:SIZES.sizeSix
+        marginLeft: "10%",
+        fontSize: SIZES.sizeSix
     },
     r2a2: {
         flexDirection: "row",
         alignItems: "center",
-        padding:8,
+        padding: 8,
         borderRadius: 10,
         backgroundColor: COLORS.light.background,
     },
     r2a2t: {
-        marginLeft:"5%",
-        fontSize:SIZES.sizeSix
+        marginLeft: "5%",
+        fontSize: SIZES.sizeSix
     },
-    r3:{
-        // borderWidth: 1,
-        height:220,
+    r3: {
+        height: 220,
         backgroundColor: "transparent",
-        width:"100%",
-        marginBottom:20
-
+        width: "100%",
+        marginBottom: 20
+    },
+    r4: {
+        height: 100,
+        backgroundColor: "transparent",
+        marginBottom: 20
+    },
+    r4t: {
+        fontSize: SIZES.sizeSixC,
+        fontWeight: "700",
+        marginBottom: 5
+    },
+    categoryContainer: {
+        flexDirection: "row",
+        marginTop: 15,
+        marginLeft: 30,
+        alignItems: "center",
+    },
+    categoryIcon: {
+        paddingRight: 10,
+        fontSize: 25,
+        fontWeight: "normal",
+    },
+    categoryText: {
+        fontSize: SIZES.sizeSix,
+        fontWeight: "500",
+    },
+    categoriesStyle: {
+        // marginTop: 20,
+        // backgroundColor: COLORS.light.textGray,
+        // borderWidth: 1,
+    },
+    categoriesContentStyle: {
+        marginRight: 30,
+        alignItems: "center",
+        justifyContent: "center",
+        paddingRight: 50,
+        // borderWidth: 1,
+    },
+    category: {
+        marginRight: 25,
+        padding: 10,
+        alignItems: "center",
+        justifyContent: "center",
+        // borderWidth: 1,
+    },
+    categoryActive: {
+        backgroundColor: COLORS.light.background,
+        marginRight: 15,
+        padding: 15,
+        alignItems: "center",
+        justifyContent: "center",
+        shadowColor: COLORS.light.tabIconDefault,
+        shadowOffset: {
+            width: 1,
+            height: 1,
+        },
+        shadowOpacity: 0.5,
+        shadowRadius: 4,
+        borderRadius: 10
+    },
+    r5: {
+        flexDirection: "row",
+        width: "100%",
+        justifyContent: "space-between",
+        marginBottom: 10,
+        backgroundColor: "transparent",
+    },
+    r5a: {
+        fontSize: SIZES.sizeSevenB,
+        fontWeight: "700",
+    },
+    r5b: {
+        fontSize: SIZES.sizeSixC,
+        // fontWeight: "700",
     }
 });

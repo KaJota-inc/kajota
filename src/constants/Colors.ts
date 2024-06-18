@@ -5,9 +5,11 @@ const tintColorDark = "#fff";
 export const COLORS = {
     light: {
         background: "#fff",
+        backgroundAsh: "#F8F8F8",
         backgroundGray: "#F3F2F1",
         colorOne: "#F15A32",
         colorOneLight: "#F8C8BB",
+        colorOneLight2: "#FDEDE9",
         colorOneDark: "#98350A",
         text: "#000",
         textGray: "#BFBFBF",
@@ -27,7 +29,10 @@ export const COLORS = {
         advertBlue: "#C5E5FB",
         advertBlueDark: "#01446C",
         advertGreen: "#82FEBC",
+        advertGreenLight: "#E6FFEF",
         advertGreenDark: "#0F8345",
+        price: "#14AE5C",
+        star: "#FFD700",
 
         tint: tintColorLight,
         tabIconDefault: "#ccc",
@@ -74,4 +79,5 @@ export const IMAGES = {
     FrameWS3sub: require("../shared/assets/images/png/FrameWS3sub.png"),
     ProfileImage: require("../shared/assets/images/png/profile_image.png"),
     AdvertShirts: require("../shared/assets/images/png/Advert_Shirts.png"),
+    SneakerSale: require("../shared/assets/images/png/SneakerSale.png"),
 };

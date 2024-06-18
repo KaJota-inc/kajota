@@ -68,7 +68,7 @@ const Advert = () => {
                     }}
                     onGetStarted={() => {
                     }}
-                    backgroundColor={COLORS.light.colorOneLight}
+                    backgroundColor={COLORS.light.colorOneLight2}
                     btnText={"Start Earning"}
                     subtitle={"Make extra money from selling for vendors."}
                     textColor={COLORS.light.colorOneDark}
