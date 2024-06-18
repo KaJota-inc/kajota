@@ -1,10 +1,12 @@
-import {ScrollView, StatusBar, StyleSheet} from "react-native";
+import {Image, ScrollView, StatusBar, StyleSheet} from "react-native";
 
 import React from "react";
 import {Text, View} from "@components/Themed";
 import {CompositeScreenProps} from "@react-navigation/native";
 import {HomeProps, HomeRoutes} from "@shared/const/routerHome";
 import {RootRoutes, RootScreenProps} from "@shared/const/routerRoot";
+import {COLORS, IMAGES, SIZES} from "@constants/Colors";
+import CartIcon from "@shared/components/CartIcon";
 
 type NavigationProps = CompositeScreenProps<
     HomeProps<HomeRoutes.HOME>,
@@ -20,13 +22,14 @@ const Home: React.FC<NavigationProps> = () => {
                 <View style={styles.subContainer}>
                     <View style={styles.r1}>
                         <View style={styles.r1a}>
-                            <View>
-                                <Text>img</Text>
-                            </View>
-                            <Text>Hi Jane</Text>
+                            {/*<View style={styles.r1img}>*/}
+                            <Image source={IMAGES.ProfileImage} style={styles.r1imgb}/>
+                            {/*</View>*/}
+                            <Text style={styles.r1t}>Hi Jane</Text>
                         </View>
                         <View style={styles.r1b}>
-                            <Text>Cart</Text>
+                            <CartIcon count={10} />
+                            {/*<Text>Cart</Text>*/}
                         </View>
                     </View>
                     <View>
@@ -79,10 +82,10 @@ const Home: React.FC<NavigationProps> = () => {
                         </View>
 
                     </ScrollView>
+                </View>
             </View>
         </View>
-</View>
-);
+    );
 };
 
 export default Home;
@@ -125,4 +128,35 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         paddingVertical: 5,
     },
+    r1: {
+        flexDirection: "row",
+        width: "100%",
+        justifyContent: "space-between",
+        marginVertical: 15,
+        alignItems: "center"
+    },
+    r1a: {
+        flexDirection: "row",
+        alignItems: "center"
+
+    },
+    r1b: {},
+    r1img: {
+        height: 50,
+        width: 50,
+        borderWidth: 1,
+        marginRight: 10
+    },
+    r1imgb: {
+        width: 50,
+        height: 50,
+        // borderWidth: 1,
+        marginRight: "6%",
+        borderColor: COLORS.light.colorOne,
+    },
+    r1t:{
+        color: COLORS.light.text,
+        fontSize: SIZES.sizeSeven,
+        fontWeight: "500",
+    }
 });

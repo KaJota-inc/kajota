@@ -8,8 +8,9 @@ import EmailLogo from "../assets/images/svg/email_icon.svg";
 import TabExploreLogo from "../assets/images/svg/TabExplore.svg";
 import TabSellLogo from "../assets/images/svg/TabSell.svg";
 import TabItemsLogo from "../assets/images/svg/TabItems.svg";
-import TabAccountLogo from "../assets/images/svg//TabAccount.svg";
-import TabHomeLogo from "../assets/images/svg//TabHome.svg";
+import TabAccountLogo from "../assets/images/svg/TabAccount.svg";
+import TabHomeLogo from "../assets/images/svg/TabHome.svg";
+import Basket from "../assets/images/svg/Basket.svg";
 import {COLORS} from "@constants/Colors";
 
 export const TabExploreLogoSVG =
@@ -176,5 +177,25 @@ export const EmailLogoSVG =
             </>
         );
     };
+
+export const BasketSVG =
+    ({
+         height = 32,
+         width = 32,
+         color = COLORS.light.background,
+         stroke = COLORS.light.text
+     }) => {
+        return (
+            <>
+                <Basket
+                    height={height}
+                    width={width}
+                    fill={color}
+                    stroke={stroke}
+                />
+            </>
+        );
+    };
+
 
 const styles = StyleSheet.create({});
