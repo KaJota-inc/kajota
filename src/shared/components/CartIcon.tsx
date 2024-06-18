@@ -29,6 +29,8 @@ const styles = StyleSheet.create({
         backgroundColor: "transparent",
         height: 50,
         marginRight: 20,
+        // borderWidth:1,
+        marginBottom: 10
     },
     body: {
         borderRadius: 10,
@@ -39,6 +41,8 @@ const styles = StyleSheet.create({
         height: 15,
         padding: 1,
         alignSelf: "flex-end",
+        // borderWidth:1,
+
     },
     cartText: {
         color: COLORS.light.colorOneDark,

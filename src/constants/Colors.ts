@@ -18,6 +18,16 @@ export const COLORS = {
         active: "#737373",
         progress: "#3BA755",
         progressBg: "#BFBFBF",
+        hashBackGround: "#F5F3F3",
+        hashBackGroundL2: "#F3F3F3",
+        hashBackGroundL3: "#F2F2F2",
+        hashHomeBackGround: "#EDEDED",
+        hashHomeBackGroundL2: "#F9F9F9",
+        hashHomeBackGroundL3: "#D3D3D3",
+        advertBlue: "#C5E5FB",
+        advertBlueDark: "#01446C",
+        advertGreen: "#82FEBC",
+        advertGreenDark: "#0F8345",
 
         tint: tintColorLight,
         tabIconDefault: "#ccc",
@@ -63,4 +73,5 @@ export const IMAGES = {
     FrameWS3: require("../shared/assets/images/png/FrameWS3.png"),
     FrameWS3sub: require("../shared/assets/images/png/FrameWS3sub.png"),
     ProfileImage: require("../shared/assets/images/png/profile_image.png"),
+    AdvertShirts: require("../shared/assets/images/png/Advert_Shirts.png"),
 };
