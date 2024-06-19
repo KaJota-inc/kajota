@@ -11,6 +11,8 @@ import TabItemsLogo from "../assets/images/svg/TabItems.svg";
 import TabAccountLogo from "../assets/images/svg/TabAccount.svg";
 import TabHomeLogo from "../assets/images/svg/TabHome.svg";
 import Basket from "../assets/images/svg/Basket.svg";
+import AIStar from "../assets/images/svg/AIStar.svg";
+import PickAPLan from "../assets/images/svg/PickAPlan.svg";
 import {COLORS} from "@constants/Colors";
 
 export const TabExploreLogoSVG =
@@ -188,6 +190,43 @@ export const BasketSVG =
         return (
             <>
                 <Basket
+                    height={height}
+                    width={width}
+                    fill={color}
+                    stroke={stroke}
+                />
+            </>
+        );
+    };
+
+export const AIStarSVG =
+    ({
+         height = 20,
+         width = 20,
+         color = COLORS.light.colorOne,
+         stroke = COLORS.light.background
+     }) => {
+        return (
+            <>
+                <AIStar
+                    height={height}
+                    width={width}
+                    fill={color}
+                    stroke={stroke}
+                />
+            </>
+        );
+    };
+export const PickAPLanSVG =
+    ({
+         height = 250,
+         width = 250,
+         color = COLORS.light.colorOne,
+         stroke = COLORS.light.background
+     }) => {
+        return (
+            <>
+                <PickAPLan
                     height={height}
                     width={width}
                     fill={color}

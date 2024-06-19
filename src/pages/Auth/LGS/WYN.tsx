@@ -5,7 +5,6 @@ import {Text, View} from "@components/Themed";
 import {COLORS, SIZES} from "@constants/Colors";
 import {MainButton} from "@components/index";
 import {TextInput} from "react-native-paper";
-import ValidateData from "@shared/lib/validateData";
 import {validateObject} from "@shared/helper";
 import {IFLowProps} from "@pages/Auth/LGS/index";
 
@@ -34,7 +33,7 @@ const WYN = ({handleStep, flow, option, currentIdx}: IFLowProps) => {
 
     let validation: TypeValidation = validateObject(
         {
-            user:fullName
+            user: fullName
         },
         // @ts-ignore
         SCHEME,
@@ -49,7 +48,7 @@ const WYN = ({handleStep, flow, option, currentIdx}: IFLowProps) => {
         debug.log("here")
         validation = validateObject(
             {
-                user:fullName
+                user: fullName
             },
             // @ts-ignore
             SCHEME,
@@ -68,7 +67,7 @@ const WYN = ({handleStep, flow, option, currentIdx}: IFLowProps) => {
         setErrorCount(errorCount + 1)
         validation = validateObject(
             {
-                user:fullName
+                user: fullName
             },
             // @ts-ignore
             SCHEME,

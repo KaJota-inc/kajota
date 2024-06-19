@@ -12,6 +12,7 @@ export const COLORS = {
         colorOneLight2: "#FDEDE9",
         colorOneDark: "#98350A",
         text: "#000",
+        textHash: "#A8A8B9",
         textGray: "#BFBFBF",
         textAsh: "#F3F2F1",
         tabColor: "#6B7280",

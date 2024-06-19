@@ -17,15 +17,24 @@ import WYPN from "@pages/Auth/LGS/WYPN";
 import {LoginOptionTypes} from "@shared/types/generaltypes";
 import ForgotPassword from "@pages/Auth/LGS/ForgotPassword";
 import ResetPassword from "@pages/Auth/LGS/ResetPassword";
+import HWYJ from "@pages/Auth/LGS/HWYJ";
+import SelectItems from "@pages/Auth/LGS/SelectItems";
+import StoreDetails from "@pages/Auth/LGS/StoreDetails";
+import PickAPlan from "@pages/Auth/LGS/PickAPlan";
+import Plan from "@pages/Auth/LGS/Plan";
 
+
+export type UserType = "CO_SELL" | "SELL" | "ALL" | "BUY";
 
 export interface IFLowProps {
     handleStep: (val: number) => void;
-
     flow: number[];
     option: LoginOptionTypes;
     currentIdx: number;
+    handleUserType?: (val: UserType) => void;
+    userType?: UserType
 }
+
 
 type NavigationProps = AuthProps<AuthRoutes.LGS>;
 
@@ -33,15 +42,22 @@ const LGS: React.FC<NavigationProps> = ({navigation, route}) => {
 
     const {option} = route.params;
     // debug.log("option",option)
-    const googleFlow: number[] = [0, 1, 2]
-    const appleFlow: number[] = [0, 1, 2]
-    const emailFlow: number[] = [7, 8, 1, 5, 6, 3, 4]
+    const allUserTypeFLow: number[] = [14, 15]
+    const otherUserTypeFLow: number[] = [12, 13]
+
+
+    const googleFlow: number[] = [0, 1, 2, 3, 4, 11,]
+    const appleFlow: number[] = [0, 1, 2, 3, 4, 11,]
+    const emailFlow: number[] = [7, 8, 1, 5, 6, 3, 4, 11,]
     const forgotPasswordFlow: number[] = [9, 1, 10]
 
 
     const [step, setStep] = useState<number>(0);
     const [currentIdx, setCurrentIdx] = useState<number>(0);
     const [mainFlow, setMainFlow] = useState<number[]>(emailFlow);
+    const [previousFLow, setPreviousFLow] = useState<number[]>([]);
+    const [userFlow, setUserFlow] = useState<number[]>(otherUserTypeFLow);
+    const [userType, setUserType] = useState<UserType>();
 
     const handleSetStep = (val: number) => {
         setStep(val)
@@ -53,7 +69,11 @@ const LGS: React.FC<NavigationProps> = ({navigation, route}) => {
         }
         setStep(mainFlow[currentIdx - 1])
         setCurrentIdx(currentIdx - 1)
+    }
 
+    const handleUserType = (val: UserType) => {
+        debug.log("User type", val)
+        setUserType(val)
     }
 
     const handleMainFlow = () => {
@@ -74,8 +94,6 @@ const LGS: React.FC<NavigationProps> = ({navigation, route}) => {
                 setMainFlow(emailFlow)
                 break;
         }
-
-
     }
 
     useEffect(() => {
@@ -85,12 +103,32 @@ const LGS: React.FC<NavigationProps> = ({navigation, route}) => {
     }, [option,]);
 
     useEffect(() => {
-
+        debug.log("mainFlow", mainFlow)
         if (mainFlow.length) {
-            setStep(mainFlow[0])
+            setStep(mainFlow[currentIdx])
         }
 
     }, [mainFlow,]);
+
+    useEffect(() => {
+
+        debug.log("User type", userType)
+        debug.log("previousFLow", previousFLow)
+        if (!userType) {
+            return
+        }
+        if (!previousFLow.length) {
+            setPreviousFLow([...mainFlow])
+        }
+        if (userType === "ALL") {
+            setUserFlow(allUserTypeFLow)
+            setMainFlow([...previousFLow, ...allUserTypeFLow])
+        } else {
+            setUserFlow(otherUserTypeFLow)
+            setMainFlow([...previousFLow, ...otherUserTypeFLow])
+        }
+
+    }, [userType, previousFLow]);
 
 
     useEffect(() => {
@@ -112,7 +150,7 @@ const LGS: React.FC<NavigationProps> = ({navigation, route}) => {
                         style={styles.scroll}
                     >
                         <View style={styles.r2}>
-                            <TouchableOpacity
+                            {![11].includes(step) && <TouchableOpacity
                                 style={styles.r2t1}
                                 onPress={() => {
                                     handleBack()
@@ -121,8 +159,22 @@ const LGS: React.FC<NavigationProps> = ({navigation, route}) => {
                             >
                                 {/*<AntDesign name="left" size={25} color={COLORS.light.text} />*/}
                                 <Feather name="chevron-left" size={28} color={COLORS.light.text}/>
-                            </TouchableOpacity>
+                            </TouchableOpacity>}
+                            {step === 15 && <Text style={styles.r2t4}>Plans</Text>}
+                            {[12, 14, 15].includes(step) && <TouchableOpacity
+                                style={styles.r2t2}
+                                onPress={() => {
 
+                                    handleSetStep(mainFlow[currentIdx + 1])
+                                    setCurrentIdx(currentIdx + 1)
+
+                                }}
+                            >
+
+                                {/*<AntDesign name="left" size={25} color={COLORS.light.text} />*/}
+                                {/*<Feather name="chevron-left" size={28} color={COLORS.light.text}/>*/}
+                                <Text style={styles.r2t3}>Skip</Text>
+                            </TouchableOpacity>}
                         </View>
 
                         {step === 0 && <PhoNoV
@@ -230,6 +282,58 @@ const LGS: React.FC<NavigationProps> = ({navigation, route}) => {
                             option={option}
                         />}
 
+                        {step === 11 && <HWYJ
+                            currentIdx={currentIdx}
+                            flow={mainFlow}
+                            handleStep={(val: number) => {
+                                handleSetStep(val)
+                                setCurrentIdx(currentIdx + 1)
+                            }}
+                            option={option}
+                            handleUserType={handleUserType}
+                        />}
+
+                        {step === 12 && <SelectItems
+                            currentIdx={currentIdx}
+                            flow={mainFlow}
+                            handleStep={(val: number) => {
+                                handleSetStep(val)
+                                setCurrentIdx(currentIdx + 1)
+                            }}
+                            option={option}
+                            userType={userType}
+                        />}
+
+
+                        {step === 13 && <StoreDetails
+                            currentIdx={currentIdx}
+                            flow={mainFlow}
+                            handleStep={(val: number) => {
+                                handleSetStep(val)
+                                setCurrentIdx(currentIdx + 1)
+                            }}
+                            option={option}
+                        />}
+
+                        {step === 14 && <PickAPlan
+                            currentIdx={currentIdx}
+                            flow={mainFlow}
+                            handleStep={(val: number) => {
+                                handleSetStep(val)
+                                setCurrentIdx(currentIdx + 1)
+                            }}
+                            option={option}
+                        />}
+
+                        {step === 15 && <Plan
+                            currentIdx={currentIdx}
+                            flow={mainFlow}
+                            handleStep={(val: number) => {
+                                handleSetStep(val)
+                                setCurrentIdx(currentIdx + 1)
+                            }}
+                            option={option}
+                        />}
 
                     </ScrollView>
 
@@ -283,17 +387,34 @@ const styles = StyleSheet.create({
     },
     r2: {
         flexDirection: "row",
-        // justifyContent: "center",
+        justifyContent: "space-between",
         width: "100%",
-        // alignItems: "flex-start",
-        marginTop: "8%",
-        // marginBottom: "2%",
+        alignItems: "center",
+        marginTop: "5%",
+        marginBottom: "5%",
 
     },
     r2t1: {
         backgroundColor: COLORS.light.backgroundGray,
         padding: 10,
         borderRadius: 30
+    },
+    r2t2: {
+        // backgroundColor: COLORS.light.backgroundGray,
+        alignItems: "center",
+        justifyContent: "center"
+    },
+    r2t3: {
+        // backgroundColor: COLORS.light.backgroundGray,
+        // alignItems: "center",
+        // justifyContent: "center"
+        fontSize: SIZES.sizeSixC
+    },
+    r2t4: {
+
+        fontSize: SIZES.sizeSevenB,
+        fontWeight:"700",
+        textAlign:"center"
     },
 
 

@@ -21,6 +21,21 @@ export const CATEGORIES = [
     "Vehicles",
     "Property",
 ];
+export const CATEGORIES2 = [
+    {name: "Men’s Fashion", icon: "👔"},
+    {name: "Women’s Fashion", icon: "👗"},
+    {name: "Accessories", icon: "🧣"},
+    {name: "Electronics", icon: "💻"},
+    {name: "Furniture", icon: "🛋"},
+    {name: "Toys", icon: "🧸"},
+    {name: "Books", icon: "📚"},
+    {name: "Games", icon: "🎮"},
+    {name: "Arts", icon: "️️🖼"},
+    {name: "Beauty", icon: "💄"},
+    {name: "Sports", icon: "🏈"},
+    {name: "Pets", icon: "🦊"},
+];
+
 
 export const PRODUCTS: ProductType[] = [
     {

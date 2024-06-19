@@ -14,17 +14,18 @@ type IProps = {
     selectedItemIndex: number;
 };
 
-const DropDownInput = ({
-                           hideMenu,
-                           items = ["Item 1", "Item 2", "Item 3"],
-                           openMenu = () => {
-                           },
-                           closeMenu = () => {
-                           },
-                           setSelectedItemIndex = (idx: number) => {
-                           },
-                           selectedItemIndex = 0,
-                       }: IProps) => {
+const DropDownInput = (
+    {
+        hideMenu,
+        items = ["Item 1", "Item 2", "Item 3"],
+        openMenu = () => {
+        },
+        closeMenu = () => {
+        },
+        setSelectedItemIndex = (idx: number) => {
+        },
+        selectedItemIndex = 0,
+    }: IProps) => {
     //   const [visible, setVisible] = useState(false);
     //   const [selectedItem, setSelectedItem] = useState<string>("");
 
