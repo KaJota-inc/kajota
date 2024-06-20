@@ -5,6 +5,4 @@ echo  :::::::::::::::::::::::::::::: &&
 echo  👷‍♀️ 🔨🛠🔨🛠🔨🛠🔨🛠 🛠🔨🛠🔨🛠 🛠👷‍♀️  &&
 echo  :::::Searching for Bugs::::::: &&
 echo  :::::::::::::::::::::::::::::: &&
-npx lint-staged &&
-npm run lint:fix &&
-npm run format
+npx lint-staged

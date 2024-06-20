@@ -1,9 +1,11 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Easing, StyleProp, ViewStyle } from "react-native";
-import { Animated, StyleSheet, Dimensions } from "react-native";
-import { PanGestureHandler } from "react-native-gesture-handler";
-import { View } from "@components/Themed";
-import { COLORS } from "@constants/Colors";
+import React, { useEffect, useRef, useState } from 'react';
+import { Easing, StyleProp, ViewStyle } from 'react-native';
+import { Animated, Dimensions, StyleSheet } from 'react-native';
+import { PanGestureHandler } from 'react-native-gesture-handler';
+
+import { COLORS } from '@constants/Colors';
+
+import { View } from '@components/Themed';
 
 export const ProgressBarButton = ({
   buttonStyle,
@@ -16,12 +18,12 @@ export const ProgressBarButton = ({
   buttonStyle: StyleProp<ViewStyle>;
   cWidth: number;
   pad: number;
-  setExternalProgress: Function;
+  setExternalProgress: (value: number) => void;
   children?: any;
   initialPercentage?: number;
 }) => {
   const BUTTON_WIDTH = cWidth || 50;
-  const DEVICE_WIDTH = Dimensions.get("window").width;
+  const DEVICE_WIDTH = Dimensions.get('window').width;
   const BUTTON_HEIGHT = cWidth || 50;
   const ALLOWANCE = DEVICE_WIDTH - BUTTON_WIDTH * 2;
 
@@ -36,12 +38,9 @@ export const ProgressBarButton = ({
     nativeEvent: { state: number; translationX?: any };
   }) => {
     const { translationX } = event.nativeEvent;
-    let oldPosition = position?.current?._value || 0;
+    const oldPosition = position?.current?._value || 0;
 
-    let newPosition = Math.min(
-      Math.max(oldPosition + translationX, pad),
-      ALLOWANCE
-    );
+    const newPosition = Math.min(Math.max(oldPosition + translationX, pad), ALLOWANCE);
 
     position?.current.setValue(newPosition);
 
@@ -77,18 +76,18 @@ const styles = StyleSheet.create({
   container: {
     // borderWidth: 1,
     flex: 1,
-    justifyContent: "center",
+    justifyContent: 'center',
   },
   button: {
     backgroundColor: COLORS.light.background,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     // borderWidth: 3,
     borderColor: COLORS.light.progress,
   },
   buttonText: {
     color: COLORS.light.progress,
     fontSize: 12,
-    fontWeight: "500",
+    fontWeight: '500',
   },
 });

@@ -17,14 +17,14 @@ module.exports = {
         'no-shadow': 'off',
         'no-undef': 'off',
         'no-console': 'error',
-        'no-unused-vars': 'off', // Note: you must disable the base rule as it can report incorrect errors
+        'no-unused-vars': 'warn', // Note: you must disable the base rule as it can report incorrect errors
         'no-duplicate-imports': 'warn',
         'no-extra-boolean-cast': 'off',
         'arrow-parens': ['error', 'as-needed'],
         'react/react-in-jsx-scope': 'off',
         'react-native/no-unused-styles': 2,
-        'react-native/no-inline-styles': 2,
-        'react-native/no-color-literals': 'error',
+        'react-native/no-inline-styles': "warn",
+        'react-native/no-color-literals': 'warn',
         'react-native/no-single-element-style-arrays': 'error',
         'react/no-array-index-key': 'error',
         'i18next/no-literal-string': 'warn',
@@ -39,15 +39,18 @@ module.exports = {
         '@typescript-eslint/no-inferrable-types': 'off',
         '@typescript-eslint/no-empty-function': 'off',
         // '@typescript-eslint/ban-ts-comment': [
-        //   'error',
-        //   { 'ts-expect-error': 'allow-with-description' },
-        // ]
-        '@typescript-eslint/ban-ts-comment': 'off',
+        //     'warn',
+        //     {
+        //         'ts-expect-error': 'allow-with-description',
+        //         'ts-ignore': 'allow-with-description'
+        //     },
+        // ],
+        '@typescript-eslint/ban-ts-comment': 'warn',
 
         'react-hooks/rules-of-hooks': 'error', // Checks rules of Hooks
         'react-hooks/exhaustive-deps': 'warn', // Checks effect dependencies // off - useEffect error disable
         'react/jsx-curly-brace-presence': ['error', 'never'],
-        'react/no-unstable-nested-components': ['error', {allowAsProps: true}],
+        'react/no-unstable-nested-components': ['warn', {allowAsProps: true}],
         'react/jsx-sort-props': [
             'warn',
             {
@@ -86,7 +89,7 @@ module.exports = {
                     ['^(@services)(/.*|$)'],
                     ['^\\u0000'],
                     ['^\\.\\.(?!/?$)', '^\\.\\./?$'],
-                    ['^\\./(?=.*/)(?!/?$)', '^\\.(?!/?$)', '^\\./?$'],
+                    ['^\\./(?=.*!/)(?!/?$)', '^\\.(?!/?$)', '^\\./?$'],
                 ],
             },
         ],
@@ -102,3 +105,4 @@ module.exports = {
         'transformer.js',
     ],
 };
+

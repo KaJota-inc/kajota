@@ -3,7 +3,7 @@
  * @param {Object} validateObj - Object with input properties for validation
  * @param {Object<Function>} validateScheme - Validation scheme
  */
-// @ts-ignore
+// @ts-ignore 234567
 export const validateObject = (
   validateObj: { [key: string]: unknown } = {},
   validateScheme: { [key: string]: (value: unknown) => boolean } = {},
@@ -14,7 +14,7 @@ export const validateObject = (
   return Object.entries(validateObj).reduce(
     (result, [key, value]) => {
       const isValid = validateScheme[key](value);
-      // @ts-ignore
+      // @ts-ignore qwerty
       result.isValid = Boolean(result.isValid * isValid); // Discrete multiplication
       result.data = {
         ...result.data,

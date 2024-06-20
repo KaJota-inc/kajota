@@ -1,7 +1,6 @@
-
-import MainButton from "./MainButton";
-import OtpInput from "./OtpInput";
-import KeyPad from "./KeyPad";
-import Badge from "./Badge";
+import Badge from './Badge';
+import KeyPad from './KeyPad';
+import MainButton from './MainButton';
+import OtpInput from './OtpInput';
 
 export { MainButton, OtpInput, KeyPad, Badge };

@@ -1,7 +1,9 @@
-import { StyleSheet } from "react-native";
-import React from "react";
-import { Text, View } from "./Themed";
-import { COLORS } from "@constants/Colors";
+import React from 'react';
+import { StyleSheet } from 'react-native';
+
+import { COLORS } from '@constants/Colors';
+
+import { Text, View } from './Themed';
 
 interface Iprops {
   badgeSize?: number;
@@ -15,7 +17,7 @@ interface Iprops {
 const Badge: React.FC<Iprops> = ({
   badgeSize = 28,
   corner = 8,
-  text = "9+",
+  text = '9+',
   textSize = 14,
   bgColor = COLORS.light.background,
   textColor = COLORS.light.background,
@@ -55,13 +57,13 @@ const styles = StyleSheet.create({
   container: {
     borderRadius: 14,
     backgroundColor: COLORS.light.background,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     width: 28,
     height: 28,
     padding: 1,
-    alignSelf: "flex-end",
-    position: "absolute",
+    alignSelf: 'flex-end',
+    position: 'absolute',
     right: -8,
     top: -8,
   },

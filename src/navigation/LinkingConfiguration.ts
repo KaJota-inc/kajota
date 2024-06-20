@@ -4,12 +4,13 @@
  * https://reactnavigation.org/docs/configuring-links
  */
 
-import { LinkingOptions } from "@react-navigation/native";
-import * as Linking from "expo-linking";
-import { RootParamList } from "../shared/const/routerRoot";
+import { LinkingOptions } from '@react-navigation/native';
+import * as Linking from 'expo-linking';
+
+import { RootParamList } from '../shared/const/routerRoot';
 
 const linking: LinkingOptions<RootParamList> = {
-  prefixes: [Linking.createURL("/")],
+  prefixes: [Linking.createURL('/')],
   config: {
     screens: {},
   },

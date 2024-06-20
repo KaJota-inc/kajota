@@ -1,2 +1,1 @@
-
-export const BASE_HOST = "http://localhost";
+export const BASE_HOST = 'http://localhost';

@@ -1,9 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from 'react';
+import { StyleSheet, TextInput } from 'react-native';
+import { Octicons } from '@expo/vector-icons';
 
-import { StyleSheet, TextInput } from "react-native";
-import { Text, View } from "./Themed";
-import { COLORS } from "@constants/Colors";
-import { Octicons } from "@expo/vector-icons";
+import { COLORS } from '@constants/Colors';
+
+import { Text, View } from './Themed';
 
 interface Iprops {
   code: string;
@@ -12,19 +13,14 @@ interface Iprops {
   setIsPinReady: any;
 }
 
-const OtpInput: React.FC<Iprops> = ({
-  code,
-  setCode,
-  maximumLength,
-  setIsPinReady,
-}) => {
+const OtpInput: React.FC<Iprops> = ({ code, setCode, maximumLength, setIsPinReady }) => {
   const [isInputBoxFocused, setIsInputBoxFocused] = useState(false);
   const boxArray = new Array(maximumLength).fill(0);
-  const inputRef = useRef<any>(null);
+  const inputRef = useRef(null);
 
   const BoxDigit = (_: any, index: number) => {
     const secure = true;
-    const emptyInput = "";
+    const emptyInput = '';
     const digit = code[index] || emptyInput;
     const isCurrentValue = index === code.length;
     const isLastValue = index === maximumLength - 1;
@@ -41,23 +37,21 @@ const OtpInput: React.FC<Iprops> = ({
 
     return (
       <View
+        key={index}
         style={[
           styles.splitBox,
           {
-            borderColor: digit
-              ? COLORS.light.colorOne
-              : COLORS.light.tabIconSelected,
+            borderColor: digit ? COLORS.light.colorOne : COLORS.light.tabIconSelected,
           },
         ]}
-        key={index}
       >
         <Text style={styles.splitBoxText}>
           {secure
             ? digit && (
                 <Octicons
+                  color={COLORS.light.tabIconSelected}
                   name="dot-fill"
                   size={15}
-                  color={COLORS.light.tabIconSelected}
                 />
               )
             : digit}
@@ -75,9 +69,7 @@ const OtpInput: React.FC<Iprops> = ({
   };
   return (
     <View style={styles.otpInputContainer}>
-      <View style={styles.splitOTPBoxesContainer}>
-        {boxArray.map(BoxDigit)}
-      </View>
+      <View style={styles.splitOTPBoxesContainer}>{boxArray.map(BoxDigit)}</View>
 
       {/* <TextInput
         value={code}
@@ -97,19 +89,19 @@ export default OtpInput;
 
 const styles = StyleSheet.create({
   otpInputContainer: {
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   textInputHidden: {
-    width: "100%",
+    width: '100%',
     borderColor: COLORS.light.tabIconSelected,
-    position: "absolute",
+    position: 'absolute',
     // opacity: 0,
   },
   splitOTPBoxesContainer: {
-    width: "100%",
-    flexDirection: "row",
-    justifyContent: "space-between",
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   splitBox: {
     borderRadius: 5,
@@ -117,13 +109,13 @@ const styles = StyleSheet.create({
     minWidth: 50,
     minHeight: 50,
     borderWidth: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   splitBoxText: {
     fontSize: 20,
-    fontWeight: "600",
-    textAlign: "center",
+    fontWeight: '600',
+    textAlign: 'center',
     color: COLORS.light.tabIconSelected,
   },
   splitBoxesFocused: {
@@ -135,6 +127,6 @@ const styles = StyleSheet.create({
     borderColor: COLORS.light.colorOne,
   },
   dot: {
-    fontWeight: "900",
+    fontWeight: '900',
   },
 });
