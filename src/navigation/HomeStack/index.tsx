@@ -1,6 +1,8 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
+import Cart from '@pages/Home/Cart';
+
 import { HomeParamList, HomeRoutes } from '@shared/const/routerHome';
 
 import { DOB } from '../../pages/Home';
@@ -16,6 +18,7 @@ const HomeStack = (): React.ReactElement => {
     >
       <Home.Screen component={BottomBar} name={HomeRoutes.HOME} />
       <Home.Screen component={DOB} name={HomeRoutes.DOB} />
+      <Home.Screen component={Cart} name={HomeRoutes.CART} />
     </Home.Navigator>
   );
 };

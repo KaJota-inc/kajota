@@ -11,6 +11,7 @@ import { CATEGORIES } from '@constants/values';
 
 import CartIcon from '@shared/components/CartIcon';
 import { GridProductDisplay } from '@shared/components/GridProductDisplay';
+import { AuthRoutes } from '@shared/const/routerAuth';
 import { HomeProps, HomeRoutes } from '@shared/const/routerHome';
 import { RootRoutes, RootScreenProps } from '@shared/const/routerRoot';
 
@@ -21,7 +22,7 @@ type NavigationProps = CompositeScreenProps<
   RootScreenProps<RootRoutes.Home>
 >;
 
-const Home: React.FC<NavigationProps> = () => {
+const Home: React.FC<NavigationProps> = ({ navigation }) => {
   const [catIndex, setCatIndex] = useState(0);
 
   return (
@@ -36,9 +37,15 @@ const Home: React.FC<NavigationProps> = () => {
               {/*</View>*/}
               <Text style={styles.r1t}>Hi Jane</Text>
             </View>
-            <View style={styles.r1b}>
+            <TouchableOpacity
+              style={styles.r1b}
+              onPress={() => {
+                debug.log('pressed');
+                navigation?.navigate(HomeRoutes.CART);
+              }}
+            >
               <CartIcon count={10} />
-            </View>
+            </TouchableOpacity>
           </View>
           <View style={styles.r2}>
             <View style={styles.r2a}>
@@ -169,8 +176,9 @@ const styles = StyleSheet.create({
   },
   r1b: {
     backgroundColor: 'transparent',
+
     // paddingLeft: 15,
-    // borderWidth: 1,
+    borderWidth: 1,
   },
   r1img: {
     height: 50,
