@@ -1,13 +1,11 @@
-import { StackScreenProps } from "@react-navigation/stack";
+import { StackScreenProps } from '@react-navigation/stack';
 
 export enum Tabs {
-  Home = "Home",
-
+  Home = 'Home',
 }
 
 export type TabsNavigatorParamList = {
   [Tabs.Home]: undefined;
-
 };
 
 export type TabsScreenProps<RouteName extends Tabs> = StackScreenProps<

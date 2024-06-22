@@ -1,8 +1,3 @@
-import AccountsMain from "./AccountsMain";
+import AccountsMain from './AccountsMain';
 
-
-
-export {
-    AccountsMain,
-
-};
+export { AccountsMain };

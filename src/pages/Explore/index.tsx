@@ -1,8 +1,3 @@
-import ExploreMain from "./ExploreMain";
+import ExploreMain from './ExploreMain';
 
-
-
-export {
-    ExploreMain,
-
-};
+export { ExploreMain };

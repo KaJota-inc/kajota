@@ -1,13 +1,15 @@
-import { createStackNavigator } from "@react-navigation/stack";
-import React from "react";
-import { RootParamList, RootRoutes } from "@shared/const/routerRoot";
-import AuthStack from "../AuthStack";
-import HomeStack from "../HomeStack";
-import AccountsStack from "../AccountsStack";
-import SellStack from "../SellsStack";
-import ItemsStack from "../ItemsStack";
-import ExploreStack from "../ExploreStack";
-import BottomBar from "../BottomBar";
+import React from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
+
+import { RootParamList, RootRoutes } from '@shared/const/routerRoot';
+
+import AccountsStack from '../AccountsStack';
+import AuthStack from '../AuthStack';
+import BottomBar from '../BottomBar';
+import ExploreStack from '../ExploreStack';
+import HomeStack from '../HomeStack';
+import ItemsStack from '../ItemsStack';
+import SellStack from '../SellsStack';
 
 const RootStack = createStackNavigator<RootParamList>();
 
@@ -20,10 +22,7 @@ const RootStackApp = (): React.ReactElement => {
       <RootStack.Screen component={AuthStack} name={RootRoutes.Auth} />
       <RootStack.Screen component={HomeStack} name={RootRoutes.Home} />
       <RootStack.Screen component={BottomBar} name={RootRoutes.Tabs} />
-      <RootStack.Screen
-        component={SellStack}
-        name={RootRoutes.Sells}
-      />
+      <RootStack.Screen component={SellStack} name={RootRoutes.Sells} />
       <RootStack.Screen component={AccountsStack} name={RootRoutes.Accounts} />
       <RootStack.Screen component={ItemsStack} name={RootRoutes.Items} />
       <RootStack.Screen component={ExploreStack} name={RootRoutes.Explore} />

@@ -8,7 +8,7 @@ import {
   withTiming,
 } from 'react-native-reanimated';
 
-export const useErrorAnimation = (error: boolean ) => {
+export const useErrorAnimation = (error: boolean) => {
   const shakeValue = useSharedValue(0);
 
   const [errorAnimation, setErrorAnimation] = useState(error);

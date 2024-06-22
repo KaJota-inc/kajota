@@ -1,16 +1,16 @@
-import { StackNavigationProp, StackScreenProps } from "@react-navigation/stack";
-
+import { StackNavigationProp, StackScreenProps } from '@react-navigation/stack';
 
 export enum AccountsRoutes {
-    AccountsMain = "AccountsMain",
+  AccountsMain = 'AccountsMain',
 }
 
 export type AccountsParamList = {
-    [AccountsRoutes.AccountsMain]: undefined;
+  [AccountsRoutes.AccountsMain]: undefined;
 };
 
-export type AccountsProps<RouteName extends AccountsRoutes> =
-  StackScreenProps<AccountsParamList, RouteName>;
+export type AccountsProps<RouteName extends AccountsRoutes> = StackScreenProps<
+  AccountsParamList,
+  RouteName
+>;
 
-export type AccountsNavigationProps =
-  StackNavigationProp<AccountsParamList>;
+export type AccountsNavigationProps = StackNavigationProp<AccountsParamList>;

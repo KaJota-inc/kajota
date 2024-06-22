@@ -1,8 +1,3 @@
-import ItemsMain from "./ItemsMain";
+import ItemsMain from './ItemsMain';
 
-
-
-export {
-    ItemsMain,
-
-};
+export { ItemsMain };

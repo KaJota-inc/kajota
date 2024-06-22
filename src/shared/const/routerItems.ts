@@ -1,11 +1,11 @@
-import { StackNavigationProp, StackScreenProps } from "@react-navigation/stack";
+import { StackNavigationProp, StackScreenProps } from '@react-navigation/stack';
 
 export enum ItemsRoutes {
-    ItemsMain = "ItemsMain",
+  ItemsMain = 'ItemsMain',
 }
 
 export type ItemsParamList = {
-    [ItemsRoutes.ItemsMain]: undefined;
+  [ItemsRoutes.ItemsMain]: undefined;
 };
 
 export type ItemsProps<RouteName extends ItemsRoutes> = StackScreenProps<

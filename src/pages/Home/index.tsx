@@ -1,8 +1,4 @@
-import DOB from "../../pages/Home/DOB";
+import DOB from '../../pages/Home/DOB';
+import Home from '../../pages/Home/Home';
 
-import Home from "../../pages/Home/Home";
-
-export {
-    DOB,
-    Home
-};
+export { DOB, Home };

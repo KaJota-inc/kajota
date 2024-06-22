@@ -1,14 +1,14 @@
-import {StyleSheet} from "react-native";
+import React from 'react';
+import { StyleSheet } from 'react-native';
 
-import React from "react";
-import {Text, View} from "@components/Themed";
+import { Text, View } from '@components/Themed';
 
 const ExploreMain = () => {
-    return (
-        <View>
-            <Text>ExploreMain</Text>
-        </View>
-    );
+  return (
+    <View>
+      <Text>ExploreMain</Text>
+    </View>
+  );
 };
 
 export default ExploreMain;

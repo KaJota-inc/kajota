@@ -1,8 +1,3 @@
-import SellsMain from "./SellsMain";
+import SellsMain from './SellsMain';
 
-
-
-export {
-    SellsMain,
-
-};
+export { SellsMain };
