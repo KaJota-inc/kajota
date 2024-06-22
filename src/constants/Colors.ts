@@ -10,6 +10,7 @@ export const COLORS = {
     colorOneLight: '#F8C8BB',
     colorOneLight2: '#FDEDE9',
     colorOneDark: '#98350A',
+    delete: '#EA001E',
     text: '#000',
     textHash: '#A8A8B9',
     textGray: '#BFBFBF',
@@ -79,4 +80,5 @@ export const IMAGES = {
   ProfileImage: require('../shared/assets/images/png/profile_image.png'),
   AdvertShirts: require('../shared/assets/images/png/Advert_Shirts.png'),
   SneakerSale: require('../shared/assets/images/png/SneakerSale.png'),
+  ShoeFem: require('../shared/assets/images/png/ShoeFem.png'),
 };

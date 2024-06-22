@@ -44,7 +44,13 @@ const Home: React.FC<NavigationProps> = ({ navigation }) => {
                 navigation?.navigate(HomeRoutes.CART);
               }}
             >
-              <CartIcon count={10} />
+              <CartIcon
+                count={10}
+                onPressed={() => {
+                  debug.log('pressed');
+                  navigation?.navigate(HomeRoutes.CART);
+                }}
+              />
             </TouchableOpacity>
           </View>
           <View style={styles.r2}>
@@ -178,7 +184,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
 
     // paddingLeft: 15,
-    borderWidth: 1,
+    // borderWidth: 1,
   },
   r1img: {
     height: 50,

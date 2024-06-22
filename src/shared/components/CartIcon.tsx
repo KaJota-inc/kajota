@@ -11,11 +11,12 @@ import { Text, View } from '@components/Themed';
 
 type CartIconType = {
   count?: number;
+  onPressed: () => void;
 };
 
-export default function CartIcon({ count = 1 }: CartIconType) {
+const CartIcon = ({ count = 1, onPressed }: CartIconType) => {
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={onPressed}>
       <View style={styles.body}>
         <Text style={styles.cartText}>{count}</Text>
       </View>
@@ -24,7 +25,9 @@ export default function CartIcon({ count = 1 }: CartIconType) {
       <BasketSVG />
     </TouchableOpacity>
   );
-}
+};
+
+export default CartIcon;
 
 const styles = StyleSheet.create({
   container: {
