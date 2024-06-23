@@ -7,10 +7,8 @@ import CartItems from '@pages/Home/Cart/CartItems';
 
 import { COLORS, SIZES } from '@constants/Colors';
 
-import { AuthRoutes } from '@shared/const/routerAuth';
 import { HomeProps, HomeRoutes } from '@shared/const/routerHome';
 import { RootRoutes, RootScreenProps } from '@shared/const/routerRoot';
-import { validateObject } from '@shared/helper';
 
 import { MainButton } from '@components/index';
 import { Text, View } from '@components/Themed';
@@ -22,11 +20,12 @@ type NavigationProps = CompositeScreenProps<
 
 const Cart: React.FC<NavigationProps> = ({ navigation, route }) => {
   const handleBack = () => {
-    // navigation?.navigate(AuthRoutes.SignUp);
     navigation?.goBack();
   };
 
-  const handleContinue = async () => {};
+  const handleContinue = async () => {
+    navigation?.navigate(HomeRoutes.ORDER);
+  };
 
   return (
     <View style={styles.main}>
@@ -45,13 +44,12 @@ const Cart: React.FC<NavigationProps> = ({ navigation, route }) => {
             <Text style={styles.r2t4}>Cart</Text>
           </View>
 
-          <CartItems />
-
           <ScrollView
             contentContainerStyle={styles.scrollContent}
             showsVerticalScrollIndicator={false}
             style={styles.scroll}
           >
+            <CartItems />
             <View style={styles.r8}>
               <View style={styles.r8a}>
                 <Text style={styles.r8at1}>Sum Total</Text>

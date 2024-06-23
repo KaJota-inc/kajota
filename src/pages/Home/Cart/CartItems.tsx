@@ -16,60 +16,106 @@ const CartItems = () => {
 
   return (
     <GestureHandlerRootView style={styles.container}>
-      <FlatList
-        contentContainerStyle={styles.scrollContent}
-        data={data}
-        horizontal={false}
-        renderItem={({ item }) => (
-          <Swipeable
-            key={nanoid()}
-            renderRightActions={() => (
-              <TouchableOpacity
-                style={styles.right}
-                onPress={() => {
-                  debug.log('deleting...');
-                }}
-              >
-                {/*<Text>Delete</Text>*/}
-                <DeleteIconSVG />
-              </TouchableOpacity>
-            )}
-            // renderLeftActions={() => <Text>Edit</Text>}
-          >
-            <View style={styles.itemContainer}>
-              <View style={styles.itemA}>
-                <Image resizeMode="cover" source={IMAGES.ShoeFem} style={styles.itemA1} />
-                <View style={styles.itemA2}>
-                  <Text style={styles.itemA2t1}>Fashion Nova</Text>
-                  <View style={styles.itemA2t2}>
-                    <AntDesign color={COLORS.light.star} name="star" size={15} />
-                    <Text style={styles.itemA2t2b}>4.6</Text>
-                    <View style={styles.itemA2t2a}>
-                      <Text style={styles.itemA2t2c}>M</Text>
-                    </View>
+      {data.map((item, idx) => (
+        <Swipeable
+          key={nanoid()}
+          renderRightActions={() => (
+            <TouchableOpacity
+              style={styles.right}
+              onPress={() => {
+                debug.log('deleting...');
+              }}
+            >
+              {/*<Text>Delete</Text>*/}
+              <DeleteIconSVG />
+            </TouchableOpacity>
+          )}
+        >
+          <View style={styles.itemContainer}>
+            <View style={styles.itemA}>
+              <Image resizeMode="cover" source={IMAGES.ShoeFem} style={styles.itemA1} />
+              <View style={styles.itemA2}>
+                <Text style={styles.itemA2t1}>Fashion Nova</Text>
+                <View style={styles.itemA2t2}>
+                  <AntDesign color={COLORS.light.star} name="star" size={15} />
+                  <Text style={styles.itemA2t2b}>4.6</Text>
+                  <View style={styles.itemA2t2a}>
+                    <Text style={styles.itemA2t2c}>M</Text>
                   </View>
-
-                  <Text style={styles.itemA2t3}>£100.00</Text>
                 </View>
-              </View>
-              <View style={styles.itemB}>
-                <TouchableOpacity style={styles.itemBt1}>
-                  <Text style={styles.itemBText}>+</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.itemBt2}>
-                  <Text style={styles.itemBText}>1</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.itemBt3}>
-                  <Text style={styles.itemBText}>-</Text>
-                </TouchableOpacity>
+
+                <Text style={styles.itemA2t3}>£100.00</Text>
               </View>
             </View>
-          </Swipeable>
-        )}
-        showsHorizontalScrollIndicator={false}
-        showsVerticalScrollIndicator={false}
-        style={styles.scroll}
-      />
+            <View style={styles.itemB}>
+              <TouchableOpacity style={styles.itemBt1}>
+                <Text style={styles.itemBText}>-</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.itemBt2}>
+                <Text style={styles.itemBText}>1</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.itemBt3}>
+                <Text style={styles.itemBText}>+</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </Swipeable>
+      ))}
+
+      {/*<FlatList*/}
+      {/*  contentContainerStyle={styles.scrollContent}*/}
+      {/*  data={data}*/}
+      {/*  horizontal={false}*/}
+      {/*  renderItem={({ item }) => (*/}
+      {/*    <Swipeable*/}
+      {/*      key={nanoid()}*/}
+      {/*      renderRightActions={() => (*/}
+      {/*        <TouchableOpacity*/}
+      {/*          style={styles.right}*/}
+      {/*          onPress={() => {*/}
+      {/*            debug.log('deleting...');*/}
+      {/*          }}*/}
+      {/*        >*/}
+      {/*          /!*<Text>Delete</Text>*!/*/}
+      {/*          <DeleteIconSVG />*/}
+      {/*        </TouchableOpacity>*/}
+      {/*      )}*/}
+
+      {/*    >*/}
+      {/*      <View style={styles.itemContainer}>*/}
+      {/*        <View style={styles.itemA}>*/}
+      {/*          <Image resizeMode="cover" source={IMAGES.ShoeFem} style={styles.itemA1} />*/}
+      {/*          <View style={styles.itemA2}>*/}
+      {/*            <Text style={styles.itemA2t1}>Fashion Nova</Text>*/}
+      {/*            <View style={styles.itemA2t2}>*/}
+      {/*              <AntDesign color={COLORS.light.star} name="star" size={15} />*/}
+      {/*              <Text style={styles.itemA2t2b}>4.6</Text>*/}
+      {/*              <View style={styles.itemA2t2a}>*/}
+      {/*                <Text style={styles.itemA2t2c}>M</Text>*/}
+      {/*              </View>*/}
+      {/*            </View>*/}
+
+      {/*            <Text style={styles.itemA2t3}>£100.00</Text>*/}
+      {/*          </View>*/}
+      {/*        </View>*/}
+      {/*        <View style={styles.itemB}>*/}
+      {/*          <TouchableOpacity style={styles.itemBt1}>*/}
+      {/*            <Text style={styles.itemBText}>+</Text>*/}
+      {/*          </TouchableOpacity>*/}
+      {/*          <TouchableOpacity style={styles.itemBt2}>*/}
+      {/*            <Text style={styles.itemBText}>1</Text>*/}
+      {/*          </TouchableOpacity>*/}
+      {/*          <TouchableOpacity style={styles.itemBt3}>*/}
+      {/*            <Text style={styles.itemBText}>-</Text>*/}
+      {/*          </TouchableOpacity>*/}
+      {/*        </View>*/}
+      {/*      </View>*/}
+      {/*    </Swipeable>*/}
+      {/*  )}*/}
+      {/*  showsHorizontalScrollIndicator={false}*/}
+      {/*  showsVerticalScrollIndicator={false}*/}
+      {/*  style={styles.scroll}*/}
+      {/*/>*/}
     </GestureHandlerRootView>
   );
 };

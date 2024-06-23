@@ -2,6 +2,7 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import Cart from '@pages/Home/Cart';
+import Order from '@pages/Home/Order';
 
 import { HomeParamList, HomeRoutes } from '@shared/const/routerHome';
 
@@ -19,6 +20,7 @@ const HomeStack = (): React.ReactElement => {
       <Home.Screen component={BottomBar} name={HomeRoutes.HOME} />
       <Home.Screen component={DOB} name={HomeRoutes.DOB} />
       <Home.Screen component={Cart} name={HomeRoutes.CART} />
+      <Home.Screen component={Order} name={HomeRoutes.ORDER} />
     </Home.Navigator>
   );
 };

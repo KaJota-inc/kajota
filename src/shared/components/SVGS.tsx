@@ -9,6 +9,7 @@ import Basket from '../assets/images/svg/Basket.svg';
 import EmailLogo from '../assets/images/svg/email_icon.svg';
 import FifaLogo from '../assets/images/svg/FIFA_logo_without_slogan 1.svg';
 import GoogleLogo from '../assets/images/svg/google.svg';
+import LocationIcon from '../assets/images/svg/Location.svg';
 import DeleteIcon from '../assets/images/svg/material-symbols_delete.svg';
 import PickAPLan from '../assets/images/svg/PickAPlan.svg';
 import TabAccountLogo from '../assets/images/svg/TabAccount.svg';
@@ -189,6 +190,18 @@ export const DeleteIconSVG = ({
   return (
     <>
       <DeleteIcon fill={color} height={height} stroke={stroke} width={width} />
+    </>
+  );
+};
+export const LocationIconSVG = ({
+  height = 28,
+  width = 38,
+  color = COLORS.light.colorOne,
+  stroke = COLORS.light.background,
+}) => {
+  return (
+    <>
+      <LocationIcon fill={color} height={height} stroke={stroke} width={width} />
     </>
   );
 };
