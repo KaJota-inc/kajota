@@ -16,8 +16,6 @@ type UtilityOptType = {
 };
 
 const HWYJ = ({ handleStep, flow, option, currentIdx, handleUserType }: IFLowProps) => {
-  const [code, setCode] = useState<string>('');
-  const [errorText, setErrorText] = useState<string>('');
   const [selectedItemIndex, setSelectedItemIndex] = useState<number>();
 
   const utilityOptions: UtilityOptType[] = [

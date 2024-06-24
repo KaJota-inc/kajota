@@ -86,6 +86,7 @@ const Order: React.FC<NavigationProps> = ({ navigation, route }) => {
     //     // setError(true)
     //     return;
     // }
+    navigation?.navigate(HomeRoutes.ORDERPAYMENT);
   };
 
   useEffect(() => {
@@ -117,7 +118,7 @@ const Order: React.FC<NavigationProps> = ({ navigation, route }) => {
             >
               <Feather color={COLORS.light.text} name="chevron-left" size={28} />
             </TouchableOpacity>
-            <Text style={styles.r2t4}>Order</Text>
+            <Text style={styles.r2t4}>My Order</Text>
           </View>
 
           <ScrollView

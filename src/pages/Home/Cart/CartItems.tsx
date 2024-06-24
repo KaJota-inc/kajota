@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FlatList, Image, TouchableOpacity } from 'react-native';
 import { StyleSheet } from 'react-native';
 import { GestureHandlerRootView, Swipeable } from 'react-native-gesture-handler';
@@ -13,6 +13,8 @@ import { Text, View } from '@components/Themed';
 
 const CartItems = () => {
   const data = [{ key: 'Item 1' }, { key: 'Item 2' }, { key: 'Item 3' }];
+
+  const [itemCount, setItemCount] = useState<number>(1);
 
   return (
     <GestureHandlerRootView style={styles.container}>
@@ -48,13 +50,25 @@ const CartItems = () => {
               </View>
             </View>
             <View style={styles.itemB}>
-              <TouchableOpacity style={styles.itemBt1}>
+              <TouchableOpacity
+                style={styles.itemBt1}
+                onPress={() => {
+                  if (itemCount > 1) {
+                    setItemCount(itemCount - 1);
+                  }
+                }}
+              >
                 <Text style={styles.itemBText}>-</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.itemBt2}>
-                <Text style={styles.itemBText}>1</Text>
+                <Text style={styles.itemBText}>{itemCount}</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.itemBt3}>
+              <TouchableOpacity
+                style={styles.itemBt3}
+                onPress={() => {
+                  setItemCount(itemCount + 1);
+                }}
+              >
                 <Text style={styles.itemBText}>+</Text>
               </TouchableOpacity>
             </View>

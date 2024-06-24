@@ -6,11 +6,13 @@ import { COLORS } from '@constants/Colors';
 import AIStar from '../assets/images/svg/AIStar.svg';
 import AppleLogo from '../assets/images/svg/apple.svg';
 import Basket from '../assets/images/svg/Basket.svg';
+import WalletLogo from '../assets/images/svg/bi_wallet-fill.svg';
 import EmailLogo from '../assets/images/svg/email_icon.svg';
 import FifaLogo from '../assets/images/svg/FIFA_logo_without_slogan 1.svg';
 import GoogleLogo from '../assets/images/svg/google.svg';
 import LocationIcon from '../assets/images/svg/Location.svg';
 import DeleteIcon from '../assets/images/svg/material-symbols_delete.svg';
+import PayPalLogo from '../assets/images/svg/paypal.svg';
 import PickAPLan from '../assets/images/svg/PickAPlan.svg';
 import TabAccountLogo from '../assets/images/svg/TabAccount.svg';
 import TabExploreLogo from '../assets/images/svg/TabExplore.svg';
@@ -18,6 +20,18 @@ import TabHomeLogo from '../assets/images/svg/TabHome.svg';
 import TabItemsLogo from '../assets/images/svg/TabItems.svg';
 import TabSellLogo from '../assets/images/svg/TabSell.svg';
 
+export const WalletLogoLogoSVG = ({
+  height = 25,
+  width = 25,
+  color = COLORS.light.colorOne,
+  stroke = COLORS.light.background,
+}) => {
+  return (
+    <>
+      <WalletLogo fill={color} height={height} stroke={stroke} width={width} />
+    </>
+  );
+};
 export const TabExploreLogoSVG = ({
   height = 35,
   width = 35,
@@ -202,6 +216,17 @@ export const LocationIconSVG = ({
   return (
     <>
       <LocationIcon fill={color} height={height} stroke={stroke} width={width} />
+    </>
+  );
+};
+export const PayPalLogoSVG = ({
+  height = 30,
+  width = 100,
+  color = COLORS.light.colorOne,
+}) => {
+  return (
+    <>
+      <PayPalLogo fill={color} height={height} width={width} />
     </>
   );
 };
