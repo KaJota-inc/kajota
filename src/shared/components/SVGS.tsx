@@ -7,6 +7,7 @@ import AIStar from '../assets/images/svg/AIStar.svg';
 import AppleLogo from '../assets/images/svg/apple.svg';
 import Basket from '../assets/images/svg/Basket.svg';
 import WalletLogo from '../assets/images/svg/bi_wallet-fill.svg';
+import ConfirmationLogo from '../assets/images/svg/confirmation.svg';
 import EmailLogo from '../assets/images/svg/email_icon.svg';
 import FifaLogo from '../assets/images/svg/FIFA_logo_without_slogan 1.svg';
 import GoogleLogo from '../assets/images/svg/google.svg';
@@ -227,6 +228,17 @@ export const PayPalLogoSVG = ({
   return (
     <>
       <PayPalLogo fill={color} height={height} width={width} />
+    </>
+  );
+};
+export const ConfirmationLogoSVG = ({
+  height = 250,
+  width = 150,
+  color = COLORS.light.colorOne,
+}) => {
+  return (
+    <>
+      <ConfirmationLogo fill={color} height={height} width={width} />
     </>
   );
 };

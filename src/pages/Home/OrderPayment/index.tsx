@@ -44,7 +44,7 @@ const OrderPayment: React.FC<NavigationProps> = ({ navigation, route }) => {
   };
 
   const handleContinue = async () => {
-    // navigation?.navigate(HomeRoutes.ORDERPAYMENT);
+    navigation?.navigate(HomeRoutes.ORDERTRACKING);
   };
 
   return (

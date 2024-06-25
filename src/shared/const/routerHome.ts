@@ -6,6 +6,9 @@ export enum HomeRoutes {
   CART = 'CART',
   ORDER = 'ORDER',
   ORDERPAYMENT = 'ORDERPAYMENT',
+  ORDERTRACKING = 'ORDERTRACKING',
+  ORDERCONFIRMATION = 'ORDERCONFIRMATION',
+  ORDERRATING = 'ORDERRATING',
 }
 
 export type HomeParamList = {
@@ -14,6 +17,9 @@ export type HomeParamList = {
   [HomeRoutes.CART]: undefined;
   [HomeRoutes.ORDER]: undefined;
   [HomeRoutes.ORDERPAYMENT]: undefined;
+  [HomeRoutes.ORDERTRACKING]: undefined;
+  [HomeRoutes.ORDERCONFIRMATION]: undefined;
+  [HomeRoutes.ORDERRATING]: undefined;
 };
 
 export type HomeProps<RouteName extends HomeRoutes> = StackScreenProps<
