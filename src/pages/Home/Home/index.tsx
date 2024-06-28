@@ -246,6 +246,7 @@ const styles = StyleSheet.create({
     marginLeft: '5%',
     fontSize: SIZES.sizeSix,
   },
+
   r3: {
     height: 220,
     backgroundColor: 'transparent',

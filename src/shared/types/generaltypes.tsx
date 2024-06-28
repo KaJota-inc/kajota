@@ -67,3 +67,27 @@ export interface ProductType {
   badgeText: string;
   favorite: boolean;
 }
+
+export interface ItemType {
+  key: number;
+  uri: ImageSourcePropType;
+  date: string;
+  time: string;
+  title: string;
+
+  ccy?: string;
+  price: string | number;
+
+  reference: string;
+
+  deliveryStatus: DeliveryStatusType;
+  //
+  //
+  // item: number;
+  // rating: number;
+  // store: string;
+  // badgeText: string;
+  // favorite: boolean;
+}
+
+export type DeliveryStatusType = 'Delivered' | 'Pending' | 'Cancelled';

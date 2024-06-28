@@ -149,7 +149,7 @@ const BottomTabNavigator = (): React.ReactElement => {
 
 const styles = StyleSheet.create({
   tabBarStyle: {
-    height: Platform.OS === 'android' ? 80 : 110,
+    height: Platform.OS === 'android' ? 100 : 110,
     backgroundColor: COLORS.light.background,
     borderTopWidth: 1,
     paddingHorizontal: 20,
@@ -166,10 +166,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 11,
-    padding: 5,
   },
   focusIcon: {
     backgroundColor: COLORS.light.colorOne,
+    paddingHorizontal: 7,
+    paddingVertical: 9,
+    marginTop: 5,
   },
 });
 

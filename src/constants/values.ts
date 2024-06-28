@@ -1,6 +1,6 @@
 import { IMAGES } from '@constants/Colors';
 
-import { ProductType } from '@shared/types/generaltypes';
+import { ItemType, ProductType } from '@shared/types/generaltypes';
 
 export const timeOptions = {
   hour: 'numeric' as const,
@@ -89,5 +89,63 @@ export const PRODUCTS: ProductType[] = [
     store: 'Zee Store',
     badgeText: 'New',
     favorite: false,
+  },
+];
+
+export const ITEMS: ItemType[] = [
+  {
+    key: 1,
+    uri: IMAGES.ShoeFem,
+    title: 'Fashion Nova',
+    price: 100.0,
+    ccy: '\u00A3',
+    date: '10-April-2024',
+    time: '7:30am',
+    reference: 'ID-235424',
+    deliveryStatus: 'Delivered',
+  },
+  {
+    key: 2,
+    uri: IMAGES.ShoeFem,
+    title: 'Fashion Nova',
+    price: 100.0,
+    ccy: '\u00A3',
+    date: '10-April-2024',
+    time: '7:30am',
+    reference: 'ID-235424',
+    deliveryStatus: 'Pending',
+  },
+  {
+    key: 3,
+    uri: IMAGES.ShoeFem,
+    title: 'Fashion Nova',
+    price: 100.0,
+    ccy: '\u00A3',
+    date: '10-April-2024',
+    time: '7:30am',
+    reference: 'ID-235424',
+    deliveryStatus: 'Delivered',
+  },
+  {
+    key: 4,
+    uri: IMAGES.ShoeFem,
+    title: 'Fashion Nova',
+    price: 100.0,
+    ccy: '\u00A3',
+    date: '10-April-2024',
+    time: '7:30am',
+    reference: 'ID-235424',
+    deliveryStatus: 'Pending',
+  },
+  {
+    key: 5,
+    uri: IMAGES.ShoeFem,
+    title: 'Fashion Nova',
+    price: 100.0,
+    ccy: '\u00A3',
+    date: '10-April-2024',
+    time: '7:30am',
+    reference: 'ID-235424',
+    deliveryStatus: 'Delivered',
   },
 ];

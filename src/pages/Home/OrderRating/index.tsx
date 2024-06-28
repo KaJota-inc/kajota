@@ -104,7 +104,13 @@ const OrderRating: React.FC<NavigationProps> = ({ navigation }) => {
               </View>
               <View style={styles.rstar}>
                 {[1, 2, 3, 4, 5].map((s, index) => (
-                  <TouchableOpacity key={nanoid()} style={styles.rstarx}>
+                  <TouchableOpacity
+                    key={nanoid()}
+                    style={styles.rstarx}
+                    onPress={() => {
+                      setRating(s);
+                    }}
+                  >
                     <AntDesign
                       color={rating >= index + 1 ? COLORS.light.star : COLORS.light.text}
                       name={rating >= index + 1 ? 'star' : 'staro'}

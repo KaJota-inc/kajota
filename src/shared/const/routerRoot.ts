@@ -39,7 +39,7 @@ export type RootParamList = {
   };
   [RootRoutes.Items]?: {
     screen: ItemsRoutes;
-    params: any | undefined;
+    params?: any | undefined;
   };
   [RootRoutes.Tabs]?: {
     screen: Tabs;

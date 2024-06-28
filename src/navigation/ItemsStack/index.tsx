@@ -2,6 +2,7 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import { ItemsMain } from '@pages/Items';
+import NoNotifications from '@pages/Items/NoNotifications';
 
 import { ItemsParamList, ItemsRoutes } from '@shared/const/routerItems';
 
@@ -14,6 +15,7 @@ const ItemsStack = (): React.ReactElement => {
       screenOptions={{ headerShown: false }}
     >
       <Items.Screen component={ItemsMain} name={ItemsRoutes.ItemsMain} />
+      <Items.Screen component={NoNotifications} name={ItemsRoutes.NoNotifications} />
     </Items.Navigator>
   );
 };

@@ -33,6 +33,7 @@ export const COLORS = {
     hashHomeBackGroundL3: '#D3D3D3',
     advertBlue: '#C5E5FB',
     trackingBlue: '#D9F8FF',
+    pendingBlue: '#ECF9FF',
     trackingBlueDark: '#009DBF',
     advertBlueDark: '#01446C',
     advertGreen: '#82FEBC',
