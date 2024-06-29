@@ -81,13 +81,14 @@ export interface ItemType {
   reference: string;
 
   deliveryStatus: DeliveryStatusType;
-  //
-  //
-  // item: number;
-  // rating: number;
-  // store: string;
-  // badgeText: string;
-  // favorite: boolean;
 }
 
 export type DeliveryStatusType = 'Delivered' | 'Pending' | 'Cancelled';
+
+export interface NotificationType {
+  key: number;
+  uri: ImageSourcePropType;
+  time: string;
+  desc: string;
+  store: string;
+}

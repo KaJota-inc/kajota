@@ -3,6 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import { ItemsMain } from '@pages/Items';
 import NoNotifications from '@pages/Items/NoNotifications';
+import Notifications from '@pages/Items/Notifications';
 
 import { ItemsParamList, ItemsRoutes } from '@shared/const/routerItems';
 
@@ -16,6 +17,7 @@ const ItemsStack = (): React.ReactElement => {
     >
       <Items.Screen component={ItemsMain} name={ItemsRoutes.ItemsMain} />
       <Items.Screen component={NoNotifications} name={ItemsRoutes.NoNotifications} />
+      <Items.Screen component={Notifications} name={ItemsRoutes.Notifications} />
     </Items.Navigator>
   );
 };

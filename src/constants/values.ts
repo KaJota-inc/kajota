@@ -1,6 +1,8 @@
+import { ImageSourcePropType } from 'react-native';
+
 import { IMAGES } from '@constants/Colors';
 
-import { ItemType, ProductType } from '@shared/types/generaltypes';
+import { ItemType, NotificationType, ProductType } from '@shared/types/generaltypes';
 
 export const timeOptions = {
   hour: 'numeric' as const,
@@ -147,5 +149,57 @@ export const ITEMS: ItemType[] = [
     time: '7:30am',
     reference: 'ID-235424',
     deliveryStatus: 'Delivered',
+  },
+];
+
+export const TestNotifications: NotificationType[] = [
+  {
+    key: 1,
+    uri: IMAGES.ZeeStoreWorkspace,
+    time: '2',
+    store: 'Zee’s Store',
+    desc: 'Payment complete for Adidas Shoe',
+  },
+  {
+    key: 2,
+    uri: IMAGES.ZeeStoreBag,
+    time: '2',
+    store: 'Zee’s Store',
+    desc: 'Your order has is successfully placed',
+  },
+  {
+    key: 3,
+    uri: IMAGES.ZeeStoreShoe,
+    time: '2',
+    store: 'Zee’s Store',
+    desc: 'Your order is successfully delivered',
+  },
+  {
+    key: 4,
+    uri: IMAGES.ZeeStoreDiningTable,
+    time: '2',
+    store: 'Zee’s Store',
+    desc: 'Items from your wishlist are on sale',
+  },
+  {
+    key: 5,
+    uri: IMAGES.ZeeStoreF15,
+    time: '2',
+    store: 'Zee’s Store',
+    desc: 'Exclusive deals just for you! Shop now!',
+  },
+  {
+    key: 6,
+    uri: IMAGES.ZeeStoreBlackFriday,
+    time: '2',
+    store: 'Zee’s Store',
+    desc: 'Discover products tailored just for you',
+  },
+  {
+    key: 7,
+    uri: IMAGES.ZeeStoreAccountInfo,
+    time: '2',
+    store: 'Zee’s Store',
+    desc: 'Account information has been updated',
   },
 ];

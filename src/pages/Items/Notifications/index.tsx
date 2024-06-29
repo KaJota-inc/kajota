@@ -12,7 +12,7 @@ import { CompositeScreenProps } from '@react-navigation/native';
 import { nanoid } from '@reduxjs/toolkit';
 
 import { COLORS, IMAGES, SIZES } from '@constants/Colors';
-import { ITEMS } from '@constants/values';
+import { ITEMS, TestNotifications } from '@constants/values';
 
 import CartIcon from '@shared/components/CartIcon';
 import {
@@ -20,20 +20,19 @@ import {
   PendingIconSVG,
   WishListIconSVG,
 } from '@shared/components/SVGS';
-import { HomeRoutes } from '@shared/const/routerHome';
 import { ItemsProps, ItemsRoutes } from '@shared/const/routerItems';
 import { RootRoutes, RootScreenProps } from '@shared/const/routerRoot';
-import { ItemType } from '@shared/types/generaltypes';
+import { ItemType, NotificationType } from '@shared/types/generaltypes';
 
 import { Text, View } from '@components/Themed';
 
 type NavigationProps = CompositeScreenProps<
-  ItemsProps<ItemsRoutes.ItemsMain>,
+  ItemsProps<ItemsRoutes.Notifications>,
   RootScreenProps<RootRoutes.Items>
 >;
 
-const ItemsMain: React.FC<NavigationProps> = ({ navigation }) => {
-  const [items, setItems] = React.useState<ItemType[]>(ITEMS);
+const Notifications: React.FC<NavigationProps> = ({ navigation }) => {
+  const [notis, setNotis] = React.useState<NotificationType[]>(TestNotifications);
 
   const handleBack = () => {
     navigation?.goBack();
@@ -53,38 +52,9 @@ const ItemsMain: React.FC<NavigationProps> = ({ navigation }) => {
             >
               <Feather color={COLORS.light.text} name="chevron-left" size={28} />
             </TouchableOpacity>
-            <View style={styles.r1b}>
-              <TouchableOpacity
-                style={styles.r1c}
-                onPress={() => {
-                  debug.log('pressed');
-                  // navigation?.navigate(HomeRoutes.CART);
-                }}
-              >
-                <CartIcon
-                  count={10}
-                  onPressed={() => {
-                    debug.log('pressed');
-                    // navigation?.navigate(HomeRoutes.CART);
-                  }}
-                />
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.r2t4}
-                onPress={() => {
-                  debug.log('pressed2');
-                  navigation?.navigate(RootRoutes.Items, {
-                    screen: ItemsRoutes.Notifications,
-                  });
-                }}
-              >
-                <NotificationBellIconSVG />
-              </TouchableOpacity>
-            </View>
+            <Text style={styles.r2t2}>Notifications</Text>
           </View>
-          <View style={styles.r3}>
-            <Text style={styles.r3t}>My Items</Text>
-          </View>
+
           <View style={styles.r2}>
             <View style={styles.r2a}>
               <TouchableOpacity style={styles.r2a1}>
@@ -97,61 +67,19 @@ const ItemsMain: React.FC<NavigationProps> = ({ navigation }) => {
               </TouchableOpacity>
             </View>
           </View>
-
-          <View style={styles.r4}>
-            <TouchableOpacity style={styles.r4a}>
-              <View style={styles.r4a1}>
-                {/*<Text style={styles.r4a1t1}>*/}
-                <WishListIconSVG />
-                {/*</Text>*/}
-                <Text style={styles.r4a1t2}>Wishlist</Text>
-              </View>
-              <View style={styles.r4a2}>
-                <Text style={styles.r4a2t}>+10</Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.r4b}>
-              <View style={styles.r4a1}>
-                {/*<Text style={styles.r4a1t1}>*/}
-                <PendingIconSVG />
-                {/*</Text>*/}
-                <Text style={styles.r4a1t2}>Pending</Text>
-              </View>
-              <View style={styles.r4a2}>
-                <Text style={styles.r4a2t}>+5</Text>
-              </View>
-            </TouchableOpacity>
-          </View>
-
-          <View style={styles.r5}>
-            <Text style={styles.r5t1}>All Orders</Text>
-            <TouchableOpacity>
-              <Text style={styles.r5t2}>View All</Text>
-            </TouchableOpacity>
-          </View>
         </View>
         <ScrollView
           contentContainerStyle={styles.scrollContent}
           showsVerticalScrollIndicator={false}
           style={styles.scroll}
         >
-          {items.map((item, idx) => (
+          {notis.map((item, idx) => (
             <View key={nanoid()} style={styles.itemContainer}>
               <View style={styles.itemA}>
                 <Image resizeMode="cover" source={item.uri} style={styles.itemA1} />
                 <View style={styles.itemA2}>
-                  <Text style={styles.itemA2t1}>{item.title}</Text>
-                  {/*<View style={styles.itemA2t2}>*/}
-                  {/*    <AntDesign color={COLORS.light.star} name="star" size={15}/>*/}
-                  {/*    <Text style={styles.itemA2t2b}>4.6</Text>*/}
-                  {/*    <View style={styles.itemA2t2a}>*/}
-                  {/*        <Text style={styles.itemA2t2c}>M</Text>*/}
-                  {/*    </View>*/}
-                  {/*</View>*/}
-
-                  <Text style={styles.itemA2t3}>
-                    {item.date}, {item.time}
-                  </Text>
+                  <Text style={styles.itemA2t1}>{item.desc}</Text>
+                  <Text style={styles.itemA2t3}>{item.store}</Text>
                 </View>
               </View>
               <View style={styles.itemB}>
@@ -163,49 +91,10 @@ const ItemsMain: React.FC<NavigationProps> = ({ navigation }) => {
                     // }
                   }}
                 >
-                  <Text style={styles.itemBText}>
-                    {item.ccy}
-                    {Number(item.price).toFixed(2)}
-                  </Text>
+                  <Ionicons color={COLORS.light.notiBlue} name="ellipse" size={14} />
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.itemBt2}>
-                  <Text style={styles.itemBTextm}>{item.reference}</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={styles.itemBt3}
-                  onPress={() => {
-                    // setItemCount(itemCount + 1);
-                  }}
-                >
-                  {item.deliveryStatus === 'Delivered' && (
-                    <Ionicons
-                      color={COLORS.light.trackingGreenDark}
-                      name="checkmark-circle-outline"
-                      size={20}
-                    />
-                  )}
-                  {item.deliveryStatus === 'Pending' && (
-                    // <MaterialIcons
-                    //     name="progress-download"
-                    //     size={24}
-                    //
-                    // />
-                    <MaterialCommunityIcons
-                      color={COLORS.light.trackingBlueDark}
-                      name="progress-download"
-                      size={24}
-                    />
-                  )}
-                  <Text
-                    style={[
-                      styles.itemBTextc,
-                      item.deliveryStatus === 'Pending' && {
-                        color: COLORS.light.trackingBlueDark,
-                      },
-                    ]}
-                  >
-                    {item.deliveryStatus}
-                  </Text>
+                  <Text style={styles.itemBTextm}>{item.time} hrs ago</Text>
                 </TouchableOpacity>
               </View>
             </View>
@@ -216,7 +105,7 @@ const ItemsMain: React.FC<NavigationProps> = ({ navigation }) => {
   );
 };
 
-export default ItemsMain;
+export default Notifications;
 
 const styles = StyleSheet.create({
   main: {
@@ -239,7 +128,7 @@ const styles = StyleSheet.create({
   r1: {
     flexDirection: 'row',
     width: '100%',
-    justifyContent: 'space-between',
+    // justifyContent: 'space-between',
     marginVertical: 15,
     backgroundColor: 'transparent',
     alignItems: 'center',
@@ -258,6 +147,13 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.light.backgroundGray,
     padding: 10,
     borderRadius: 30,
+  },
+  r2t2: {
+    fontSize: SIZES.sizeSevenB,
+    fontWeight: '700',
+    textAlign: 'center',
+    marginLeft: '25%',
+    backgroundColor: COLORS.light.hashHomeBackGroundL2,
   },
   r2t4: {
     // fontSize: SIZES.sizeSevenB,
@@ -406,7 +302,8 @@ const styles = StyleSheet.create({
     fontWeight: '400',
   },
   itemContainer: {
-    paddingVertical: 10,
+    paddingTop: 10,
+    paddingBottom: 25,
     width: '100%',
     borderBottomWidth: 1,
     borderColor: COLORS.light.textGray,
@@ -425,29 +322,33 @@ const styles = StyleSheet.create({
     gap: 15,
     alignItems: 'center',
     backgroundColor: 'transparent',
+    flex: 1,
   },
   itemA1: {
-    height: 80,
-    width: 80,
-
-    borderRadius: 15,
+    height: 50,
+    width: 50,
+    borderRadius: 13,
     backgroundColor: 'transparent',
+    // borderWidth: 1,
   },
   itemA2: {
     justifyContent: 'space-between',
     gap: 8,
     backgroundColor: 'transparent',
+    flexWrap: 'wrap',
   },
   itemA2t1: {
-    fontSize: SIZES.sizeSixB,
-    fontWeight: '500',
+    fontSize: SIZES.sizeSix,
+    fontWeight: '400',
     backgroundColor: 'transparent',
+    flexWrap: 'wrap',
   },
   itemA2t2: {
     flexDirection: 'row',
     gap: 10,
     alignItems: 'center',
     backgroundColor: 'transparent',
+    flexWrap: 'wrap',
   },
   itemA2t2a: {
     backgroundColor: COLORS.light.textGray,
@@ -465,19 +366,21 @@ const styles = StyleSheet.create({
     color: COLORS.light.active,
   },
   itemB: {
-    // flexDirection: 'row',
     alignItems: 'flex-end',
     justifyContent: 'space-between',
     backgroundColor: 'transparent',
-    // borderWidth: 1,
+    gap: 5,
+    marginRight: 5,
   },
   itemBText: {
     fontSize: SIZES.sizeSeven,
     fontWeight: '700',
   },
   itemBTextm: {
-    fontSize: SIZES.sizeSeven,
-    fontWeight: '300',
+    fontSize: SIZES.sizeSix,
+    fontWeight: '400',
+    color: COLORS.light.text,
+    opacity: 0.6,
   },
   itemBTextc: {
     fontSize: SIZES.sizeSix,
@@ -487,17 +390,13 @@ const styles = StyleSheet.create({
   itemBt1: {
     paddingHorizontal: 8,
     paddingVertical: 2,
-    // borderBottomStartRadius: 15,
-    // borderTopStartRadius: 15,
-    // borderWidth: 1,
-    // borderColor: COLORS.light.textGray,
   },
   itemBt2: {
     // borderTopWidth: 1,
     // borderBottomWidth: 1,
     paddingHorizontal: 8,
     paddingVertical: 2,
-    // borderColor: COLORS.light.textGray,
+    marginTop: 20,
   },
   itemBt3: {
     // borderWidth: 1,

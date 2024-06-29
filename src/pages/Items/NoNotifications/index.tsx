@@ -25,7 +25,8 @@ type NavigationProps = CompositeScreenProps<
 const NoNotifications: React.FC<NavigationProps> = ({ navigation }) => {
   const handleContinue = async () => {
     debug.log('here');
-    navigation?.navigate(RootRoutes.Home);
+    // navigation?.navigate(RootRoutes.Home);
+    navigation?.goBack();
   };
 
   return (
@@ -55,17 +56,6 @@ const NoNotifications: React.FC<NavigationProps> = ({ navigation }) => {
                 }}
               />
             </View>
-            {/*<View style={styles.r9b}>*/}
-            {/*    <MainButton*/}
-            {/*        btnStyle={styles.r9bbtn}*/}
-            {/*        err={false}*/}
-            {/*        textStyle={styles.r9bt}*/}
-            {/*        title="No, I’m not Satisfied"*/}
-            {/*        onPressFunction={() => {*/}
-            {/*            handleContinue();*/}
-            {/*        }}*/}
-            {/*    />*/}
-            {/*</View>*/}
           </View>
         </View>
       </View>
