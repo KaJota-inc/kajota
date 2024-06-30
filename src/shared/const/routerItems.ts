@@ -17,4 +17,4 @@ export type ItemsProps<RouteName extends ItemsRoutes> = StackScreenProps<
   RouteName
 >;
 
-export type ItemsNavigationProps = StackNavigationProp<ItemsParamList>;
+// export type ItemsNavigationProps = StackNavigationProp<ItemsParamList>;

@@ -25,12 +25,15 @@ const Advert = () => {
     <Swiper
       ref={swiperRef}
       activeDotStyle={styles.activeDot}
+      autoplay={true}
+      autoplayTimeout={3}
       bounces={true}
+      containerStyle={styles.containerStyle}
       dotStyle={styles.dot}
       index={0}
       loop={true}
       style={styles.wrapper}
-      containerStyle={styles.containerStyle}
+      autoplayDirection={true}
       // dot={<Text></Text>}
       // activeDot={<Text></Text>}
     >

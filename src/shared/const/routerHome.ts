@@ -9,6 +9,8 @@ export enum HomeRoutes {
   ORDERTRACKING = 'ORDERTRACKING',
   ORDERCONFIRMATION = 'ORDERCONFIRMATION',
   ORDERRATING = 'ORDERRATING',
+  SEARCH = 'SEARCH',
+  SEARCHPRODUCTS = 'SEARCHPRODUCTS',
 }
 
 export type HomeParamList = {
@@ -20,6 +22,8 @@ export type HomeParamList = {
   [HomeRoutes.ORDERTRACKING]: undefined;
   [HomeRoutes.ORDERCONFIRMATION]: undefined;
   [HomeRoutes.ORDERRATING]: undefined;
+  [HomeRoutes.SEARCH]: undefined;
+  [HomeRoutes.SEARCHPRODUCTS]: undefined;
 };
 
 export type HomeProps<RouteName extends HomeRoutes> = StackScreenProps<

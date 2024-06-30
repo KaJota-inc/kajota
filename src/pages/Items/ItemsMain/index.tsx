@@ -11,6 +11,8 @@ import {
 import { CompositeScreenProps } from '@react-navigation/native';
 import { nanoid } from '@reduxjs/toolkit';
 
+import SearchBar from '@pages/Home/Search/SearchBar';
+
 import { COLORS, IMAGES, SIZES } from '@constants/Colors';
 import { ITEMS } from '@constants/values';
 
@@ -65,7 +67,9 @@ const ItemsMain: React.FC<NavigationProps> = ({ navigation }) => {
                   count={10}
                   onPressed={() => {
                     debug.log('pressed');
-                    // navigation?.navigate(HomeRoutes.CART);
+                    navigation?.navigate(RootRoutes.Home, {
+                      screen: HomeRoutes.CART,
+                    });
                   }}
                 />
               </TouchableOpacity>
@@ -86,16 +90,24 @@ const ItemsMain: React.FC<NavigationProps> = ({ navigation }) => {
             <Text style={styles.r3t}>My Items</Text>
           </View>
           <View style={styles.r2}>
-            <View style={styles.r2a}>
-              <TouchableOpacity style={styles.r2a1}>
-                <AntDesign color={COLORS.light.active} name="search1" size={26} />
-                <Text style={styles.r2a1t}>search</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.r2a2}>
-                <SimpleLineIcons color={COLORS.light.active} name="camera" size={24} />
-                <Text style={styles.r2a2t}>Lens search</Text>
-              </TouchableOpacity>
-            </View>
+            <SearchBar
+              width="100%"
+              onPressed={() => {
+                navigation?.navigate(RootRoutes.Home, {
+                  screen: HomeRoutes.SEARCH,
+                });
+              }}
+            />
+            {/*<View style={styles.r2a}>*/}
+            {/*    <TouchableOpacity style={styles.r2a1}>*/}
+            {/*        <AntDesign color={COLORS.light.active} name="search1" size={26}/>*/}
+            {/*        <Text style={styles.r2a1t}>search</Text>*/}
+            {/*    </TouchableOpacity>*/}
+            {/*    <TouchableOpacity style={styles.r2a2}>*/}
+            {/*        <SimpleLineIcons color={COLORS.light.active} name="camera" size={24}/>*/}
+            {/*        <Text style={styles.r2a2t}>Lens search</Text>*/}
+            {/*    </TouchableOpacity>*/}
+            {/*</View>*/}
           </View>
 
           <View style={styles.r4}>

@@ -5,13 +5,13 @@ import { CompositeScreenProps } from '@react-navigation/native';
 import { nanoid } from '@reduxjs/toolkit';
 
 import Advert from '@pages/Home/Home/advert/Advert';
+import SearchBar from '@pages/Home/Search/SearchBar';
 
 import { COLORS, IMAGES, SIZES } from '@constants/Colors';
 import { CATEGORIES } from '@constants/values';
 
 import CartIcon from '@shared/components/CartIcon';
 import { GridProductDisplay } from '@shared/components/GridProductDisplay';
-import { AuthRoutes } from '@shared/const/routerAuth';
 import { HomeProps, HomeRoutes } from '@shared/const/routerHome';
 import { RootRoutes, RootScreenProps } from '@shared/const/routerRoot';
 
@@ -54,22 +54,31 @@ const Home: React.FC<NavigationProps> = ({ navigation }) => {
             </TouchableOpacity>
           </View>
           <View style={styles.r2}>
-            <View style={styles.r2a}>
-              <TouchableOpacity style={styles.r2a1}>
-                <AntDesign color={COLORS.light.active} name="search1" size={26} />
-                <Text style={styles.r2a1t}>search</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.r2a2}>
-                <SimpleLineIcons color={COLORS.light.active} name="camera" size={24} />
-                <Text style={styles.r2a2t}>Lens search</Text>
-              </TouchableOpacity>
-            </View>
+            <SearchBar
+              width="82%"
+              onPressed={() => navigation?.navigate(HomeRoutes.SEARCH)}
+            />
+            {/*<View style={styles.r2a}>*/}
+            {/*    <TouchableOpacity*/}
+            {/*        style={styles.r2a1}*/}
+            {/*        onPress={() => {*/}
+            {/*            navigation?.navigate(HomeRoutes.SEARCH);*/}
+            {/*        }}*/}
+            {/*    >*/}
+            {/*        <AntDesign color={COLORS.light.active} name="search1" size={26}/>*/}
+            {/*        <Text style={styles.r2a1t}>search</Text>*/}
+            {/*    </TouchableOpacity>*/}
+            {/*    <TouchableOpacity*/}
+            {/*        style={styles.r2a2}*/}
+            {/*        onPress={() => {*/}
+            {/*            navigation?.navigate(HomeRoutes.SEARCH);*/}
+            {/*        }}*/}
+            {/*    >*/}
+            {/*        <SimpleLineIcons color={COLORS.light.active} name="camera" size={24}/>*/}
+            {/*        <Text style={styles.r2a2t}>Lens search</Text>*/}
+            {/*    </TouchableOpacity>*/}
+            {/*</View>*/}
             <TouchableOpacity style={styles.r2b}>
-              {/*<Feather*/}
-              {/*    name="sliders"*/}
-              {/*    size={24}*/}
-              {/*    color={COLORS.light.active}*/}
-              {/*/>*/}
               <SimpleLineIcons color={COLORS.light.active} name="equalizer" size={24} />
             </TouchableOpacity>
           </View>
@@ -217,7 +226,7 @@ const styles = StyleSheet.create({
     // borderWidth: 1,
     width: '82%',
     backgroundColor: COLORS.light.backgroundGray,
-    padding: 10,
+    padding: 5,
     borderRadius: 13,
   },
   r2b: {

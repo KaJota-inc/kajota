@@ -25,7 +25,7 @@ export type RootParamList = {
   };
   [RootRoutes.Home]?: {
     screen: HomeRoutes;
-    params: any | undefined;
+    params?: any | undefined;
   };
   [RootRoutes.Accounts]?: {
     screen: AccountsRoutes;

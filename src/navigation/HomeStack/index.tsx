@@ -7,6 +7,8 @@ import OrderConfirmation from '@pages/Home/OrderConfirmation';
 import OrderPayment from '@pages/Home/OrderPayment';
 import OrderRating from '@pages/Home/OrderRating';
 import OrderTracking from '@pages/Home/OrderTracking';
+import Search from '@pages/Home/Search';
+import SearchProducts from '@pages/Home/SearchProducts';
 
 import { HomeParamList, HomeRoutes } from '@shared/const/routerHome';
 
@@ -29,6 +31,8 @@ const HomeStack = (): React.ReactElement => {
       <Home.Screen component={OrderTracking} name={HomeRoutes.ORDERTRACKING} />
       <Home.Screen component={OrderConfirmation} name={HomeRoutes.ORDERCONFIRMATION} />
       <Home.Screen component={OrderRating} name={HomeRoutes.ORDERRATING} />
+      <Home.Screen component={Search} name={HomeRoutes.SEARCH} />
+      <Home.Screen component={SearchProducts} name={HomeRoutes.SEARCHPRODUCTS} />
     </Home.Navigator>
   );
 };

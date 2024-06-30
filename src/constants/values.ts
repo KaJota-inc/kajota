@@ -1,6 +1,6 @@
 import { ImageSourcePropType } from 'react-native';
 
-import { IMAGES } from '@constants/Colors';
+import { COLORS, IMAGES } from '@constants/Colors';
 
 import { ItemType, NotificationType, ProductType } from '@shared/types/generaltypes';
 
@@ -25,18 +25,87 @@ export const CATEGORIES = [
   'Property',
 ];
 export const CATEGORIES2 = [
-  { name: 'Men’s Fashion', icon: '👔' },
-  { name: 'Women’s Fashion', icon: '👗' },
-  { name: 'Accessories', icon: '🧣' },
-  { name: 'Electronics', icon: '💻' },
-  { name: 'Furniture', icon: '🛋' },
-  { name: 'Toys', icon: '🧸' },
-  { name: 'Books', icon: '📚' },
-  { name: 'Games', icon: '🎮' },
-  { name: 'Arts', icon: '️️🖼' },
-  { name: 'Beauty', icon: '💄' },
-  { name: 'Sports', icon: '🏈' },
-  { name: 'Pets', icon: '🦊' },
+  {
+    name: 'Men’s Fashion',
+    icon: '👔',
+    color: COLORS.light.colorOneLight2,
+    textColor: COLORS.light.colorOne,
+  },
+  {
+    name: 'Women’s Fashion',
+    icon: '👗',
+    color: COLORS.light.catPurpleLight,
+    textColor: COLORS.light.catPurple,
+  },
+  {
+    name: 'Accessories',
+    icon: '🧣',
+    color: COLORS.light.catBlueLight,
+    textColor: COLORS.light.catBlue,
+  },
+  {
+    name: 'Electronics',
+    icon: '💻',
+    color: COLORS.light.catYellowLight,
+    textColor: COLORS.light.catYellow,
+  },
+  {
+    name: 'Toys',
+    icon: '🧸',
+    color: COLORS.light.catPurpleLight,
+    textColor: COLORS.light.catPurple,
+  },
+  {
+    name: 'Furniture',
+    icon: '🛋',
+    color: COLORS.light.catBrownLight,
+    textColor: COLORS.light.catBrown,
+  },
+  {
+    name: 'Books',
+    icon: '📚',
+    color: COLORS.light.catYellowLight,
+    textColor: COLORS.light.catYellow,
+  },
+  {
+    name: 'Beauty',
+    icon: '💄',
+    color: COLORS.light.advertGreenLight,
+    textColor: COLORS.light.price,
+  },
+  {
+    name: 'Games',
+    icon: '🎮',
+    color: COLORS.light.catTBlueLight,
+    textColor: COLORS.light.catTBlue,
+  },
+  {
+    name: 'Arts',
+    icon: '️️🖼',
+    color: COLORS.light.colorOneLight2,
+    textColor: COLORS.light.colorOne,
+  },
+  {
+    name: 'Sports',
+    icon: '🏈',
+    color: COLORS.light.catBrownLight,
+    textColor: COLORS.light.catBrown,
+  },
+  {
+    name: 'Pets',
+    icon: '🦊',
+    color: COLORS.light.catBlueLight,
+    textColor: COLORS.light.catBlue,
+  },
+];
+
+export const TRENDINGSEARCHES = [
+  { name: 'Accessories' },
+  { name: 'Electronics' },
+  { name: 'Furniture' },
+  { name: 'Fashion' },
+  { name: 'Kitchen Utensils' },
+  { name: 'Health' },
 ];
 
 export const PRODUCTS: ProductType[] = [

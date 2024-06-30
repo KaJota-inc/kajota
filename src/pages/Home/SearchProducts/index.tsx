@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Image, ScrollView, StatusBar, StyleSheet, TouchableOpacity } from 'react-native';
 import {
   AntDesign,
+  Entypo,
   Feather,
+  FontAwesome,
   Ionicons,
   MaterialCommunityIcons,
   MaterialIcons,
@@ -14,15 +16,21 @@ import { nanoid } from '@reduxjs/toolkit';
 import SearchBar from '@pages/Home/Search/SearchBar';
 
 import { COLORS, IMAGES, SIZES } from '@constants/Colors';
-import { ITEMS, TestNotifications } from '@constants/values';
+import {
+  CATEGORIES2,
+  ITEMS,
+  TestNotifications,
+  TRENDINGSEARCHES,
+} from '@constants/values';
 
 import CartIcon from '@shared/components/CartIcon';
+import { GridProductDisplay } from '@shared/components/GridProductDisplay';
 import {
   NotificationBellIconSVG,
   PendingIconSVG,
   WishListIconSVG,
 } from '@shared/components/SVGS';
-import { HomeRoutes } from '@shared/const/routerHome';
+import { HomeProps, HomeRoutes } from '@shared/const/routerHome';
 import { ItemsProps, ItemsRoutes } from '@shared/const/routerItems';
 import { RootRoutes, RootScreenProps } from '@shared/const/routerRoot';
 import { ItemType, NotificationType } from '@shared/types/generaltypes';
@@ -30,15 +38,33 @@ import { ItemType, NotificationType } from '@shared/types/generaltypes';
 import { Text, View } from '@components/Themed';
 
 type NavigationProps = CompositeScreenProps<
-  ItemsProps<ItemsRoutes.Notifications>,
-  RootScreenProps<RootRoutes.Items>
+  HomeProps<HomeRoutes.SEARCHPRODUCTS>,
+  RootScreenProps<RootRoutes.Home>
 >;
 
-const Notifications: React.FC<NavigationProps> = ({ navigation }) => {
-  const [notis, setNotis] = React.useState<NotificationType[]>(TestNotifications);
+const SearchProducts: React.FC<NavigationProps> = ({ navigation }) => {
+  const opts = [
+    {
+      name: 'Popular',
+    },
+    { name: 'Color' },
+    { name: 'Popular' },
+    { name: 'Popular' },
+    { name: 'Color' },
+  ];
 
   const handleBack = () => {
     navigation?.goBack();
+  };
+
+  const [selectedItemIndex, setSelectedItemIndex] = useState<number[]>([]);
+
+  const handlePress = (val: number) => {
+    if (selectedItemIndex.includes(val)) {
+      setSelectedItemIndex(selectedItemIndex.filter(sii => sii !== val));
+    } else {
+      setSelectedItemIndex([...selectedItemIndex, val]);
+    }
   };
 
   return (
@@ -46,7 +72,7 @@ const Notifications: React.FC<NavigationProps> = ({ navigation }) => {
       <StatusBar barStyle="dark-content" />
       <View style={styles.container}>
         <View style={styles.subContainer}>
-          <View style={styles.r1}>
+          <View style={styles.r2}>
             <TouchableOpacity
               style={styles.r2t1}
               onPress={() => {
@@ -55,22 +81,9 @@ const Notifications: React.FC<NavigationProps> = ({ navigation }) => {
             >
               <Feather color={COLORS.light.text} name="chevron-left" size={28} />
             </TouchableOpacity>
-            <Text style={styles.r2t2}>Notifications</Text>
-          </View>
 
-          <View style={styles.r2}>
-            {/*<View style={styles.r2a}>*/}
-            {/*  <TouchableOpacity style={styles.r2a1}>*/}
-            {/*    <AntDesign color={COLORS.light.active} name="search1" size={26} />*/}
-            {/*    <Text style={styles.r2a1t}>search</Text>*/}
-            {/*  </TouchableOpacity>*/}
-            {/*  <TouchableOpacity style={styles.r2a2}>*/}
-            {/*    <SimpleLineIcons color={COLORS.light.active} name="camera" size={24} />*/}
-            {/*    <Text style={styles.r2a2t}>Lens search</Text>*/}
-            {/*  </TouchableOpacity>*/}
-            {/*</View>*/}
             <SearchBar
-              width="100%"
+              width="85%"
               onPressed={() => {
                 navigation?.navigate(RootRoutes.Home, {
                   screen: HomeRoutes.SEARCH,
@@ -84,39 +97,73 @@ const Notifications: React.FC<NavigationProps> = ({ navigation }) => {
           showsVerticalScrollIndicator={false}
           style={styles.scroll}
         >
-          {notis.map((item, idx) => (
-            <View key={nanoid()} style={styles.itemContainer}>
-              <View style={styles.itemA}>
-                <Image resizeMode="cover" source={item.uri} style={styles.itemA1} />
-                <View style={styles.itemA2}>
-                  <Text style={styles.itemA2t1}>{item.desc}</Text>
-                  <Text style={styles.itemA2t3}>{item.store}</Text>
-                </View>
-              </View>
-              <View style={styles.itemB}>
-                <TouchableOpacity
-                  style={styles.itemBt1}
-                  onPress={() => {
-                    // if (itemCount > 1) {
-                    //     setItemCount(itemCount - 1);
-                    // }
-                  }}
-                >
-                  <Ionicons color={COLORS.light.notiBlue} name="ellipse" size={14} />
+          <View style={styles.r4}>
+            <ScrollView
+              contentContainerStyle={styles.categoriesContentStyle}
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+              showsVerticalScrollIndicator={false}
+              style={styles.categoriesStyle}
+            >
+              <View style={styles.r4a}>
+                <TouchableOpacity style={styles.catBody}>
+                  {/*<FontAwesome name="sliders" size={24} color={COLORS.light.active} />*/}
+                  <SimpleLineIcons
+                    color={COLORS.light.active}
+                    name="equalizer"
+                    size={20}
+                  />
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.itemBt2}>
-                  <Text style={styles.itemBTextm}>{item.time} hrs ago</Text>
-                </TouchableOpacity>
+                {opts?.map((item, idx) => (
+                  <TouchableOpacity
+                    key={nanoid()}
+                    style={[
+                      styles.catBody,
+                      selectedItemIndex.includes(idx) && {
+                        backgroundColor: COLORS.light.text,
+                      },
+                    ]}
+                    onPress={() => {
+                      // handlePress(idx);
+                    }}
+                  >
+                    <Text
+                      style={[
+                        styles.catName,
+                        selectedItemIndex.includes(idx) && {
+                          color: COLORS.light.background,
+                        },
+                      ]}
+                    >
+                      {item?.name}
+                    </Text>
+                    {item.name === 'Color' && (
+                      <Text>
+                        <Entypo color="black" name="chevron-down" size={15} />
+                      </Text>
+                    )}
+                  </TouchableOpacity>
+                ))}
               </View>
-            </View>
-          ))}
+            </ScrollView>
+          </View>
+
+          <View style={styles.r5}>
+            <Text style={styles.r5t2}>
+              Showing <Text style={styles.r5t1}>results</Text> from all shops
+            </Text>
+          </View>
+
+          <View>
+            <GridProductDisplay />
+          </View>
         </ScrollView>
       </View>
     </View>
   );
 };
 
-export default Notifications;
+export default SearchProducts;
 
 const styles = StyleSheet.create({
   main: {
@@ -136,6 +183,18 @@ const styles = StyleSheet.create({
     marginTop: '15%',
     backgroundColor: COLORS.light.hashHomeBackGroundL2,
   },
+  categoriesStyle: {
+    // marginTop: 20,
+    // backgroundColor: COLORS.light.textGray,
+    // borderWidth: 1,
+  },
+  categoriesContentStyle: {
+    marginRight: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingRight: 50,
+    // borderWidth: 1,
+  },
   r1: {
     flexDirection: 'row',
     width: '100%',
@@ -147,7 +206,7 @@ const styles = StyleSheet.create({
   },
   r2: {
     flexDirection: 'row',
-    // justifyContent: 'space-between',
+    justifyContent: 'space-between',
     width: '100%',
     alignItems: 'center',
     marginTop: '5%',
@@ -197,8 +256,11 @@ const styles = StyleSheet.create({
   },
   r2b: {
     padding: 15,
-    borderRadius: 13,
-    backgroundColor: COLORS.light.background,
+    backgroundColor: 'transparent',
+    // marginRight: 5,
+    color: COLORS.light.text,
+    fontWeight: '500',
+    fontSize: SIZES.sizeSixB,
   },
   r2a1: {
     flexDirection: 'row',
@@ -248,20 +310,23 @@ const styles = StyleSheet.create({
   r4: {
     backgroundColor: 'transparent',
     width: '100%',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  r4a: {
-    backgroundColor: COLORS.light.colorOneLight2,
-    // height: 100,
-    width: '48%',
-    borderRadius: 15,
-    flexDirection: 'row',
+    // flexDirection: 'row',
     // alignItems: 'center',
     justifyContent: 'space-between',
-    paddingVertical: 15,
-    paddingHorizontal: '3%',
+    marginBottom: 20,
+  },
+  r4a: {
+    backgroundColor: 'transparent',
+    // // height: 100,
+    // width: '48%',
+    // borderRadius: 15,
+    // flexDirection: 'row',
+    // // alignItems: 'center',
+    // paddingVertical: 15,
+    // paddingHorizontal: '3%',
+    marginVertical: 10,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
   },
   r4b: {
     backgroundColor: COLORS.light.pendingBlue,
@@ -302,7 +367,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginVertical: 20,
+    marginBottom: 10,
   },
   r5t1: {
     fontSize: SIZES.sizeSeven,
@@ -419,5 +484,42 @@ const styles = StyleSheet.create({
     // borderBottomEndRadius: 15,
     // borderTopEndRadius: 15,
     // borderColor: COLORS.light.textGray,
+  },
+  catBody: {
+    backgroundColor: COLORS.light.background,
+    paddingVertical: 5,
+    paddingHorizontal: 8,
+    marginVertical: 8,
+    marginHorizontal: 4,
+    flexDirection: 'row',
+    borderWidth: 0.5,
+    borderRadius: 12,
+    alignItems: 'center',
+  },
+  catName: {
+    color: COLORS.light.text,
+    fontSize: 16,
+    fontWeight: '400',
+    marginRight: 5,
+  },
+  catBody2: {
+    backgroundColor: COLORS.light.background,
+    // paddingVertical: 15,
+    paddingHorizontal: 15,
+    marginVertical: 8,
+    marginHorizontal: 5,
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderRadius: 15,
+    width: '46%',
+    justifyContent: 'center',
+    height: 58,
+  },
+  catName2: {
+    color: COLORS.light.text,
+    fontSize: 16,
+    fontWeight: '400',
+    marginLeft: 5,
+    textAlign: 'center',
   },
 });
