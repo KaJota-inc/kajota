@@ -151,7 +151,7 @@ const Home: React.FC<NavigationProps> = ({ navigation }) => {
                       },
                     ]}
                     onPress={() => {
-                      handlePress(idx);
+                      // handlePress(idx);
                     }}
                   >
                     <Text>
@@ -414,10 +414,10 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.light.background,
     padding: 10,
     marginVertical: 8,
-    marginHorizontal: 2,
+    marginHorizontal: 4,
     flexDirection: 'row',
     borderWidth: 0.5,
-    borderRadius: 20,
+    borderRadius: 30,
   },
   catName: {
     color: COLORS.light.text,
