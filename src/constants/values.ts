@@ -2,6 +2,20 @@ import { ImageSourcePropType } from 'react-native';
 
 import { COLORS, IMAGES } from '@constants/Colors';
 
+import {
+  AddidasIconSVG,
+  AppleLogoIconSVG,
+  AppleLogoSVG,
+  AsusIconSVG,
+  FifaIconSVG,
+  NikeIconSVG,
+  NintendoIconSVG,
+  NorthFaceIconSVG,
+  PumaIconSVG,
+  SamsungIconSVG,
+  SonyIconSVG,
+  SuperDryIconSVG,
+} from '@shared/components/SVGS';
 import { ItemType, NotificationType, ProductType } from '@shared/types/generaltypes';
 
 export const timeOptions = {
@@ -96,6 +110,74 @@ export const CATEGORIES2 = [
     icon: '🦊',
     color: COLORS.light.catBlueLight,
     textColor: COLORS.light.catBlue,
+  },
+];
+export const BRANDS = [
+  {
+    name: 'Nike',
+    icon: NikeIconSVG,
+    color: COLORS.light.colorOneLight2,
+    textColor: COLORS.light.colorOne,
+  },
+  {
+    name: 'Apple',
+    icon: AppleLogoIconSVG,
+    color: COLORS.light.catPurpleLight,
+    textColor: COLORS.light.catPurple,
+  },
+  {
+    name: 'Adidas',
+    icon: AddidasIconSVG,
+    color: COLORS.light.catBlueLight,
+    textColor: COLORS.light.catBlue,
+  },
+  {
+    name: 'Sony',
+    icon: SonyIconSVG,
+    color: COLORS.light.catYellowLight,
+    textColor: COLORS.light.catYellow,
+  },
+  {
+    name: 'Fifa',
+    icon: FifaIconSVG,
+    color: COLORS.light.catPurpleLight,
+    textColor: COLORS.light.catPurple,
+  },
+  {
+    name: 'Puma',
+    icon: PumaIconSVG,
+    color: COLORS.light.catBrownLight,
+    textColor: COLORS.light.catBrown,
+  },
+  {
+    name: 'Nintendo',
+    icon: NintendoIconSVG,
+    color: COLORS.light.catYellowLight,
+    textColor: COLORS.light.catYellow,
+  },
+  {
+    name: 'Asus',
+    icon: AsusIconSVG,
+    color: COLORS.light.advertGreenLight,
+    textColor: COLORS.light.price,
+  },
+  {
+    name: 'Samsung',
+    icon: SamsungIconSVG,
+    color: COLORS.light.catTBlueLight,
+    textColor: COLORS.light.catTBlue,
+  },
+  {
+    name: 'The north face.',
+    icon: NorthFaceIconSVG,
+    color: COLORS.light.colorOneLight2,
+    textColor: COLORS.light.colorOne,
+  },
+  {
+    name: 'Superdry',
+    icon: SuperDryIconSVG,
+    color: COLORS.light.catBrownLight,
+    textColor: COLORS.light.catBrown,
   },
 ];
 

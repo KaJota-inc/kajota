@@ -8,7 +8,7 @@ import Advert from '@pages/Home/Home/advert/Advert';
 import SearchBar from '@pages/Home/Search/SearchBar';
 
 import { COLORS, IMAGES, SIZES } from '@constants/Colors';
-import { CATEGORIES } from '@constants/values';
+import { BRANDS, CATEGORIES, CATEGORIES2 } from '@constants/values';
 
 import CartIcon from '@shared/components/CartIcon';
 import { GridProductDisplay } from '@shared/components/GridProductDisplay';
@@ -24,6 +24,16 @@ type NavigationProps = CompositeScreenProps<
 
 const Home: React.FC<NavigationProps> = ({ navigation }) => {
   const [catIndex, setCatIndex] = useState(0);
+
+  const [selectedItemIndex, setSelectedItemIndex] = useState<number[]>([]);
+
+  const handlePress = (val: number) => {
+    if (selectedItemIndex.includes(val)) {
+      setSelectedItemIndex(selectedItemIndex.filter(sii => sii !== val));
+    } else {
+      setSelectedItemIndex([...selectedItemIndex, val]);
+    }
+  };
 
   return (
     <View style={styles.main}>
@@ -58,26 +68,6 @@ const Home: React.FC<NavigationProps> = ({ navigation }) => {
               width="82%"
               onPressed={() => navigation?.navigate(HomeRoutes.SEARCH)}
             />
-            {/*<View style={styles.r2a}>*/}
-            {/*    <TouchableOpacity*/}
-            {/*        style={styles.r2a1}*/}
-            {/*        onPress={() => {*/}
-            {/*            navigation?.navigate(HomeRoutes.SEARCH);*/}
-            {/*        }}*/}
-            {/*    >*/}
-            {/*        <AntDesign color={COLORS.light.active} name="search1" size={26}/>*/}
-            {/*        <Text style={styles.r2a1t}>search</Text>*/}
-            {/*    </TouchableOpacity>*/}
-            {/*    <TouchableOpacity*/}
-            {/*        style={styles.r2a2}*/}
-            {/*        onPress={() => {*/}
-            {/*            navigation?.navigate(HomeRoutes.SEARCH);*/}
-            {/*        }}*/}
-            {/*    >*/}
-            {/*        <SimpleLineIcons color={COLORS.light.active} name="camera" size={24}/>*/}
-            {/*        <Text style={styles.r2a2t}>Lens search</Text>*/}
-            {/*    </TouchableOpacity>*/}
-            {/*</View>*/}
             <TouchableOpacity style={styles.r2b}>
               <SimpleLineIcons color={COLORS.light.active} name="equalizer" size={24} />
             </TouchableOpacity>
@@ -131,7 +121,67 @@ const Home: React.FC<NavigationProps> = ({ navigation }) => {
                 View All
               </Text>
             </View>
-            <View>
+            <View style={styles.r6}>
+              <GridProductDisplay />
+            </View>
+
+            <View style={styles.r5}>
+              <Text style={styles.r5a}>Your favourites</Text>
+              <Text style={styles.r5b} onPress={() => {}}>
+                View All
+              </Text>
+            </View>
+            <View style={styles.r6}>
+              <GridProductDisplay />
+            </View>
+
+            <View style={styles.r7}>
+              <Text style={styles.r7a}>Shop by brand</Text>
+            </View>
+            <View style={styles.catContainer}>
+              {BRANDS?.map((item, idx) => {
+                const IconToRender = item?.icon;
+                return (
+                  <TouchableOpacity
+                    key={nanoid()}
+                    style={[
+                      styles.catBody,
+                      selectedItemIndex.includes(idx) && {
+                        backgroundColor: COLORS.light.text,
+                      },
+                    ]}
+                    onPress={() => {
+                      handlePress(idx);
+                    }}
+                  >
+                    <Text>
+                      <IconToRender />
+                    </Text>
+                    <Text
+                      style={[
+                        styles.catName,
+                        selectedItemIndex.includes(idx) && {
+                          color: COLORS.light.background,
+                        },
+                      ]}
+                    >
+                      {item?.name}
+                    </Text>
+                  </TouchableOpacity>
+                );
+              })}
+            </View>
+            <View style={styles.r3}>
+              <Advert />
+            </View>
+
+            <View style={styles.r5}>
+              <Text style={styles.r5a}>Recommended stores for you</Text>
+              <Text style={styles.r5b} onPress={() => {}}>
+                View All
+              </Text>
+            </View>
+            <View style={styles.r6}>
               <GridProductDisplay />
             </View>
           </ScrollView>
@@ -325,8 +375,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     width: '100%',
     justifyContent: 'space-between',
-    marginBottom: 10,
+    marginTop: 20,
     backgroundColor: 'transparent',
+    // borderWidth: 1
   },
   r5a: {
     fontSize: SIZES.sizeSevenB,
@@ -335,5 +386,43 @@ const styles = StyleSheet.create({
   r5b: {
     fontSize: SIZES.sizeSixC,
     // fontWeight: "700",
+  },
+  r6: {
+    marginBottom: 15,
+    marginTop: 10,
+    backgroundColor: 'transparent',
+  },
+  r7: {
+    flexDirection: 'row',
+    width: '100%',
+    justifyContent: 'space-between',
+    // marginTop: 20,
+    backgroundColor: 'transparent',
+    // borderWidth: 1
+  },
+  r7a: {
+    fontSize: SIZES.sizeSixC,
+    fontWeight: '700',
+  },
+  catContainer: {
+    marginVertical: 20,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    backgroundColor: 'transparent',
+  },
+  catBody: {
+    backgroundColor: COLORS.light.background,
+    padding: 10,
+    marginVertical: 8,
+    marginHorizontal: 2,
+    flexDirection: 'row',
+    borderWidth: 0.5,
+    borderRadius: 20,
+  },
+  catName: {
+    color: COLORS.light.text,
+    fontSize: 16,
+    fontWeight: '600',
+    marginLeft: 5,
   },
 });

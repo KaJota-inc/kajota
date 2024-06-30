@@ -156,6 +156,7 @@ const SearchProducts: React.FC<NavigationProps> = ({ navigation }) => {
 
           <View>
             <GridProductDisplay />
+            <GridProductDisplay />
           </View>
         </ScrollView>
       </View>
