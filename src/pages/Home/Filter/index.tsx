@@ -2,9 +2,7 @@ import React, { useState } from 'react';
 import { Image, ScrollView, StatusBar, StyleSheet, TouchableOpacity } from 'react-native';
 import {
   AntDesign,
-  Entypo,
   Feather,
-  FontAwesome,
   Ionicons,
   MaterialCommunityIcons,
   MaterialIcons,
@@ -13,18 +11,19 @@ import {
 import { CompositeScreenProps } from '@react-navigation/native';
 import { nanoid } from '@reduxjs/toolkit';
 
+import PriceRangeSlider from '@pages/Home/Filter/PriceRangeSlider';
 import SearchBar from '@pages/Home/Search/SearchBar';
 
 import { COLORS, IMAGES, SIZES } from '@constants/Colors';
 import {
   CATEGORIES2,
+  FILTERCOLORS,
   ITEMS,
   TestNotifications,
   TRENDINGSEARCHES,
 } from '@constants/values';
 
 import CartIcon from '@shared/components/CartIcon';
-import { GridProductDisplay } from '@shared/components/GridProductDisplay';
 import {
   NotificationBellIconSVG,
   PendingIconSVG,
@@ -35,23 +34,16 @@ import { ItemsProps, ItemsRoutes } from '@shared/const/routerItems';
 import { RootRoutes, RootScreenProps } from '@shared/const/routerRoot';
 import { ItemType, NotificationType } from '@shared/types/generaltypes';
 
+import { MainButton } from '@components/index';
 import { Text, View } from '@components/Themed';
 
 type NavigationProps = CompositeScreenProps<
-  HomeProps<HomeRoutes.SEARCHPRODUCTS>,
+  HomeProps<HomeRoutes.FilterBy>,
   RootScreenProps<RootRoutes.Home>
 >;
 
-const SearchProducts: React.FC<NavigationProps> = ({ navigation }) => {
-  const opts = [
-    {
-      name: 'Popular',
-    },
-    { name: 'Color' },
-    // { name: 'Popular' },
-    // { name: 'Popular' },
-    // { name: 'Color' },
-  ];
+const FilterBy: React.FC<NavigationProps> = ({ navigation }) => {
+  const [notis, setNotis] = React.useState<NotificationType[]>(TestNotifications);
 
   const handleBack = () => {
     navigation?.goBack();
@@ -72,7 +64,19 @@ const SearchProducts: React.FC<NavigationProps> = ({ navigation }) => {
       <StatusBar barStyle="dark-content" />
       <View style={styles.container}>
         <View style={styles.subContainer}>
-          <View style={styles.r2}>
+          {/*<View style={styles.r1}>*/}
+          {/*    <TouchableOpacity*/}
+          {/*        style={styles.r2t1}*/}
+          {/*        onPress={() => {*/}
+          {/*            handleBack();*/}
+          {/*        }}*/}
+          {/*    >*/}
+          {/*        <Feather color={COLORS.light.text} name="chevron-left" size={28}/>*/}
+          {/*    </TouchableOpacity>*/}
+          {/*    <Text style={styles.r2t2}>Notifications</Text>*/}
+          {/*</View>*/}
+
+          <View style={styles.r1}>
             <TouchableOpacity
               style={styles.r2t1}
               onPress={() => {
@@ -81,15 +85,7 @@ const SearchProducts: React.FC<NavigationProps> = ({ navigation }) => {
             >
               <Feather color={COLORS.light.text} name="chevron-left" size={28} />
             </TouchableOpacity>
-
-            <SearchBar
-              width="85%"
-              onPressed={() => {
-                navigation?.navigate(RootRoutes.Home, {
-                  screen: HomeRoutes.SEARCH,
-                });
-              }}
-            />
+            <Text style={styles.r2t2}>Filter By</Text>
           </View>
         </View>
         <ScrollView
@@ -97,66 +93,104 @@ const SearchProducts: React.FC<NavigationProps> = ({ navigation }) => {
           showsVerticalScrollIndicator={false}
           style={styles.scroll}
         >
+          <View style={styles.r5}>
+            <Text>Category</Text>
+          </View>
+
+          <View style={[styles.r4a, { justifyContent: 'space-between' }]}>
+            {CATEGORIES2?.map((item, idx) => (
+              <TouchableOpacity
+                key={nanoid()}
+                style={[
+                  styles.catBody2,
+                  {
+                    backgroundColor: item.color,
+                  },
+                ]}
+                onPress={() => {
+                  // handlePress(idx);
+                  navigation?.navigate(HomeRoutes.SEARCHPRODUCTS);
+                }}
+              >
+                {/*<Text>{item?.icon}</Text>*/}
+                <Text style={[styles.catName2, { color: item.textColor }]}>
+                  {item?.name}
+                </Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+
+          {/*{notis.map((item, idx) => (*/}
+          {/*    <View key={nanoid()} style={styles.itemContainer}>*/}
+          {/*        <View style={styles.itemA}>*/}
+          {/*            <Image resizeMode="cover" source={item.uri} style={styles.itemA1}/>*/}
+          {/*            <View style={styles.itemA2}>*/}
+          {/*                <Text style={styles.itemA2t1}>{item.desc}</Text>*/}
+          {/*                <Text style={styles.itemA2t3}>{item.store}</Text>*/}
+          {/*            </View>*/}
+          {/*        </View>*/}
+          {/*        <View style={styles.itemB}>*/}
+          {/*            <TouchableOpacity*/}
+          {/*                style={styles.itemBt1}*/}
+          {/*                onPress={() => {*/}
+          {/*                    // if (itemCount > 1) {*/}
+          {/*                    //     setItemCount(itemCount - 1);*/}
+          {/*                    // }*/}
+          {/*                }}*/}
+          {/*            >*/}
+          {/*                <Ionicons color={COLORS.light.notiBlue} name="ellipse" size={14}/>*/}
+          {/*            </TouchableOpacity>*/}
+          {/*            <TouchableOpacity style={styles.itemBt2}>*/}
+          {/*                <Text style={styles.itemBTextm}>{item.time} hrs ago</Text>*/}
+          {/*            </TouchableOpacity>*/}
+          {/*        </View>*/}
+          {/*    </View>*/}
+          {/*))}*/}
           <View style={styles.r4}>
-            <ScrollView
-              contentContainerStyle={styles.categoriesContentStyle}
-              horizontal={true}
-              showsHorizontalScrollIndicator={false}
-              showsVerticalScrollIndicator={false}
-              style={styles.categoriesStyle}
-            >
-              <View style={styles.r4a}>
-                <TouchableOpacity style={styles.catBody}>
-                  {/*<FontAwesome name="sliders" size={24} color={COLORS.light.active} />*/}
-                  <SimpleLineIcons
-                    color={COLORS.light.active}
-                    name="equalizer"
-                    size={20}
-                  />
-                </TouchableOpacity>
-                {opts?.map((item, idx) => (
-                  <TouchableOpacity
-                    key={nanoid()}
+            <Text>Colors</Text>
+            <View style={styles.r4a}>
+              {FILTERCOLORS?.map((item, idx) => (
+                <TouchableOpacity
+                  key={nanoid()}
+                  style={[
+                    styles.catBody,
+                    selectedItemIndex.includes(idx) && {
+                      backgroundColor: COLORS.light.text,
+                    },
+                  ]}
+                  onPress={() => {
+                    handlePress(idx);
+                  }}
+                >
+                  <View style={[styles.catColor, { backgroundColor: item.color }]} />
+                  <Text
                     style={[
-                      styles.catBody,
+                      styles.catName,
                       selectedItemIndex.includes(idx) && {
-                        backgroundColor: COLORS.light.text,
+                        color: COLORS.light.background,
                       },
                     ]}
-                    onPress={() => {
-                      // handlePress(idx);
-                    }}
                   >
-                    <Text
-                      style={[
-                        styles.catName,
-                        selectedItemIndex.includes(idx) && {
-                          color: COLORS.light.background,
-                        },
-                      ]}
-                    >
-                      {item?.name}
-                    </Text>
-                    {item.name === 'Color' && (
-                      <Text>
-                        <Entypo color="black" name="chevron-down" size={15} />
-                      </Text>
-                    )}
-                  </TouchableOpacity>
-                ))}
-              </View>
-            </ScrollView>
+                    {item?.name}
+                  </Text>
+                </TouchableOpacity>
+              ))}
+            </View>
           </View>
 
-          <View style={styles.r5}>
-            <Text style={styles.r5t2}>
-              Showing <Text style={styles.r5t1}>results</Text> from all shops
-            </Text>
-          </View>
+          {/*<>*/}
+          <PriceRangeSlider />
+          {/*</>*/}
 
-          <View>
-            <GridProductDisplay />
-            <GridProductDisplay />
+          <View style={styles.r9}>
+            <MainButton
+              btnStyle={styles.r9t}
+              err={false}
+              title="Apply"
+              onPressFunction={() => {
+                navigation?.navigate(HomeRoutes.SEARCHPRODUCTS);
+              }}
+            />
           </View>
         </ScrollView>
       </View>
@@ -164,7 +198,7 @@ const SearchProducts: React.FC<NavigationProps> = ({ navigation }) => {
   );
 };
 
-export default SearchProducts;
+export default FilterBy;
 
 const styles = StyleSheet.create({
   main: {
@@ -184,18 +218,6 @@ const styles = StyleSheet.create({
     marginTop: '15%',
     backgroundColor: COLORS.light.hashHomeBackGroundL2,
   },
-  categoriesStyle: {
-    // marginTop: 20,
-    // backgroundColor: COLORS.light.textGray,
-    // borderWidth: 1,
-  },
-  categoriesContentStyle: {
-    marginRight: 30,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingRight: 50,
-    // borderWidth: 1,
-  },
   r1: {
     flexDirection: 'row',
     width: '100%',
@@ -207,7 +229,7 @@ const styles = StyleSheet.create({
   },
   r2: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    // justifyContent: 'space-between',
     width: '100%',
     alignItems: 'center',
     marginTop: '5%',
@@ -258,7 +280,7 @@ const styles = StyleSheet.create({
   r2b: {
     padding: 15,
     backgroundColor: 'transparent',
-    // marginRight: 5,
+    marginRight: 5,
     color: COLORS.light.text,
     fontWeight: '500',
     fontSize: SIZES.sizeSixB,
@@ -314,6 +336,7 @@ const styles = StyleSheet.create({
     // flexDirection: 'row',
     // alignItems: 'center',
     justifyContent: 'space-between',
+    marginTop: 20,
     marginBottom: 20,
   },
   r4a: {
@@ -368,7 +391,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginBottom: 10,
+    marginVertical: 10,
   },
   r5t1: {
     fontSize: SIZES.sizeSeven,
@@ -488,20 +511,27 @@ const styles = StyleSheet.create({
   },
   catBody: {
     backgroundColor: COLORS.light.background,
-    paddingVertical: 5,
-    paddingHorizontal: 8,
+    paddingVertical: 10,
+    paddingHorizontal: 15,
     marginVertical: 8,
-    marginHorizontal: 4,
+    marginHorizontal: 2,
     flexDirection: 'row',
     borderWidth: 0.5,
-    borderRadius: 12,
-    alignItems: 'center',
+    borderRadius: 20,
   },
   catName: {
     color: COLORS.light.text,
     fontSize: 16,
     fontWeight: '400',
-    marginRight: 5,
+    marginLeft: 5,
+  },
+  catColor: {
+    // color: COLORS.light.text,
+    // fontSize: 16,
+    // fontWeight: '400',
+    marginRight: 10,
+    padding: 10,
+    borderRadius: 20,
   },
   catBody2: {
     backgroundColor: COLORS.light.background,
@@ -522,5 +552,17 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     marginLeft: 5,
     textAlign: 'center',
+  },
+  r9: {
+    // marginBottom: 10,
+    // marginTop: '25%',
+    paddingVertical: 5,
+    width: '100%',
+    alignItems: 'center',
+    backgroundColor: 'transparent',
+    alignSelf: 'flex-end',
+  },
+  r9t: {
+    backgroundColor: COLORS.light.colorOne,
   },
 });

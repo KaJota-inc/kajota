@@ -2,6 +2,7 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import Cart from '@pages/Home/Cart';
+import FilterBy from '@pages/Home/Filter';
 import Order from '@pages/Home/Order';
 import OrderConfirmation from '@pages/Home/OrderConfirmation';
 import OrderPayment from '@pages/Home/OrderPayment';
@@ -33,6 +34,7 @@ const HomeStack = (): React.ReactElement => {
       <Home.Screen component={OrderRating} name={HomeRoutes.ORDERRATING} />
       <Home.Screen component={Search} name={HomeRoutes.SEARCH} />
       <Home.Screen component={SearchProducts} name={HomeRoutes.SEARCHPRODUCTS} />
+      <Home.Screen component={FilterBy} name={HomeRoutes.FilterBy} />
     </Home.Navigator>
   );
 };

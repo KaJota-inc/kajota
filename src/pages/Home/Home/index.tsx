@@ -68,7 +68,12 @@ const Home: React.FC<NavigationProps> = ({ navigation }) => {
               width="82%"
               onPressed={() => navigation?.navigate(HomeRoutes.SEARCH)}
             />
-            <TouchableOpacity style={styles.r2b}>
+            <TouchableOpacity
+              style={styles.r2b}
+              onPress={() => {
+                navigation?.navigate(HomeRoutes.FilterBy);
+              }}
+            >
               <SimpleLineIcons color={COLORS.light.active} name="equalizer" size={24} />
             </TouchableOpacity>
           </View>

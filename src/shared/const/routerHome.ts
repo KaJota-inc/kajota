@@ -1,5 +1,7 @@
 import { StackNavigationProp, StackScreenProps } from '@react-navigation/stack';
 
+import FilterBy from '@pages/Home/Filter';
+
 export enum HomeRoutes {
   DOB = 'DOB',
   HOME = 'HOME',
@@ -11,6 +13,7 @@ export enum HomeRoutes {
   ORDERRATING = 'ORDERRATING',
   SEARCH = 'SEARCH',
   SEARCHPRODUCTS = 'SEARCHPRODUCTS',
+  FilterBy = 'FilterBy',
 }
 
 export type HomeParamList = {
@@ -24,6 +27,7 @@ export type HomeParamList = {
   [HomeRoutes.ORDERRATING]: undefined;
   [HomeRoutes.SEARCH]: undefined;
   [HomeRoutes.SEARCHPRODUCTS]: undefined;
+  [HomeRoutes.FilterBy]: undefined;
 };
 
 export type HomeProps<RouteName extends HomeRoutes> = StackScreenProps<

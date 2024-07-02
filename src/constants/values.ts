@@ -190,6 +190,15 @@ export const TRENDINGSEARCHES = [
   { name: 'Health' },
 ];
 
+export const FILTERCOLORS = [
+  { name: 'Green', color: COLORS.light.topup },
+  { name: 'Blue', color: COLORS.light.catTBlue },
+  { name: 'Purple', color: COLORS.light.catPurple },
+  { name: 'Red', color: COLORS.light.delete },
+  { name: 'Black', color: COLORS.light.text },
+  { name: 'Yellow', color: COLORS.light.trackingYellowDark },
+];
+
 export const PRODUCTS: ProductType[] = [
   {
     key: 1,

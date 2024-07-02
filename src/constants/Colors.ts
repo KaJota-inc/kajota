@@ -113,4 +113,5 @@ export const IMAGES = {
   ZeeStoreF15: require('../shared/assets/images/png/zee_store_f15_off.png'),
   ZeeStoreShoe: require('../shared/assets/images/png/zee_store_shoe.png'),
   ZeeStoreWorkspace: require('../shared/assets/images/png/zee_store_workspace.png'),
+  RangeKnob: require('../shared/assets/images/png/range_knob.png'),
 };
